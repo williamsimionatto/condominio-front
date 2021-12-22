@@ -47,6 +47,8 @@ import { UserModule } from './views/user/user.module';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NgProgressModule } from 'ngx-progressbar';
+import { NgProgressHttpModule } from 'ngx-progressbar/http';
 
 @NgModule({
   imports: [
@@ -68,7 +70,12 @@ import { HttpClientModule } from '@angular/common/http';
     IconModule,
     IconSetModule.forRoot(),
     UserModule,
-    FormsModule
+    FormsModule,
+    NgProgressModule.withConfig({
+      color: "red",
+      spinner: false
+    }),
+    NgProgressHttpModule
   ],
   declarations: [
     AppComponent,
