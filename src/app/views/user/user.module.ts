@@ -1,20 +1,23 @@
 // Angular
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 // Components Routing
-import { ListUserComponent } from './list-user.component';
-import { ListRoutingModule } from './list-routing.module';
+import { ListUserComponent } from './list/list-user.component';
+import { UserRoutingModule } from './user-routing.module';
+import { AddEditUserComponent } from './add/add-edit.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
+    UserRoutingModule,
     FormsModule,
-    ListRoutingModule
+    ReactiveFormsModule
   ],
   declarations: [
-    ListUserComponent
+    ListUserComponent,
+    AddEditUserComponent
   ],
   providers: [
   ]

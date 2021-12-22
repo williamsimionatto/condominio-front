@@ -1,1 +1,1 @@
-export * from './list-user.component'
+export * from './list/list-user.component'

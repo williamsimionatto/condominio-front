@@ -1,0 +1,65 @@
+<div class="animated fadeIn">
+    <header class="header header-sticky mb-4"></header>
+
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-label"> Usuários </div>
+                </div>
+
+                <div class="card-body">
+                    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="col-sm-2 col-xs-12">
+                                <div class="form-group">
+                                    <label class="form-label" for="id">Id</label>
+                                    <input class="form-control" id="id" formControlName="id" autocomplete="off" readonly="true">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-5 col-md-5">
+                                <div class="form-group">
+                                    <label class="form-label" for="name">Nome</label>
+                                    <input class="form-control" id="name" formControlName="name" autocomplete="off">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-5 col-md-5">
+                                <div class="form-group">
+                                    <label class="form-label" for="email">E-mail</label>
+                                    <input class="form-control" id="email" formControlName="email" autocomplete="off">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-5 col-md-5">
+                                <div class="form-group">
+                                    <label class="form-label" for="password">Senha</label>
+                                    <input class="form-control" id="password" formControlName="password" autocomplete="off">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-5 col-md-5">
+                                <div class="form-group">
+                                    <label class="form-label" for="passwordConfirmation">Confirmação Senha</label>
+                                    <input class="form-control" id="passwordConfirmation" formControlName="passwordConfirmation" autocomplete="off">
+                                </div>
+                            </div>
+                        </div>
+    
+                        <hr>
+
+                        <div class="form-group form-footer">
+                            <a routerLink="/usuario" class="btn btn-light rounded-pill btnVoltar">Voltar</a>
+    
+                            <button [disabled]="loading" class="btn btn-primary rounded-pill" *ngIf="!readonly">
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                Salvar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

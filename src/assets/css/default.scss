@@ -22,12 +22,22 @@
 }
 
 .btnCadastrar {
-  margin-right: 1.75em;
   font-weight: bold;
 }
 
 .card-label {
   font-weight: bold;
   display: inline-block;
-  margin-left: 1.25rem;
+  margin-top: 0.50rem;
+}
+
+.form-footer, .form-buttons {
+  text-align: initial;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0;
+}
+
+.btnVoltar {
+  margin-right: 0.5rem;
 }

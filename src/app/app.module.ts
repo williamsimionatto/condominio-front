@@ -45,6 +45,8 @@ import { ChartsModule } from 'ng2-charts';
 import { AuthGuardService } from './service/auth/auth-guard.service';
 import { UserModule } from './views/user/user.module';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -57,12 +59,16 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
     AppHeaderModule,
     AppSidebarModule,
     PerfectScrollbarModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    AppRoutingModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
     IconModule,
     IconSetModule.forRoot(),
-    UserModule
+    UserModule,
+    FormsModule
   ],
   declarations: [
     AppComponent,
