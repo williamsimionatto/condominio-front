@@ -7,12 +7,28 @@ import { AuthGuardService as AuthGuard } from './service/auth/auth-guard.service
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
+import { LoginComponent } from './views/login/login.component';
+import { RegisterComponent } from './views/register/register.component';
 
 export const routes: Routes = [
   {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    data: {
+      title: 'Login'
+    }
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    data: {
+      title: 'Registre-se'
+    }
   },
   {
     path: '404',
