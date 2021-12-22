@@ -42,6 +42,9 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
+import { AuthGuardService } from './service/auth/auth-guard.service';
+import { UserModule } from './views/user/user.module';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 @NgModule({
   imports: [
@@ -59,6 +62,7 @@ import { ChartsModule } from 'ng2-charts';
     ChartsModule,
     IconModule,
     IconSetModule.forRoot(),
+    UserModule
   ],
   declarations: [
     AppComponent,
@@ -69,11 +73,18 @@ import { ChartsModule } from 'ng2-charts';
     RegisterComponent
   ],
   providers: [
+    AuthGuardService,
+    Storage,
+    { 
+      provide: JWT_OPTIONS, 
+      useValue: JWT_OPTIONS 
+    },
+    JwtHelperService,
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     },
-    IconSetService,
+    IconSetService
   ],
   bootstrap: [ AppComponent ]
 })

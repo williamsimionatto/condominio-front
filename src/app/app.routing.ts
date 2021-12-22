@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
+import { AuthGuardService as AuthGuard } from './service/auth/auth-guard.service';
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
@@ -36,7 +37,8 @@ export const routes: Routes = [
     children: [
       {
         path: 'usuario',
-        loadChildren: () => import('./views/user/user.module').then(m => m.UserModule)
+        loadChildren: () => import('./views/user/user.module').then(m => m.UserModule),
+        canActivate: [AuthGuard]
       },
       {
         path: 'dashboard',

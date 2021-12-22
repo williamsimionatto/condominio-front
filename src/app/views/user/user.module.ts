@@ -15,6 +15,8 @@ import { ListRoutingModule } from './list-routing.module';
   ],
   declarations: [
     ListUserComponent
+  ],
+  providers: [
   ]
 })
 export class UserModule { }
