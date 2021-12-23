@@ -32,17 +32,17 @@ export class AddEditUserComponent implements OnInit {
     this.userForm = this.formBuilder.group({
       id: this.formBuilder.control('', [Validators.nullValidator]),
       name: this.formBuilder.control('', [Validators.required]),
-      email: this.formBuilder.control('', [Validators.required, Validators.pattern(this.emailPattern)]),
+      email: this.formBuilder.control('', [Validators.required]),
       password: this.formBuilder.control('', [Validators.required]),
       passwordConfirmation: this.formBuilder.control('', [Validators.required])
     });
 
     if (!this.isAddMode) {
-      // this.userService
-      //   .getById(this.id)
-      //   .pipe(first())
-      //   .subscribe(x => { this.form.patchValue(x[0]) }
-      // );
+      this.userService
+        .getById(this.id)
+        .pipe(first())
+        .subscribe(x => { this.userForm.patchValue(x[0]) }
+      );
     }
   }
 
@@ -57,33 +57,31 @@ export class AddEditUserComponent implements OnInit {
   }
 
   private create() {
-    console.log(this.userForm.value);
-    
-    // this.userService
-    //   .create(this.form.value)
-    //   .pipe(first())
-    //   .subscribe({
-    //     next: () => {
-    //       this.router.navigate(['../'], { relativeTo: this.route });
-    //     },
-    //     error: ret => {
-    //       this.loading = false;
-    //     }
-    // });
+    this.userService
+      .create(this.userForm.value)
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          this.router.navigate(['../'], { relativeTo: this.route });
+        },
+        error: ret => {
+          this.loading = false;
+        }
+    });
   }
 
   private update() {
-    // this.form.value.id = this.id;
+    this.userForm.value.id = this.id;
 
-    // this.userService.update(this.form.value).pipe(first()).subscribe(
-    //   {
-    //     next: () => {
-    //       this.router.navigate(['../../'], { relativeTo: this.route });
-    //     },
-    //     error: error => {
-    //       this.loading = false;
-    //     }
-    //   }
-    // );
+    this.userService.update(this.userForm.value).pipe(first()).subscribe(
+      {
+        next: () => {
+          this.router.navigate(['../../'], { relativeTo: this.route });
+        },
+        error: error => {
+          this.loading = false;
+        }
+      }
+    );
   }
 }

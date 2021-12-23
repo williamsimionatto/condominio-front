@@ -18,7 +18,6 @@
             <table class="table table-striped border datatable">
               <thead>
                 <tr>
-                  <th width="5%">Código</th>
                   <th>Nome</th>
                   <th>E-mail</th>
                   <th>Ativo</th>
@@ -27,45 +26,20 @@
               </thead>
 
               <tbody>
-                <tr class="align-middle">
-                  <td>1</td>
-                  <td>Fulano de Tal</td>
-                  <td>fulanodetal@mail.com</td>
+                <tr *ngFor="let user of users">
+                  <td>{{user.nome}}</td>
+                  <td>{{user.email}}</td>
+                  <td>{{user.active}}</td>
                   <td>
-                      <span class="badge bg-success-gradient">Ativo</span>
-                  </td>
-                  <td>
-                    <a class="btn btn-success btn-sm rounded-pill">
+                    <a class="btn btn-success btn-sm rounded-pill" routerLink="overview/{{user._id}}">
                       <i class="fa fa-search"></i>
                     </a>
 
-                    <a class="btn btn-primary btn-sm rounded-pill">
+                    <a class="btn btn-primary btn-sm rounded-pill" routerLink="add/{{user._id}}">
                         <i class="fa fa-pencil"></i>
                     </a>
 
-                    <a class="btn btn-danger btn-sm rounded-pill">
-                        <i class="fa fa-trash"></i>
-                    </a>
-                  </td>
-                </tr>
-                <tr class="align-middle">
-                  <td>2</td>
-                  <td>Ciclano</td>
-                  <td>Ciclano@mail.com</td>
-                  <td>
-                    <span class="badge bg-dark-gradient">Inativo</span>
-                  </td>
-
-                  <td>
-                    <a class="btn btn-success btn-sm rounded-pill">
-                      <i class="fa fa-search"></i>
-                    </a>
-
-                    <a class="btn btn-primary btn-sm rounded-pill">
-                      <i class="fa fa-pencil"></i>
-                    </a>
-
-                    <a class="btn btn-danger btn-sm rounded-pill">
+                    <a class="btn btn-danger btn-sm rounded-pill" (click)="delete(user._id)">
                       <i class="fa fa-trash"></i>
                     </a>
                   </td>

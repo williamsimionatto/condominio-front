@@ -13,22 +13,22 @@ export class UserService extends Service {
   }
 
   public getAll() {
-    return this.http.get<UserParams[]>(`${environment.apiUrl}/users`, this.requestOptions);
+    return this.http.get<UserParams[]>(`${environment.apiUrl}/usuario`, this.requestOptions);
   }
 
   public getById(id: string) {
-    return this.http.get<UserParams>(`${environment.apiUrl}/users/${id}`, this.requestOptions);
+    return this.http.get<UserParams>(`${environment.apiUrl}/usuario/${id}`, this.requestOptions);
   }
 
   public create(user: UserParams) {
-    return this.http.post(`${environment.apiUrl}/users`, user, this.requestOptions);
+    return this.http.post(`${environment.apiUrl}/usuario`, user, this.requestOptions);
   }
 
   public update(user: UserParams) {
-    return this.http.put(`${environment.apiUrl}/users/${user.id}`, user, this.requestOptions);
+    return this.http.put(`${environment.apiUrl}/usuario/${user.id}`, user, this.requestOptions);
   }
 
   public delete(id: string) {
-    return this.http.delete(`${environment.apiUrl}/users/${id}`, this.requestOptions);
+    return this.http.delete(`${environment.apiUrl}/usuario/${id}`, this.requestOptions);
   }
 }

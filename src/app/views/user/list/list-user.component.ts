@@ -21,11 +21,11 @@ export class ListUserComponent implements OnInit {
   }
 
   delete(id: string) {
-    const user = this.users.filter(user => user.id === id)
+    const user = this.users.filter(user => user._id === id)
     user.isDeleting = true
 
     this.userService.delete(id).pipe(first()).subscribe(() => {
-      this.users = this.users.filter(user => user.id !== id)
+      this.users = this.users.filter(user => user._id !== id)
     })
   }
 }
