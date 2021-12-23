@@ -49,6 +49,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { HttpClientModule } from '@angular/common/http';
 import { NgProgressModule } from 'ngx-progressbar';
 import { NgProgressHttpModule } from 'ngx-progressbar/http';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   imports: [
@@ -75,7 +76,8 @@ import { NgProgressHttpModule } from 'ngx-progressbar/http';
       color: "red",
       spinner: false
     }),
-    NgProgressHttpModule
+    NgProgressHttpModule,
+    ToastrModule.forRoot()
   ],
   declarations: [
     AppComponent,
