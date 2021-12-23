@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { UserService } from '../../../service';
+import { NotificationService } from '../../../service/notification/notification.service';
 
 @Component({
    templateUrl: 'add-edit.component.html',
@@ -18,11 +19,12 @@ export class AddEditUserComponent implements OnInit {
   numberPattern = `/^[0-9]*$/`;
   emailPattern = `/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i`
 
-  constructor(
+  constructor (
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit() {
@@ -49,7 +51,7 @@ export class AddEditUserComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     if (this.userForm.invalid) {
-      return 'Invalid Form';
+      return this.notificationService.showError('Preencha todos os campos obrigatórios', 'Atenção');
     }
 
     this.loading = true;
@@ -65,6 +67,7 @@ export class AddEditUserComponent implements OnInit {
           this.router.navigate(['../'], { relativeTo: this.route });
         },
         error: ret => {
+          this.notificationService.showError('Aconteceu um erro ao salvar o registro!', 'Erro');
           this.loading = false;
         }
     });
@@ -79,9 +82,14 @@ export class AddEditUserComponent implements OnInit {
           this.router.navigate(['../../'], { relativeTo: this.route });
         },
         error: error => {
+          this.notificationService.showError('Aconteceu um erro ao atualizar o registro!', 'Erro');
           this.loading = false;
         }
       }
     );
+  }
+
+  get f() {
+    return this.userForm.controls; 
   }
 }

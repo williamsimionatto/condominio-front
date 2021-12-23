@@ -9,6 +9,7 @@ import { AddEditUserComponent } from './add/add-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgProgressModule } from 'ngx-progressbar';
 import { NgProgressHttpModule } from "ngx-progressbar/http";
+import { InputComponent } from '../../containers/input/input.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { NgProgressHttpModule } from "ngx-progressbar/http";
   ],
   declarations: [
     ListUserComponent,
-    AddEditUserComponent
+    AddEditUserComponent,
+    InputComponent
   ],
   providers: [
   ]

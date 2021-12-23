@@ -1,1 +1,62 @@
 // Here you can add other styles
+.form-group.has-success .form-control {
+    border-color: #00a65a !important;
+    box-shadow: none !important;
+}
+
+.form-group.has-error .form-control {
+    border-color: #dd4b39 !important;
+    box-shadow: none !important;
+}
+
+.form-group.has-success .help-block {
+    color: #00a65a;
+}
+
+.form-group.has-error .help-block {
+    color: #dd4b39;
+}
+
+.bg-success-gradient {
+    background-color: var(--cui-success, #1b9e3e);
+    background-image: linear-gradient(45deg, var(--cui-success-start, #2eb85c) 0%, var(--cui-success-stop, #1b9e3e 100%));  
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.35em 0.65em;
+    font-size: 0.75em;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--cui-badge-color, rgba(255, 255, 255, 0.87));
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: text-bottom;
+    border-radius: 0.25rem;
+}
+
+.bg-dark-gradient {
+    background-color: var(--cui-dark, #212333);
+    background-image: linear-gradient(45deg, var(--cui-dark-start, #3c4b64) 0%, var(--cui-dark-stop, #212333 100%));
+}
+
+.btnCadastrar {
+font-weight: bold;
+}
+
+.card-label {
+font-weight: bold;
+display: inline-block;
+margin-top: 0.50rem;
+}
+
+.form-footer, .form-buttons {
+text-align: initial;
+display: flex;
+justify-content: flex-end;
+margin-top: 0;
+}
+
+.btnVoltar {
+margin-right: 0.5rem;
+}
