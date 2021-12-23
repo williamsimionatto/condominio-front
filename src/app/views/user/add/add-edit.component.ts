@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { UserService } from '../../../service';
 import { NotificationService } from '../../../service/notification/notification.service';
@@ -16,8 +16,8 @@ export class AddEditUserComponent implements OnInit {
   loading = false;
   submitted = false;
   readonly = false;
-  numberPattern = `/^[0-9]*$/`;
-  emailPattern = `/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i`
+  numberPattern = /^[0-9]*$/
+  emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 
   constructor (
     private formBuilder: FormBuilder,
@@ -33,10 +33,10 @@ export class AddEditUserComponent implements OnInit {
 
     this.userForm = this.formBuilder.group({
       id: this.formBuilder.control('', [Validators.nullValidator]),
-      name: this.formBuilder.control('', [Validators.required]),
-      email: this.formBuilder.control('', [Validators.required]),
-      password: this.formBuilder.control('', [Validators.required]),
-      passwordConfirmation: this.formBuilder.control('', [Validators.required])
+      name: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
+      email: this.formBuilder.control('', [Validators.required, Validators.pattern(this.emailPattern)]),
+      password: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
+      passwordConfirmation: this.formBuilder.control('', [Validators.required, Validators.minLength(5)])
     });
 
     if (!this.isAddMode) {
@@ -48,14 +48,39 @@ export class AddEditUserComponent implements OnInit {
     }
   }
 
+  static equalsTo(group: AbstractControl): {[key:string]: boolean} {
+    const password = group.get('password')
+    const passwordConfirmation = group.get('passwordConfirmation')
+
+    if (!password || !passwordConfirmation) {
+      return undefined
+    }
+
+    if (password.value !== passwordConfirmation.value) {
+      return { passwordNotMatch: true }
+    }
+
+    return undefined
+  }
+
   onSubmit() {
     this.submitted = true;
     if (this.userForm.invalid) {
       return this.notificationService.showError('Preencha todos os campos obrigatórios', 'Atenção');
     }
+    
+    if (!this.validPassword()) {
+      return this.notificationService.showInfo('As senhas não conferem!', 'Atenção');
+    }
 
     this.loading = true;
     this.isAddMode ? this.create() :  this.update();
+  }
+
+  validPassword() {
+    const password = this.userForm.get('password');
+    const passwordConfirmation = this.userForm.get('passwordConfirmation');
+    return password.value === passwordConfirmation.value
   }
 
   private create() {
