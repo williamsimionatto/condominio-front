@@ -90,6 +90,7 @@ export class AddEditUserComponent implements OnInit {
       .subscribe({
         next: () => {
           this.router.navigate(['../'], { relativeTo: this.route });
+          this.notificationService.showSuccess('Registro criado com sucesso!', 'Sucesso');
         },
         error: ret => {
           this.notificationService.showError('Aconteceu um erro ao salvar o registro!', 'Erro');
@@ -105,6 +106,7 @@ export class AddEditUserComponent implements OnInit {
       {
         next: () => {
           this.router.navigate(['../../'], { relativeTo: this.route });
+          this.notificationService.showSuccess('Registro atualizado com sucesso!', 'Sucesso');
         },
         error: error => {
           this.notificationService.showError('Aconteceu um erro ao atualizar o registro!', 'Erro');
