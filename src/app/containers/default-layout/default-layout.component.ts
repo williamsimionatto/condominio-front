@@ -19,6 +19,7 @@ export class DefaultLayoutComponent {
 
   logout() {
     this.localStorageService.removeItem('token');
+    this.localStorageService.removeItem('name');
     this.router.navigate(['/login']);
   }
 }

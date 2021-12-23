@@ -41,6 +41,8 @@ export class LoginComponent {
       next: (data: LoginSuccessParams) => {
         this.notifyService.showSuccess('Login realizado com sucesso', 'Sucesso');
         this.localStorageService.setItem('token', data.token);
+        this.localStorageService.setItem('name', data.name);
+
         this.router.navigate(['/dashboard']);
       },
       error: (error: Error) => {
