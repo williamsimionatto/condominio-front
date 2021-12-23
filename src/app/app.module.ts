@@ -21,7 +21,6 @@ import { DefaultLayoutComponent } from './containers';
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
-import { RegisterComponent } from './views/register/register.component';
 
 const APP_CONTAINERS = [
   DefaultLayoutComponent
@@ -42,6 +41,14 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
+import { AuthGuardService } from './service/auth/auth-guard.service';
+import { UserModule } from './views/user/user.module';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { NgProgressModule } from 'ngx-progressbar';
+import { NgProgressHttpModule } from 'ngx-progressbar/http';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   imports: [
@@ -54,26 +61,43 @@ import { ChartsModule } from 'ng2-charts';
     AppHeaderModule,
     AppSidebarModule,
     PerfectScrollbarModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    AppRoutingModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
     IconModule,
     IconSetModule.forRoot(),
+    UserModule,
+    FormsModule,
+    NgProgressModule.withConfig({
+      color: "red",
+      spinner: false
+    }),
+    NgProgressHttpModule,
+    ToastrModule.forRoot()
   ],
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
     P404Component,
     P500Component,
-    LoginComponent,
-    RegisterComponent
+    LoginComponent
   ],
   providers: [
+    AuthGuardService,
+    Storage,
+    { 
+      provide: JWT_OPTIONS, 
+      useValue: JWT_OPTIONS 
+    },
+    JwtHelperService,
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     },
-    IconSetService,
+    IconSetService
   ],
   bootstrap: [ AppComponent ]
 })

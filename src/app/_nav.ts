@@ -12,15 +12,9 @@ export const navItems: INavData[] = [
     icon: 'fa fa-edit',
     children: [
       {
-        name: 'Usários',
-        url: '/usuarios',
+        name: 'Usuários',
+        url: '/usuario',
         icon: 'icon-user'
-      },
-      {
-        name: 'Usários Disabled',
-        url: '/usuarios',
-        icon: 'icon-user',
-        attributes: { disabled: true }
       }
     ]
   },

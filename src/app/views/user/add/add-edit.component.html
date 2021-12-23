@@ -1,0 +1,60 @@
+<div class="animated fadeIn">
+    <header class="header header-sticky mb-4"></header>
+
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-label"> Usuários </div>
+                </div>
+
+                <div class="card-body">
+                    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="col-sm-2 col-xs-12">
+                                <input-container errorMessage="i" label="Cód">
+                                    <input id="id" class="form-control" formControlName="id" autocomplete="off" [readonly]="true">
+                                </input-container>
+                            </div>
+
+                            <div class="col-sm-4 col-xs-12">
+                                <input-container errorMessage="Nome é obrigatório" label="Nome">
+                                    <input id="name" class="form-control" formControlName="name" autocomplete="off" [readonly]="readonly">
+                                </input-container>
+                            </div>
+
+                            <div class="col-lg-5 col-md-5">
+                                <input-container errorMessage="E-mail é obrigatório" label="E-mail">
+                                    <input id="email" class="form-control" formControlName="email" autocomplete="off" [readonly]="readonly">
+                                </input-container>
+                            </div>
+
+                            <div class="col-lg-5 col-md-5">
+                                <input-container errorMessage="Senha é obrigatório" label="Senha">
+                                    <input type="password" id="password" class="form-control" formControlName="password" autocomplete="off" [readonly]="readonly">
+                                </input-container>
+                            </div>
+
+                            <div class="col-lg-5 col-md-5">
+                                <input-container errorMessage="Confirmação Senha é obrigatório" label="Confirmação Senha">
+                                    <input type="password" id="passwordConfirmation" class="form-control" formControlName="passwordConfirmation" autocomplete="off" [readonly]="readonly">
+                                </input-container>
+                            </div>
+                        </div>
+    
+                        <hr>
+
+                        <div class="form-group form-footer">
+                            <a routerLink="/usuario" class="btn btn-light rounded-pill btnVoltar">Voltar</a>
+    
+                            <button [disabled]="loading || userForm.invalid" class="btn btn-primary rounded-pill" *ngIf="!readonly">
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                Salvar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
