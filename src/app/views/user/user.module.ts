@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgProgressModule } from 'ngx-progressbar';
 import { NgProgressHttpModule } from "ngx-progressbar/http";
 import { InputComponent } from '../../containers/input/input.component';
+import { OverUserViewComponent } from './overview/overview-user.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { InputComponent } from '../../containers/input/input.component';
   declarations: [
     ListUserComponent,
     AddEditUserComponent,
+    OverUserViewComponent,
     InputComponent
   ],
   providers: [
