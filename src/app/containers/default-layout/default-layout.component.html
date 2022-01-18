@@ -3,10 +3,12 @@
 <app-header
   [navbarBrandRouterLink]="['/dashboard']"
   [fixed]="true"
-  [navbarBrandFull]="{src: 'assets/img/brand/logo.svg', width: 89, height: 25, alt: 'CoreUI Logo'}"
-  [navbarBrandMinimized]="{src: 'assets/img/brand/sygnet.svg', width: 30, height: 30, alt: 'CoreUI Logo'}"
+  [navbarBrandFull]="{src: 'assets/img/brand/logo-william1.svg', width: 65, height: 35, alt: 'Logo'}"
+  [navbarBrandMinimized]="{src: 'assets/img/brand/logo-william1.svg', width: 30, height: 30, alt: 'Logo'}"
   [sidebarToggler]="'lg'"
-  [asideMenuToggler]="'lg'">
+  [asideMenuToggler]="'lg'"
+  [asideMenuToggler]=false
+  [mobileAsideMenuToggler]=false>
 
   <ul class="nav navbar-nav ml-auto">
     <li class="nav-item dropdown" dropdown placement="bottom right">
@@ -35,6 +37,7 @@
 </div>
 
 <app-footer>
-  <span><a href="https://coreui.io">CoreUI</a> &copy; 2021 creativeLabs.</span>
-  <span class="ml-auto">Powered by <a href="https://coreui.io/angular">CoreUI for Angular</a></span>
+  <span class="ml-auto">
+    <a href="#" target="_blank">William Simionatto Nepomuceno</a>&nbsp;© 2022        
+  </span>
 </app-footer>
