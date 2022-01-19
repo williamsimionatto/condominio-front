@@ -35,7 +35,6 @@ export class AddEditUserComponent implements OnInit {
       name: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
       email: this.formBuilder.control('', [Validators.required, Validators.pattern(this.emailPattern)]),
       password: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
-      password_confirmation: this.formBuilder.control('', [Validators.required, Validators.minLength(5)])
     });
 
     if (!this.isAddMode) {
@@ -43,7 +42,6 @@ export class AddEditUserComponent implements OnInit {
         .getById(this.id)
         .pipe(first())
         .subscribe(x => {
-          console.log(x);
           this.userForm.patchValue(x) 
         }
       );
@@ -71,9 +69,9 @@ export class AddEditUserComponent implements OnInit {
       return this.notificationService.showError('Preencha todos os campos obrigatórios', 'Atenção');
     }
     
-    if (!this.validPassword()) {
-      return this.notificationService.showInfo('As senhas não conferem!', 'Atenção');
-    }
+    // if (!this.validPassword()) {
+    //   return this.notificationService.showInfo('As senhas não conferem!', 'Atenção');
+    // }
 
     this.loading = true;
     this.isAddMode ? this.create() :  this.update();
@@ -95,6 +93,7 @@ export class AddEditUserComponent implements OnInit {
           this.notificationService.showSuccess('Registro criado com sucesso!', 'Sucesso');
         },
         error: ret => {
+          console.log(ret)
           this.notificationService.showError('Aconteceu um erro ao salvar o registro!', 'Erro');
           this.loading = false;
         }
