@@ -1,4 +1,4 @@
 export type LoginSuccessParams = {
-  token: string;
+  access_token: string;
   name: string;
 }

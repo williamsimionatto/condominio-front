@@ -6,7 +6,9 @@ export default class Service {
   public headerDict = {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
-    'Access-Control-Allow-Headers': 'Content-Type'
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Origin': '*',
+    'Authorization': 'Bearer ' + localStorage.getItem('token')
   }
 
   public requestOptions = {                                                                                                                                                                                 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import swal from 'sweetalert';
 import { UserService } from '../../../service';
@@ -14,7 +15,8 @@ export class ListUserComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -23,7 +25,7 @@ export class ListUserComponent implements OnInit {
     })
   }
 
-  delete(id: string) {
+  delete(userParams) {
     swal({
       text: "Deseja realmente excluir este regitro?",
       icon: "warning",
@@ -31,14 +33,15 @@ export class ListUserComponent implements OnInit {
       buttons: ["Não", "Sim"]
     }).then((willDelete) => {
       if (willDelete) {
-        const user = this.users.filter(user => user._id === id)
+        const user = this.users.filter(user => user.id === userParams.id)
         user.isDeleting = true
 
-        this.userService.delete(id).pipe(first()).subscribe(() => {
-          this.users = this.users.filter(user => user._id !== id)
+        this.userService.delete(userParams.id).pipe(first()).subscribe(() => {
+          this.users = this.users.filter(user => user.id !== userParams.id)
         })
 
         this.notificationService.showSuccess('Registro excluído com sucesso!', 'Sucesso')
+        this.users.splice(this.users.indexOf(userParams), 1);
       }
     }).catch(() => {
       this.notificationService.showError('Não foi possível excluir o registro!', 'Erro')

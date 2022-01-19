@@ -12,8 +12,8 @@ export class AuthService {
   ) {}
 
   public isAuthenticated(): boolean {
-    const token = this.localStorageService.getItem("token");
+    const token = this.localStorageService.getItem("acess_token");
     const isExpired = this.jwtHelperService.isTokenExpired(token);
-    return true || !isExpired;
+    return !isExpired;
   }
 }

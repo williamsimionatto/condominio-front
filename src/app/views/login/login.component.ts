@@ -39,9 +39,9 @@ export class LoginComponent {
     this.loading = true;
     this.loginService.login(this.loginForm.value).pipe(first()).subscribe({
       next: (data: LoginSuccessParams) => {
+        console.log(data);
         this.notifyService.showSuccess('Login realizado com sucesso', 'Sucesso');
-        this.localStorageService.setItem('token', data.token);
-        this.localStorageService.setItem('name', data.name);
+        this.localStorageService.setItem('token', data.access_token);
 
         this.router.navigate(['/dashboard']);
       },

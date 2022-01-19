@@ -28,14 +28,14 @@ export class OverUserViewComponent implements OnInit {
       name: this.formBuilder.control('', [Validators.required]),
       email: this.formBuilder.control('', [Validators.required]),
       password: this.formBuilder.control('', [Validators.required]),
-      passwordConfirmation: this.formBuilder.control('', [Validators.required])
+      password_confirmation: this.formBuilder.control('', [Validators.required])
     });
 
     if (!this.isAddMode) {
       this.userService
         .getById(this.id)
         .pipe(first())
-        .subscribe(x => { this.userForm.patchValue(x[0]) }
+        .subscribe(x => { this.userForm.patchValue(x) }
       );
     }
   }

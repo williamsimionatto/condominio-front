@@ -30,33 +30,35 @@ export class AddEditUserComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
     this.isAddMode = !this.id;
-
     this.userForm = this.formBuilder.group({
       id: this.formBuilder.control('', [Validators.nullValidator]),
       name: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
       email: this.formBuilder.control('', [Validators.required, Validators.pattern(this.emailPattern)]),
       password: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
-      passwordConfirmation: this.formBuilder.control('', [Validators.required, Validators.minLength(5)])
+      password_confirmation: this.formBuilder.control('', [Validators.required, Validators.minLength(5)])
     });
 
     if (!this.isAddMode) {
       this.userService
         .getById(this.id)
         .pipe(first())
-        .subscribe(x => { this.userForm.patchValue(x[0]) }
+        .subscribe(x => {
+          console.log(x);
+          this.userForm.patchValue(x) 
+        }
       );
     }
   }
 
   static equalsTo(group: AbstractControl): {[key:string]: boolean} {
     const password = group.get('password')
-    const passwordConfirmation = group.get('passwordConfirmation')
+    const password_confirmation = group.get('password_confirmation')
 
-    if (!password || !passwordConfirmation) {
+    if (!password || !password_confirmation) {
       return undefined
     }
 
-    if (password.value !== passwordConfirmation.value) {
+    if (password.value !== password_confirmation.value) {
       return { passwordNotMatch: true }
     }
 
@@ -79,8 +81,8 @@ export class AddEditUserComponent implements OnInit {
 
   validPassword() {
     const password = this.userForm.get('password');
-    const passwordConfirmation = this.userForm.get('passwordConfirmation');
-    return password.value === passwordConfirmation.value
+    const password_confirmation = this.userForm.get('password_confirmation');
+    return password.value === password_confirmation.value
   }
 
   private create() {

@@ -27,19 +27,19 @@
 
               <tbody>
                 <tr *ngFor="let user of users">
-                  <td>{{user.nome}}</td>
+                  <td>{{user.name}}</td>
                   <td>{{user.email}}</td>
                   <td>{{user.active}}</td>
                   <td>
-                    <a class="btn btn-success btn-sm rounded-pill" routerLink="overview/{{user._id}}">
+                    <a class="btn btn-success btn-sm rounded-pill" routerLink="overview/{{user.id}}">
                       <i class="fa fa-search"></i>
                     </a>
 
-                    <a class="btn btn-primary btn-sm rounded-pill" routerLink="edit/{{user._id}}">
+                    <a class="btn btn-primary btn-sm rounded-pill" routerLink="edit/{{user.id}}">
                         <i class="fa fa-pencil"></i>
                     </a>
 
-                    <a class="btn btn-danger btn-sm rounded-pill" (click)="delete(user._id)">
+                    <a class="btn btn-danger btn-sm rounded-pill" (click)="delete(user)">
                       <i class="fa fa-trash"></i>
                     </a>
                   </td>
