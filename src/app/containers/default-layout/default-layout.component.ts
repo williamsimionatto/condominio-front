@@ -10,8 +10,11 @@ import { navItems } from '../../_nav';
 export class DefaultLayoutComponent {
   public sidebarMinimized = true;
   public navItems = navItems;
+  public name: string
 
-  constructor(private localStorageService: LocalStorageService, private router: Router) { }
+  constructor(private localStorageService: LocalStorageService, private router: Router) { 
+    this.name = this.localStorageService.getItem('username')
+  }
 
   toggleMinimize(e) {
     this.sidebarMinimized = e;

@@ -38,10 +38,11 @@ export class LoginComponent {
 
     this.loading = true;
     this.loginService.login(this.loginForm.value).pipe(first()).subscribe({
-      next: (data: LoginSuccessParams) => {
-        console.log(data);
+      next: (data: any) => {
+        data = data[0]
         this.notifyService.showSuccess('Login realizado com sucesso', 'Sucesso');
         this.localStorageService.setItem('token', data.access_token);
+        this.localStorageService.setItem('username', data.user.name);
 
         this.router.navigate(['/dashboard']);
       },
