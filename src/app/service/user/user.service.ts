@@ -40,4 +40,8 @@ export class UserService extends Service {
   public updatePassword(user) {
     return this.http.put(`${environment.apiUrl}/user/refreshpassword/${user.id}`, user, this.requestOptions);
   }
+
+  public verifyPassword(user) {
+    return this.http.put(`${environment.apiUrl}/user/verifypassword/${user.id}`, user, this.requestOptions);
+  }
 }

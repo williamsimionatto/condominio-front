@@ -60,8 +60,8 @@ export class PasswordComponent implements OnInit {
       this.notificationService.showError('A Nova Senha não confere!', 'Erro');
     }
 
-    this.loading = true;
-    this.updatePassword()
+    
+    this.verifyPassword()
   }
 
   updatePassword() {
@@ -85,5 +85,25 @@ export class PasswordComponent implements OnInit {
           this.loading = false;
         }
     });
+  }
+
+  verifyPassword() {
+    this.passwordUserForm.value.id = this.id;
+    let data = {
+      id: this.passwordUserForm.value.id,
+      password: this.passwordUserForm.value.password
+    }
+
+    this.userService
+      .verifyPassword(data)
+      .pipe(first())
+      .subscribe((x: any) => {
+        if (x.ok) {
+          this.loading = true
+          this.updatePassword()
+        } else {
+          this.notificationService.showError('A Senha Atual está incorreta!', 'Erro');
+        }
+      })
   }
 }
