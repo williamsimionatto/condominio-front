@@ -21,7 +21,7 @@
                   <th>Nome</th>
                   <th>E-mail</th>
                   <th>Ativo</th>
-                  <th width="10%">Ações</th>
+                  <th width="18%" style="text-align: center">Ações</th>
                 </tr>
               </thead>
 
@@ -31,15 +31,19 @@
                   <td>{{user.email}}</td>
                   <td>{{user.active}}</td>
                   <td>
-                    <a class="btn btn-success btn-sm rounded-pill" routerLink="overview/{{user.id}}">
+                    <a class="btn btn-secondary btn-sm rounded-pill" style="cursor: pointer;">
+                      <i class="fa fa-key">Alterar Senha</i>
+                    </a>
+
+                    <a class="btn btn-success btn-sm rounded-pill" routerLink="overview/{{user.id}}" style="cursor: pointer;">
                       <i class="fa fa-search"></i>
                     </a>
 
-                    <a class="btn btn-primary btn-sm rounded-pill" routerLink="edit/{{user.id}}">
+                    <a class="btn btn-primary btn-sm rounded-pill" routerLink="edit/{{user.id}}" style="cursor: pointer;">
                         <i class="fa fa-pencil"></i>
                     </a>
 
-                    <a class="btn btn-danger btn-sm rounded-pill" (click)="delete(user)">
+                    <a class="btn btn-danger btn-sm rounded-pill" (click)="delete(user)" style="cursor: pointer;">
                       <i class="fa fa-trash"></i>
                     </a>
                   </td>

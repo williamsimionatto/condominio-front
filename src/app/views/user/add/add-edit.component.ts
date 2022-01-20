@@ -16,6 +16,7 @@ export class AddEditUserComponent implements OnInit {
   loading = false;
   submitted = false;
   readonly = false;
+  readonly_password = false
   numberPattern = /^[0-9]*$/
   emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 
@@ -35,9 +36,11 @@ export class AddEditUserComponent implements OnInit {
       name: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
       email: this.formBuilder.control('', [Validators.required, Validators.pattern(this.emailPattern)]),
       password: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
+      password_confirmation: this.formBuilder.control('', [Validators.required, Validators.minLength(5)])
     });
 
     if (!this.isAddMode) {
+      this.readonly_password = true;
       this.userService
         .getById(this.id)
         .pipe(first())
@@ -69,9 +72,9 @@ export class AddEditUserComponent implements OnInit {
       return this.notificationService.showError('Preencha todos os campos obrigatórios', 'Atenção');
     }
     
-    // if (!this.validPassword()) {
-    //   return this.notificationService.showInfo('As senhas não conferem!', 'Atenção');
-    // }
+    if (!this.validPassword()) {
+      return this.notificationService.showInfo('As senhas não conferem!', 'Atenção');
+    }
 
     this.loading = true;
     this.isAddMode ? this.create() :  this.update();
@@ -110,6 +113,7 @@ export class AddEditUserComponent implements OnInit {
           this.notificationService.showSuccess('Registro atualizado com sucesso!', 'Sucesso');
         },
         error: error => {
+          console.log(error)
           this.notificationService.showError('Aconteceu um erro ao atualizar o registro!', 'Erro');
           this.loading = false;
         }

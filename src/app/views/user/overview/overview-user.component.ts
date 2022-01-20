@@ -12,6 +12,7 @@ export class OverUserViewComponent implements OnInit {
   loading = false;
   submitted = false;
   readonly = true;
+  readonly_password = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,6 +29,7 @@ export class OverUserViewComponent implements OnInit {
       name: this.formBuilder.control('', [Validators.required]),
       email: this.formBuilder.control('', [Validators.required]),
       password: this.formBuilder.control('', [Validators.required]),
+      password_confirmation: this.formBuilder.control('', [Validators.required])
     });
 
     if (!this.isAddMode) {

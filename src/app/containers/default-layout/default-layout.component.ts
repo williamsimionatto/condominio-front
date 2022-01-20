@@ -18,8 +18,8 @@ export class DefaultLayoutComponent {
   }
 
   logout() {
-    this.localStorageService.removeItem('token');
-    this.localStorageService.removeItem('name');
+    this.localStorageService.clear();
+
     this.router.navigate(['/login']);
   }
 }
