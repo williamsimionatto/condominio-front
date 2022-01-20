@@ -16,6 +16,7 @@ export class AddEditUserComponent implements OnInit {
   loading = false;
   submitted = false;
   readonly = false;
+  readonly_password = false
   numberPattern = /^[0-9]*$/
   emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 
@@ -38,6 +39,7 @@ export class AddEditUserComponent implements OnInit {
     });
 
     if (!this.isAddMode) {
+      this.readonly_password = true;
       this.userService
         .getById(this.id)
         .pipe(first())

@@ -12,6 +12,7 @@ export class OverUserViewComponent implements OnInit {
   loading = false;
   submitted = false;
   readonly = true;
+  readonly_password = true;
 
   constructor(
     private formBuilder: FormBuilder,

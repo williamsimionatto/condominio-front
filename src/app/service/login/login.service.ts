@@ -13,7 +13,6 @@ export class LoginService extends Service {
   }
 
   login(data: LoginParams) {
-    console.log(data);
     return this.http.post(`${environment.apiUrl}/auth/login`, data, this.requestOptions);
   }
 }

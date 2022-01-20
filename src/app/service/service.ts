@@ -1,6 +1,9 @@
 import { HttpHeaders } from '@angular/common/http';
+import { LocalStorageService } from './local-storage/local-storage.service';
 
 export default class Service {
+  private localStorageService: LocalStorageService =  new LocalStorageService()
+
   constructor () {}
 
   public headerDict = {
@@ -8,10 +11,10 @@ export default class Service {
     'Accept': 'application/json',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Allow-Origin': '*',
-    'Authorization': 'Bearer ' + localStorage.getItem('token')
+    'Authorization': 'Bearer ' + this.localStorageService.getItem('token')
   }
 
   public requestOptions = {                                                                                                                                                                                 
-    headers: new HttpHeaders(this.headerDict), 
+    headers: new HttpHeaders(this.headerDict)
   }
 }
