@@ -29,6 +29,17 @@
                                 </input-container>
                             </div>
 
+                            <div class="col-lg-2 col-md-2">
+                                <div class="form-group">
+                                    <label class="form-label" for="inputSuccess">Ativo</label>
+                                    <select class="form-control" id="active" formControlName="active">
+                                        <option value="">Selecione</option>
+                                        <option value="S">Sim</option>
+                                        <option value="N">Não</option>    
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="col-lg-5 col-md-5">
                                 <input-container errorMessage="Senha é obrigatório" label="Senha">
                                     <input type="password" id="password" class="form-control" formControlName="password" autocomplete="off" [readonly]="readonly_password">

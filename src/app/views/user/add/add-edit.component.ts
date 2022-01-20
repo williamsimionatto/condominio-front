@@ -36,7 +36,8 @@ export class AddEditUserComponent implements OnInit {
       name: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
       email: this.formBuilder.control('', [Validators.required, Validators.pattern(this.emailPattern)]),
       password: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
-      password_confirmation: this.formBuilder.control('', [Validators.required, Validators.minLength(5)])
+      password_confirmation: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
+      active: this.formBuilder.control('', [Validators.required]),
     });
 
     if (!this.isAddMode) {
@@ -87,6 +88,7 @@ export class AddEditUserComponent implements OnInit {
   }
 
   private create() {
+    console.log(this.userForm.value)
     this.userService
       .create(this.userForm.value)
       .pipe(first())
