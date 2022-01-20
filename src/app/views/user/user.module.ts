@@ -11,6 +11,7 @@ import { NgProgressModule } from 'ngx-progressbar';
 import { NgProgressHttpModule } from "ngx-progressbar/http";
 import { InputComponent } from '../../containers/input/input.component';
 import { OverUserViewComponent } from './overview/overview-user.component';
+import { PasswordComponent } from './password/password.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { OverUserViewComponent } from './overview/overview-user.component';
     ListUserComponent,
     AddEditUserComponent,
     OverUserViewComponent,
+    PasswordComponent,
     InputComponent
   ],
   providers: [
