@@ -29,8 +29,11 @@ export class OverUserViewComponent implements OnInit {
       name: this.formBuilder.control('', [Validators.required]),
       email: this.formBuilder.control('', [Validators.required]),
       password: this.formBuilder.control('', [Validators.required]),
-      password_confirmation: this.formBuilder.control('', [Validators.required])
+      password_confirmation: this.formBuilder.control('', [Validators.required]),
+      active: this.formBuilder.control('', [Validators.required]),
     });
+
+    this.userForm.get('active').disable();
 
     if (!this.isAddMode) {
       this.userService
