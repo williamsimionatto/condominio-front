@@ -88,7 +88,6 @@ export class AddEditUserComponent implements OnInit {
   }
 
   private create() {
-    console.log(this.userForm.value)
     this.userService
       .create(this.userForm.value)
       .pipe(first())
@@ -115,7 +114,6 @@ export class AddEditUserComponent implements OnInit {
           this.notificationService.showSuccess('Registro atualizado com sucesso!', 'Sucesso');
         },
         error: error => {
-          console.log(error)
           this.notificationService.showError('Aconteceu um erro ao atualizar o registro!', 'Erro');
           this.loading = false;
         }

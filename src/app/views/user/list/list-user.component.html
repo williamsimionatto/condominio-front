@@ -1,56 +1,56 @@
 <div class="animated fadeIn">
-    <header class="header header-sticky mb-4"></header>
+  <header class="header header-sticky mb-4"></header>
 
-    <div class="row">
-      <div class="col">
-        <div class="card">
-          <div class="card-header">
-            <div class="card-label"> Usuários </div>
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-label"> Usuários </div>
 
-            <div class="card-header-actions">
-              <a class="btn btn-primary rounded-pill btnCadastrar" routerLink="add">
-                <i class="fa fa-plus"></i> Novo Registro
-              </a>            
-          </div>
+          <div class="card-header-actions">
+            <a class="btn btn-primary rounded-pill btnCadastrar" routerLink="add">
+              <i class="fa fa-plus"></i> Novo Registro
+            </a>            
         </div>
+      </div>
 
-          <div class="card-body">
-            <table class="table table-striped border datatable">
-              <thead>
-                <tr>
-                  <th>Nome</th>
-                  <th>E-mail</th>
-                  <th>Ativo</th>
-                  <th width="18%" style="text-align: center">Ações</th>
-                </tr>
-              </thead>
+      <div class="card-body table-responsive">
+        <table class="table table-striped border datatable">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>E-mail</th>
+              <th>Ativo</th>
+              <th width="18%" style="text-align: center">Ações</th>
+            </tr>
+          </thead>
 
-              <tbody>
-                <tr *ngFor="let user of users">
-                  <td>{{user.name}}</td>
-                  <td>{{user.email}}</td>
-                  <td>{{user.active == 'S' ? 'Sim' : 'Não'}}</td>
-                  <td>
-                    <a class="btn btn-dark btn-sm rounded-pill" routerLink="password/{{user.id}}" style="cursor: pointer;">
-                      <i class="fa fa-key"> Alterar Senha</i>
-                    </a>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <td>{{user.name}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.active == 'S' ? 'Sim' : 'Não'}}</td>
+              <td>
+                <a class="btn btn-dark btn-sm rounded-pill" routerLink="password/{{user.id}}" style="cursor: pointer;">
+                  <i class="fa fa-key"> Alterar Senha</i>
+                </a>
 
-                    <a class="btn btn-success btn-sm rounded-pill" routerLink="overview/{{user.id}}" style="cursor: pointer;">
-                      <i class="fa fa-search"></i>
-                    </a>
+                <a class="btn btn-success btn-sm rounded-pill" routerLink="overview/{{user.id}}" style="cursor: pointer;">
+                  <i class="fa fa-search"></i>
+                </a>
 
-                    <a class="btn btn-primary btn-sm rounded-pill" routerLink="edit/{{user.id}}" style="cursor: pointer;">
-                        <i class="fa fa-pencil"></i>
-                    </a>
+                <a class="btn btn-primary btn-sm rounded-pill" routerLink="edit/{{user.id}}" style="cursor: pointer;">
+                  <i class="fa fa-pencil"></i>
+                </a>
 
-                    <a class="btn btn-danger btn-sm rounded-pill" (click)="delete(user)" style="cursor: pointer;">
-                      <i class="fa fa-trash"></i>
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                <a class="btn btn-danger btn-sm rounded-pill" (click)="delete(user)" style="cursor: pointer;">
+                  <i class="fa fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
+  </div>
 </div>
