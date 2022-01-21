@@ -23,22 +23,22 @@ Consome API REST: https://github.com/williamsimionatto/laravel-api
 ## Cadastro de Usuários
 * Listagem de usuários já cadastrados
 
-    <img src="./img/cadastro.png" width="350" title="Cadastro">
+    <img src="./img/cadastro.png" title="Cadastro">
 * Cadastrar novo usuário
 
-    <img src="./img/cadastro_novo_usuario.png" width="350" title="Cadastro de usuário">
+    <img src="./img/cadastro_novo_usuario.png"  title="Cadastro de usuário">
 
 * Alterar Senha de um Usuário
 
-    <img src="./img/alterar_senha.png" width="350" title="Alterar senha">
+    <img src="./img/alterar_senha.png"  title="Alterar senha">
 
 * Editar Usuário
 
-    <img src="./img/edicao_usuario.png" width="350" title="Editar usuário">
+    <img src="./img/edicao_usuario.png"  title="Editar usuário">
 
 * Excluir Usuário
 
-    <img src="./img/exclusao_usuario.png" width="350" title="Excluir usuário"> 
+    <img src="./img/exclusao_usuario.png"  title="Excluir usuário"> 
 
 # 
 Template By: https://coreui.io/angular/
