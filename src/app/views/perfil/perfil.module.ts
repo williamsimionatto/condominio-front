@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "../../containers/shared.module";
 import { AddEditPerfilComponent } from "./add/add-edit.component";
 import { ListPerfilComponent } from "./list/list-perfil.component";
+import { OverviewPerfilComponent } from "./overview/overview-perfil.component";
 import { PerfilRoutingModule } from "./perfil-routing.module";
 
 @NgModule({
@@ -16,7 +17,8 @@ import { PerfilRoutingModule } from "./perfil-routing.module";
   ],
   declarations: [
     ListPerfilComponent,
-    AddEditPerfilComponent
+    AddEditPerfilComponent,
+    OverviewPerfilComponent
   ],
   providers: [
     
