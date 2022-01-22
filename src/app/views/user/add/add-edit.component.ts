@@ -50,7 +50,7 @@ export class AddEditUserComponent implements OnInit {
       password: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
       password_confirmation: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
       active: this.formBuilder.control('', [Validators.required]),
-      perfil_id: this.formBuilder.control('', [Validators.required]),
+      perfilId: this.formBuilder.control('', [Validators.required]),
     });
 
     this.getPerfis()
@@ -141,9 +141,11 @@ export class AddEditUserComponent implements OnInit {
   private getPerfis() {
     this.perfilService.getAll().pipe(first()).subscribe(
       data => {
-        this.perfilOptions = data.map(x => {
+        let options = data.map(x => {
           return { value: x.id, name: x.name }
         })
+
+        this.perfilOptions = this.perfilOptions.concat(options)
       }
     )
   }

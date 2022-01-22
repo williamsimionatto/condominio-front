@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { UserService } from '../../../service';
+import { PerfilService } from '../../../service/perfil/perfil.service';
 
 @Component({ templateUrl: '../add/add-edit.component.html' })
 export class OverUserViewComponent implements OnInit {
@@ -14,10 +15,21 @@ export class OverUserViewComponent implements OnInit {
   readonly = true;
   readonly_password = true;
 
+  activeOptions = [
+    { value: "", name: 'Selecione'},
+    { value: "S", name: 'Sim' },
+    { value: "N", name: 'Não' },
+  ];
+
+  perfilOptions = [
+    { value: "", name: 'Selecione'},
+  ]
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private userService: UserService,
+    private perfilService: PerfilService,
   ) {}
 
   ngOnInit() {
@@ -31,9 +43,13 @@ export class OverUserViewComponent implements OnInit {
       password: this.formBuilder.control('', [Validators.required]),
       password_confirmation: this.formBuilder.control('', [Validators.required]),
       active: this.formBuilder.control('', [Validators.required]),
+      perfilId: this.formBuilder.control('', [Validators.required]),
     });
 
     this.userForm.get('active').disable();
+    this.userForm.get('perfilId').disable();
+
+    this.getPerfis()
 
     if (!this.isAddMode) {
       this.userService
@@ -47,4 +63,16 @@ export class OverUserViewComponent implements OnInit {
   get f() { return this.userForm.controls; }
 
   onSubmit() {}
+
+  private getPerfis() {
+    this.perfilService.getAll().pipe(first()).subscribe(
+      data => {
+        let options = data.map(x => {
+          return { value: x.id, name: x.name }
+        })
+
+        this.perfilOptions = this.perfilOptions.concat(options)
+      }
+    )
+  }
 }
