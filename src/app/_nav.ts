@@ -12,9 +12,15 @@ export const navItems: INavData[] = [
     icon: 'fa fa-edit',
     children: [
       {
+        name: 'Perfil',
+        url: '/perfil',
+        icon: 'fa fa-bars',
+        title: false
+      },
+      {
         name: 'Usuários',
         url: '/usuario',
-        icon: 'icon-user'
+        icon: 'fa fa-bars'
       }
     ]
   },

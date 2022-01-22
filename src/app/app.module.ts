@@ -43,12 +43,14 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { AuthGuardService } from './service/auth/auth-guard.service';
 import { UserModule } from './views/user/user.module';
+import { PerfilModule } from './views/perfil/perfil.module';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgProgressModule } from 'ngx-progressbar';
 import { NgProgressHttpModule } from 'ngx-progressbar/http';
 import { ToastrModule } from 'ngx-toastr';
+import { SharedModule } from './containers/shared.module';
 
 @NgModule({
   imports: [
@@ -70,13 +72,15 @@ import { ToastrModule } from 'ngx-toastr';
     IconModule,
     IconSetModule.forRoot(),
     UserModule,
+    PerfilModule,
     FormsModule,
     NgProgressModule.withConfig({
       color: "red",
       spinner: false
     }),
     NgProgressHttpModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    SharedModule.forRoot()
   ],
   declarations: [
     AppComponent,

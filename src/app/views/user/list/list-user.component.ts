@@ -27,7 +27,7 @@ export class ListUserComponent implements OnInit {
 
   delete(userParams) {
     swal({
-      text: "Deseja realmente excluir este regitro?",
+      text: "Deseja realmente excluir este registro?",
       icon: "warning",
       dangerMode: true,
       buttons: ["Não", "Sim"]
