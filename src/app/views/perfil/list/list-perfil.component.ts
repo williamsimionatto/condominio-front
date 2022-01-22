@@ -4,6 +4,7 @@ import { NotificationService } from "../../../service/notification/notification.
 import { PerfilService } from "../../../service/perfil/perfil.service";
 import swal from 'sweetalert';
 import { first } from "rxjs/operators";
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -36,12 +37,17 @@ export class ListPerfilComponent implements OnInit {
         const perfil = this.perfis.filter(perfil => perfil.id === perfilParams.id)
         perfil.isDeleting = true
 
-        this.perfilService.delete(perfilParams.id).pipe(first()).subscribe(() => {
-          this.perfis = this.perfis.filter(perfil => perfil.id !== perfilParams.id)
-        })
-
-        this.notificationService.showSuccess('Registro excluído com sucesso!', 'Sucesso')
-        this.perfis.splice(this.perfis.indexOf(perfilParams), 1);
+        this.perfilService.delete(perfilParams.id)
+          .subscribe(
+            results => {
+              this.notificationService.showSuccess('Registro excluído com sucesso!', 'Sucesso')
+              this.perfis.splice(this.perfis.indexOf(perfilParams), 1);   
+            },
+            error => {
+              perfil.isDeleting = false
+              this.notificationService.showError('Não é possível excluir este Perfil pois ele está vinculado a um Usuário', 'Erro')
+            }
+          )
       }
     }).catch(() => {
       this.notificationService.showError('Não foi possível excluir o registro!', 'Erro')

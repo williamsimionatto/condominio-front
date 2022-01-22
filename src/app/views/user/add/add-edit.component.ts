@@ -102,6 +102,8 @@ export class AddEditUserComponent implements OnInit {
   }
 
   private create() {
+    this.userForm.value.perfil_id = this.userForm.value.perfilId;
+
     this.userService
       .create(this.userForm.value)
       .pipe(first())
@@ -119,6 +121,7 @@ export class AddEditUserComponent implements OnInit {
 
   private update() {
     this.userForm.value.id = this.id;
+    this.userForm.value.perfil_id = this.userForm.value.perfilId;
 
     this.userService.update(this.userForm.value).pipe(first()).subscribe(
       {

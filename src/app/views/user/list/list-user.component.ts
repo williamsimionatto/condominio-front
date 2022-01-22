@@ -36,7 +36,7 @@ export class ListUserComponent implements OnInit {
         const user = this.users.filter(user => user.id === userParams.id)
         user.isDeleting = true
 
-        this.userService.delete(userParams.id).pipe(first()).subscribe(() => {
+        this.userService.delete(userParams.id).pipe(first()).subscribe((x) => {
           this.users = this.users.filter(user => user.id !== userParams.id)
         })
 
