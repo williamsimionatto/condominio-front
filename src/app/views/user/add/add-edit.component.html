@@ -31,12 +31,17 @@
 
                             <div class="col-lg-2 col-md-2">
                                 <div class="form-group">
+                                    <label class="form-label" for="inputSuccess">Perfil</label>
+                                    <ng-select [items]="perfilOptions" bindLabel="name" bindValue="value" formControlName="perfil_id" ngDefaultControl>
+                                    </ng-select>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-2">
+                                <div class="form-group">
                                     <label class="form-label" for="inputSuccess">Ativo</label>
-                                    <select class="form-control" id="active" formControlName="active">
-                                        <option value="">Selecione</option>
-                                        <option value="S">Sim</option>
-                                        <option value="N">Não</option>    
-                                    </select>
+                                    <ng-select [items]="activeOptions" bindLabel="name" bindValue="value" formControlName="active" ngDefaultControl>
+                                    </ng-select>
                                 </div>
                             </div>
 

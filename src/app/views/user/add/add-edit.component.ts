@@ -4,6 +4,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { first } from 'rxjs/operators';
 import { UserService } from '../../../service';
 import { NotificationService } from '../../../service/notification/notification.service';
+import { PerfilService } from '../../../service/perfil/perfil.service';
 
 @Component({
    templateUrl: 'add-edit.component.html',
@@ -20,12 +21,23 @@ export class AddEditUserComponent implements OnInit {
   numberPattern = /^[0-9]*$/
   emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 
+  activeOptions = [
+    { value: "", name: 'Selecione'},
+    { value: "S", name: 'Sim' },
+    { value: "N", name: 'Não' },
+  ];
+
+  perfilOptions = [
+    { value: "", name: 'Selecione'},
+  ]
+
   constructor (
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private perfilService: PerfilService
   ) {}
 
   ngOnInit() {
@@ -38,15 +50,17 @@ export class AddEditUserComponent implements OnInit {
       password: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
       password_confirmation: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
       active: this.formBuilder.control('', [Validators.required]),
+      perfil_id: this.formBuilder.control('', [Validators.required]),
     });
 
+    this.getPerfis()
     if (!this.isAddMode) {
       this.readonly_password = true;
       this.userService
         .getById(this.id)
         .pipe(first())
         .subscribe(x => {
-          this.userForm.patchValue(x) 
+          this.userForm.patchValue(x)
         }
       );
     }
@@ -122,5 +136,15 @@ export class AddEditUserComponent implements OnInit {
 
   get f() {
     return this.userForm.controls; 
+  }
+
+  private getPerfis() {
+    this.perfilService.getAll().pipe(first()).subscribe(
+      data => {
+        this.perfilOptions = data.map(x => {
+          return { value: x.id, name: x.name }
+        })
+      }
+    )
   }
 }

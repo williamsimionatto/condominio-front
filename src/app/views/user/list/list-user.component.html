@@ -20,6 +20,7 @@
             <tr>
               <th>Nome</th>
               <th>E-mail</th>
+              <th>Perfil</th>
               <th>Ativo</th>
               <th width="18%" style="text-align: center">Ações</th>
             </tr>
@@ -29,6 +30,7 @@
             <tr *ngFor="let user of users">
               <td>{{user.name}}</td>
               <td>{{user.email}}</td>
+              <td>{{user.perfil_id}}</td>
               <td>{{user.active == 'S' ? 'Sim' : 'Não'}}</td>
               <td style="text-align: center">
                 <a class="btn btn-dark btn-sm rounded-pill" routerLink="password/{{user.id}}" style="cursor: pointer;">

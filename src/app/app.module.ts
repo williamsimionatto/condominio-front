@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
@@ -80,7 +81,8 @@ import { SharedModule } from './containers/shared.module';
     }),
     NgProgressHttpModule,
     ToastrModule.forRoot(),
-    SharedModule.forRoot()
+    SharedModule.forRoot(),
+    NgSelectModule
   ],
   declarations: [
     AppComponent,

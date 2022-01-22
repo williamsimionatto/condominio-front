@@ -13,6 +13,7 @@ import { OverUserViewComponent } from './overview/overview-user.component';
 import { PasswordComponent } from './password/password.component';
 import { AppModule } from '../../app.module';
 import { SharedModule } from '../../containers/shared.module';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { SharedModule } from '../../containers/shared.module';
     UserRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    NgSelectModule
   ],
   declarations: [
     ListUserComponent,
