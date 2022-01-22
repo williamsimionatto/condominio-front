@@ -5,7 +5,8 @@ import { ListPerfilComponent } from "./list/list-perfil.component";
 
 const routes: Routes = [
   { path: "", component: ListPerfilComponent },
-  { path: 'add', component: AddEditPerfilComponent}
+  { path: 'add', component: AddEditPerfilComponent},
+  { path: 'edit/:id', component: AddEditPerfilComponent },
 ]
 
 @NgModule({
