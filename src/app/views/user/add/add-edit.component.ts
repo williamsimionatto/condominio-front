@@ -97,7 +97,6 @@ export class AddEditUserComponent implements OnInit {
           this.notificationService.showSuccess('Registro criado com sucesso!', 'Sucesso');
         },
         error: ret => {
-          console.log(ret)
           this.notificationService.showError('Aconteceu um erro ao salvar o registro!', 'Erro');
           this.loading = false;
         }

@@ -50,6 +50,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgProgressModule } from 'ngx-progressbar';
 import { NgProgressHttpModule } from 'ngx-progressbar/http';
 import { ToastrModule } from 'ngx-toastr';
+import { SharedModule } from './containers/shared.module';
 
 @NgModule({
   imports: [
@@ -78,7 +79,8 @@ import { ToastrModule } from 'ngx-toastr';
       spinner: false
     }),
     NgProgressHttpModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    SharedModule.forRoot()
   ],
   declarations: [
     AppComponent,
