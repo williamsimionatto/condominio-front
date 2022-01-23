@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "../../containers/shared.module";
 import { AddEditPermissaoComponent } from "./add/add-edit.component";
 import { ListPermissaoComponent } from "./list/list-permissao.component";
+import { OverviewPermissaoComponent } from "./overview/overview-perfil.component";
 import { PermissaoRoutingModule } from "./permissao-routing.module";
 
 @NgModule({
@@ -16,7 +17,8 @@ import { PermissaoRoutingModule } from "./permissao-routing.module";
   ],
   declarations: [
     ListPermissaoComponent,
-    AddEditPermissaoComponent
+    AddEditPermissaoComponent,
+    OverviewPermissaoComponent
   ],
 })
 export class PermissaoModule {
