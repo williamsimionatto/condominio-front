@@ -52,6 +52,7 @@ import { NgProgressModule } from 'ngx-progressbar';
 import { NgProgressHttpModule } from 'ngx-progressbar/http';
 import { ToastrModule } from 'ngx-toastr';
 import { SharedModule } from './containers/shared.module';
+import { PermissaoModule } from './views/permissao/permissao.module';
 
 @NgModule({
   imports: [
@@ -74,6 +75,7 @@ import { SharedModule } from './containers/shared.module';
     IconSetModule.forRoot(),
     UserModule,
     PerfilModule,
+    PermissaoModule,
     FormsModule,
     NgProgressModule.withConfig({
       color: "red",

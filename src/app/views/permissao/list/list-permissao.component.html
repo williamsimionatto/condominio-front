@@ -1,0 +1,54 @@
+<div class="animated fadeIn">
+    <header class="header header-sticky mb-4"></header>
+  
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-label"> Permissão </div>
+  
+            <div class="card-header-actions">
+              <a class="btn btn-primary rounded-pill" routerLink="add">
+                <i class="fa fa-plus"></i> Novo Registro
+              </a>
+          </div>
+        </div>
+  
+        <div class="card-body table-responsive">
+          <table class="table table-striped border datatable">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>Sigla</th>
+                <th width="18%" style="text-align: center">Ações</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let permissao of permissoes">
+                <td>{{ permissao.id }}</td>
+                <td>{{ permissao.name }}</td>
+                <td>{{ permissao.sigla }}</td>
+
+                <td style="text-align: center">
+                  <a class="btn btn-success btn-sm rounded-pill" routerLink="overview/{{permissao.id}}" style="cursor: pointer;">
+                    <i class="fa fa-search"></i>
+                  </a>
+  
+                  <a class="btn btn-primary btn-sm rounded-pill" routerLink="edit/{{permissao.id}}" style="cursor: pointer;">
+                    <i class="fa fa-pencil"></i>
+                  </a>
+  
+                  <a class="btn btn-danger btn-sm rounded-pill" (click)="delete(permissao)" style="cursor: pointer;">
+                    <i class="fa fa-trash"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
