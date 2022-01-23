@@ -6,6 +6,7 @@ import { AddEditPerfilComponent } from "./add/add-edit.component";
 import { ListPerfilComponent } from "./list/list-perfil.component";
 import { OverviewPerfilComponent } from "./overview/overview-perfil.component";
 import { PerfilRoutingModule } from "./perfil-routing.module";
+import { PermissaoComponent } from "./permissao/permissao.component";
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { PerfilRoutingModule } from "./perfil-routing.module";
   declarations: [
     ListPerfilComponent,
     AddEditPerfilComponent,
-    OverviewPerfilComponent
+    OverviewPerfilComponent,
+    PermissaoComponent
   ],
   providers: [
     
