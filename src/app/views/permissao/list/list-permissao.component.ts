@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { first } from "rxjs/operators";
 import swal from "sweetalert";
 import { NotificationService } from "../../../service/notification/notification.service";
-import { PemrissaoService } from "../../../service/permissao/permissao.service";
+import { PermissaoService } from "../../../service/permissao/permissao.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +13,7 @@ export class ListPermissaoComponent implements OnInit {
   permissoes = null
 
   constructor(
-    private permissaoService: PemrissaoService,
+    private permissaoService: PermissaoService,
     private notificationService: NotificationService
   ) {}
 

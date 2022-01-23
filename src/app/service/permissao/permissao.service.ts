@@ -6,7 +6,7 @@ import Service from '../service';
 @Injectable({
   providedIn: 'root'
 })
-export class PemrissaoService extends Service {
+export class PermissaoService extends Service {
   constructor(private readonly http: HttpClient) {
     super();
   }
