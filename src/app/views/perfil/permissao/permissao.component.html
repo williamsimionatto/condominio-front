@@ -1,0 +1,97 @@
+<div class="animated fadeIn">
+    <header class="header header-sticky mb-4"></header>
+
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-label"> Permissões - {{ perfil.name }}</div>
+                </div>
+
+                <div class="card-body">
+                    <form [formGroup]="perfilPermissaoForm" (ngSubmit)="onSubmit()">
+                        <table class="table table-striped border datatable">
+                            <thead>
+                                <tr>
+                                    <th>Permissão</th>
+                                    <th style="text-align: center">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" (click)="checkAllByTipoPermissao($event, 'consultar')">
+                                            <label class="form-check-label"> Consultar </label>
+                                        </div>
+                                    </th>
+
+                                    <th style="text-align: center">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" (click)="checkAllByTipoPermissao($event, 'inserir')">
+                                            <label class="form-check-label"> Incluir </label>
+                                        </div>
+                                    </th>
+
+                                    <th style="text-align: center">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" (click)="checkAllByTipoPermissao($event, 'alterar')">
+                                            <label class="form-check-label"> Alterar </label>
+                                        </div>
+                                    </th>
+
+                                    <th style="text-align: center">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" (click)="checkAllByTipoPermissao($event, 'excluir')">
+                                            <label class="form-check-label"> Excluir </label>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr *ngFor="let permissao of permissoesPerfil">
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" id="permissaoName{{permissao.id}}" type="checkbox" (click)="checkAllByPermissao($event, permissao.id)">
+                                            <label class="form-check-label" for="permissaoName{{permissao.id}}"> {{ permissao.name }} </label>
+                                        </div>
+                                    </td>
+
+                                    <td width="5%">
+                                        <div class="form-check">
+                                            <input class="form-check-input" id="consultar{{permissao.id}}" type="checkbox" [checked]="permissao.consultar === 'S'">
+                                        </div>
+                                    </td>
+
+                                    <td width="5%">
+                                        <div class="form-check">
+                                            <input class="form-check-input" id="incluir{{permissao.id}}" type="checkbox" [checked]="permissao.inserir === 'S'">
+                                        </div>
+                                    </td>
+
+                                    <td width="5%">
+                                        <div class="form-check">
+                                            <input class="form-check-input" id="alterar{{permissao.id}}" type="checkbox" [checked]="permissao.alterar === 'S'">
+                                        </div>
+                                    </td>
+
+                                    <td width="5%">
+                                        <div class="form-check">
+                                            <input class="form-check-input" id="excluir{{permissao.id}}" type="checkbox" [checked]="permissao.excluir === 'S'">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <hr>
+                        <div class="form-group form-footer">
+                            <a routerLink="/perfil" class="btn btn-light rounded-pill btnVoltar">Voltar</a>
+    
+                            <button [disabled]="loading" class="btn btn-primary rounded-pill">
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                Salvar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

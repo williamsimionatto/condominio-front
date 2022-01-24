@@ -14,17 +14,17 @@ export const navItems: INavData[] = [
       {
         name: 'Perfil',
         url: '/perfil',
-        icon: 'fa fa-bars'
+        icon: 'fa fa-user'
       },
       {
         name: 'Permissão',
         url: '/permissao',
-        icon: 'fa fa-bars'
+        icon: 'fa fa-lock'
       },
       {
         name: 'Usuários',
         url: '/usuario',
-        icon: 'fa fa-bars'
+        icon: 'fa fa-users'
       }
     ]
   },
