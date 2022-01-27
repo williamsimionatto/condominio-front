@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
-import swal from 'sweetalert';
 import { UserService } from '../../../service';
+import { ConfirmationDialogService } from '../../../service/confirmation-dialog/confirmation-dialog';
 import { NotificationService } from '../../../service/notification/notification.service';
 
 @Component({
@@ -16,7 +16,8 @@ export class ListUserComponent implements OnInit {
   constructor(
     private userService: UserService,
     private notificationService: NotificationService,
-    private router: Router
+    private router: Router,
+    private confirmationDialogService: ConfirmationDialogService
   ) {}
 
   ngOnInit(): void {
@@ -26,25 +27,24 @@ export class ListUserComponent implements OnInit {
   }
 
   delete(userParams) {
-    swal({
-      text: "Deseja realmente excluir este registro?",
-      icon: "warning",
-      dangerMode: true,
-      buttons: ["Não", "Sim"]
-    }).then((willDelete) => {
-      if (willDelete) {
+    this.confirmationDialogService.confirm('Excluir Usuário', 'Deseja realmente excluir este usuário? Esta ação não poderá ser desfeita.', 'Excluir', 'Cancelar', "lg")
+      .then((confirmed) => {
+        if (!confirmed) {
+          return;
+        }
+
         const user = this.users.filter(user => user.id === userParams.id)
         user.isDeleting = true
 
         this.userService.delete(userParams.id).pipe(first()).subscribe((x) => {
           this.users = this.users.filter(user => user.id !== userParams.id)
         })
-
+    
         this.notificationService.showSuccess('Registro excluído com sucesso!', 'Sucesso')
         this.users.splice(this.users.indexOf(userParams), 1);
-      }
-    }).catch(() => {
-      this.notificationService.showError('Não foi possível excluir o registro!', 'Erro')
-    })
+      })
+      .catch(() => {
+
+      })
   }
 }
