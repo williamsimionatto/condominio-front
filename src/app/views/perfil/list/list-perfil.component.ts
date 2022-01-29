@@ -2,9 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { NotificationService } from "../../../service/notification/notification.service";
 import { PerfilService } from "../../../service/perfil/perfil.service";
-import swal from 'sweetalert';
 import { first } from "rxjs/operators";
-import { catchError } from 'rxjs/operators';
+import { ConfirmationDialogService } from "../../../service/confirmation-dialog/confirmation-dialog";
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +16,8 @@ export class ListPerfilComponent implements OnInit {
   constructor(
     private perfilService: PerfilService,
     private router: Router,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private confirmationDialogService: ConfirmationDialogService
   ) {}
 
   ngOnInit() {
@@ -27,30 +27,28 @@ export class ListPerfilComponent implements OnInit {
   }
 
   delete(perfilParams) {
-    swal({
-      text: "Deseja realmente excluir este registro?",
-      icon: "warning",
-      dangerMode: true,
-      buttons: ["Não", "Sim"]
-    }).then((willDelete) => {
-      if (willDelete) {
+    this.confirmationDialogService.confirm('Excluir Perfil', 'Deseja realmente excluir este perfil? Esta ação não poderá ser desfeita.', 'Excluir', 'Cancelar', "lg")
+      .then((confirmed) => {
+        if (!confirmed) {
+          return;
+        }
+
         const perfil = this.perfis.filter(perfil => perfil.id === perfilParams.id)
         perfil.isDeleting = true
+    
+        this.perfilService.delete(perfilParams.id).subscribe(
+          results => {
+            this.notificationService.showSuccess('Registro excluído com sucesso!', 'Sucesso')
+            this.perfis.splice(this.perfis.indexOf(perfilParams), 1);   
+          },
+          error => {
+            perfil.isDeleting = false
+            this.notificationService.showError('Não é possível excluir este Perfil pois ele está vinculado a um Usuário', 'Erro')
+          }
+        )
+      })
+      .catch(() => {
 
-        this.perfilService.delete(perfilParams.id)
-          .subscribe(
-            results => {
-              this.notificationService.showSuccess('Registro excluído com sucesso!', 'Sucesso')
-              this.perfis.splice(this.perfis.indexOf(perfilParams), 1);   
-            },
-            error => {
-              perfil.isDeleting = false
-              this.notificationService.showError('Não é possível excluir este Perfil pois ele está vinculado a um Usuário', 'Erro')
-            }
-          )
-      }
-    }).catch(() => {
-      this.notificationService.showError('Não foi possível excluir o registro!', 'Erro')
-    })
+      })
   }
 }

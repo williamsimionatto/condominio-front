@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { first } from "rxjs/operators";
-import swal from "sweetalert";
+import { ConfirmationDialogService } from "../../../service/confirmation-dialog/confirmation-dialog";
 import { NotificationService } from "../../../service/notification/notification.service";
 import { PermissaoService } from "../../../service/permissao/permissao.service";
 
@@ -14,7 +14,8 @@ export class ListPermissaoComponent implements OnInit {
 
   constructor(
     private permissaoService: PermissaoService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private confirmationDialogService: ConfirmationDialogService
   ) {}
 
   ngOnInit() {
@@ -24,30 +25,28 @@ export class ListPermissaoComponent implements OnInit {
   }
 
   delete(permissaoParams) {
-    swal({
-      text: "Deseja realmente excluir este registro?",
-      icon: "warning",
-      dangerMode: true,
-      buttons: ["Não", "Sim"]
-    }).then((willDelete) => {
-      if (willDelete) {
+    this.confirmationDialogService.confirm('Excluir Permissão', 'Deseja realmente excluir esta permissão? Esta ação não poderá ser desfeita.', 'Excluir', 'Cancelar', "lg")
+      .then((confirmed) => {
+        if (!confirmed) {
+          return;
+        }
+
         const permissao = this.permissoes.filter(permissao => permissao.id === permissaoParams.id)
         permissao.isDeleting = true
+    
+        this.permissaoService.delete(permissaoParams.id).subscribe(
+          results => {
+            this.notificationService.showSuccess('Registro excluído com sucesso!', 'Sucesso')
+            this.permissoes.splice(this.permissoes.indexOf(permissaoParams), 1);   
+          },
+          error => {
+            permissao.isDeleting = false
+            this.notificationService.showError('Não é possível excluir este registro', 'Erro')
+          }
+        )
+      })
+      .catch(() => {
 
-        this.permissaoService.delete(permissaoParams.id)
-          .subscribe(
-            results => {
-              this.notificationService.showSuccess('Registro excluído com sucesso!', 'Sucesso')
-              this.permissoes.splice(this.permissoes.indexOf(permissaoParams), 1);   
-            },
-            error => {
-              permissao.isDeleting = false
-              this.notificationService.showError('Não é possível excluir este registro', 'Erro')
-            }
-          )
-      }
-    }).catch(() => {
-      this.notificationService.showError('Não foi possível excluir o registro!', 'Erro')
-    })
+      })
   }
 }

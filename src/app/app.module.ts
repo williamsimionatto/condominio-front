@@ -53,6 +53,8 @@ import { NgProgressHttpModule } from 'ngx-progressbar/http';
 import { ToastrModule } from 'ngx-toastr';
 import { SharedModule } from './containers/shared.module';
 import { PermissaoModule } from './views/permissao/permissao.module';
+import { ConfirmationDialogService } from './service/confirmation-dialog/confirmation-dialog';
+import { ConfirmationDialogComponent } from './containers/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   imports: [
@@ -91,7 +93,8 @@ import { PermissaoModule } from './views/permissao/permissao.module';
     ...APP_CONTAINERS,
     P404Component,
     P500Component,
-    LoginComponent
+    LoginComponent,
+    ConfirmationDialogComponent
   ],
   providers: [
     AuthGuardService,
@@ -105,8 +108,10 @@ import { PermissaoModule } from './views/permissao/permissao.module';
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     },
-    IconSetService
+    IconSetService,
+    ConfirmationDialogService
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [ AppComponent ],
+  entryComponents: [ ConfirmationDialogComponent ]
 })
 export class AppModule { }
