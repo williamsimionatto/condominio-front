@@ -100,11 +100,13 @@
                                            (blur)="formatValue('valormudanca', $event)">
                                 </input-container>
                             </div>
-                        </div>
-    
-                        <hr>
 
-                        <div class="form-group form-footer">
+                        </div>
+                            
+                        <app-detail-condomino> </app-detail-condomino>
+
+                        <div class="form-group form-footer inline-footer">
+                            <hr style="background: red">
                             <a routerLink="/condominio" class="btn btn-light rounded-pill btnVoltar">Voltar</a>
 
                             <button [disabled]="loading || condominioForm.invalid" class="btn btn-primary rounded-pill" *ngIf="!readonly">

@@ -61,6 +61,8 @@ import { PermissaoModule } from './views/permissao/permissao.module';
 import { ConfirmationDialogService } from './service/confirmation-dialog/confirmation-dialog';
 import { ConfirmationDialogComponent } from './containers/confirmation-dialog/confirmation-dialog.component';
 import { CondominioModule } from './views/condominio/condominio.module';
+import { CondominiosModule } from './views/condominos/condominos.module';
+import { DetailCondominosComponent } from './views/condominos/detail/detail-condomino.component';
 
 @NgModule({
   imports: [
@@ -82,6 +84,7 @@ import { CondominioModule } from './views/condominio/condominio.module';
     IconModule,
     IconSetModule.forRoot(),
     CondominioModule,
+    CondominiosModule,
     UserModule,
     PerfilModule,
     PermissaoModule,

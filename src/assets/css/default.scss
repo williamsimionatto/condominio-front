@@ -45,3 +45,15 @@
 .input-value {
   text-align: right;
 }
+
+.inline-footer {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.table th, .table td {
+  padding: 0.25rem;
+  vertical-align: top;
+  border-top: 1px solid #c8ced3;
+}

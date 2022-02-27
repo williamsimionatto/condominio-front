@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "../../containers/shared.module";
+import { CondominiosModule } from "../condominos/condominos.module";
 import { AddEditCondominioComponent } from "./add/add-edit.component";
 import { CondominioRoutingModule } from "./condominio-routing.module";
 import { ListCondominioComponent } from "./list/list-condominio.component";
@@ -13,14 +14,16 @@ import { OverviewCondominioComponent } from "./overview/overview-condominio.comp
     CondominioRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    CondominiosModule
   ],
   declarations: [
     ListCondominioComponent,
     AddEditCondominioComponent,
-    OverviewCondominioComponent
+    OverviewCondominioComponent,
   ],
-  providers: []
+  providers: [
+  ]
 })
 export class CondominioModule {
 
