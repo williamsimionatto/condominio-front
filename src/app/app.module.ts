@@ -55,6 +55,7 @@ import { SharedModule } from './containers/shared.module';
 import { PermissaoModule } from './views/permissao/permissao.module';
 import { ConfirmationDialogService } from './service/confirmation-dialog/confirmation-dialog';
 import { ConfirmationDialogComponent } from './containers/confirmation-dialog/confirmation-dialog.component';
+import { CondominioModule } from './views/condominio/condominio.module';
 
 @NgModule({
   imports: [
@@ -75,6 +76,7 @@ import { ConfirmationDialogComponent } from './containers/confirmation-dialog/co
     ChartsModule,
     IconModule,
     IconSetModule.forRoot(),
+    CondominioModule,
     UserModule,
     PerfilModule,
     PermissaoModule,

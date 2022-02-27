@@ -44,10 +44,16 @@ export const routes: Routes = [
     },
     children: [
       {
-        path: 'usuario',
-        loadChildren: () => import('./views/user/user.module').then(m => m.UserModule),
+        path: 'condominio',
+        loadChildren: () => import('./views/condominio/condominio.module').then(m => m.CondominioModule),
         canActivate: [AuthGuard]
       },
+      {
+        path: 'dashboard',
+        loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule),
+        canActivate: [AuthGuard]
+      },
+      
       {
         path: 'perfil',
         loadChildren: () => import('./views/perfil/perfil.module').then(m => m.PerfilModule),
@@ -59,10 +65,10 @@ export const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: 'dashboard',
-        loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule),
+        path: 'usuario',
+        loadChildren: () => import('./views/user/user.module').then(m => m.UserModule),
         canActivate: [AuthGuard]
-      }
+      },
     ]
   },
   { path: '**', component: P404Component }
