@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -111,7 +111,7 @@ import { CondominioModule } from './views/condominio/condominio.module';
       useClass: HashLocationStrategy
     },
     IconSetService,
-    ConfirmationDialogService
+    ConfirmationDialogService,
   ],
   bootstrap: [ AppComponent ],
   entryComponents: [ ConfirmationDialogComponent ]
