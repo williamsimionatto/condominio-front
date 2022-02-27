@@ -30,6 +30,22 @@
                             </div>
 
                             <div class="col-sm-2 col-xs-2">
+                                <input-container errorMessage="Taxa Geração Boleto é obrigatório" label="Taxa Geração Boleto">
+                                    <input id="taxaboleto" class="form-control" 
+                                           formControlName="taxaboleto" autocomplete="off" [readonly]="readonly"
+                                           (blur)="formatValue('taxaboleto', $event)">
+                                </input-container>
+                            </div>
+
+                            <div class="col-sm-2 col-xs-2">
+                                <input-container errorMessage="Taxa Básica d'água é obrigatório" label="Taxa Básica d'água">
+                                    <input id="taxabasicaagua" class="form-control" 
+                                           formControlName="taxabasicaagua" autocomplete="off" [readonly]="readonly"
+                                           (blur)="formatValue('taxabasicaagua', $event)">
+                                </input-container>
+                            </div>
+
+                            <div class="col-sm-2 col-xs-2">
                                 <input-container errorMessage="Valor Cond. 2 Quartos é obrigatório" label="Valor Cond. 2 Quartos" ng-model="number">
                                     <input id="condominio2quartos" class="form-control input-value" 
                                            formControlName="condominio2quartos" autocomplete="off" [readonly]="readonly"

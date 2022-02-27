@@ -38,7 +38,9 @@ export class AddEditCondominioComponent implements OnInit {
       valoragua: this.formBuilder.control("", [Validators.required]),
       valorsalaofestas: this.formBuilder.control("", [Validators.required]),
       valorlimpezasalaofestas: this.formBuilder.control("", [Validators.required]),
-      valormudanca: this.formBuilder.control("", [Validators.required])
+      valormudanca: this.formBuilder.control("", [Validators.required]),
+      taxaboleto: this.formBuilder.control("", [Validators.required]),
+      taxabasicaagua: this.formBuilder.control("", [Validators.required])
     })
 
     if (!this.isAddMode) {
