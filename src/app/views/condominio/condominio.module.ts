@@ -5,6 +5,7 @@ import { SharedModule } from "../../containers/shared.module";
 import { AddEditCondominioComponent } from "./add/add-edit.component";
 import { CondominioRoutingModule } from "./condominio-routing.module";
 import { ListCondominioComponent } from "./list/list-condominio.component";
+import { OverviewCondominioComponent } from "./overview/overview-condominio.component";
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { ListCondominioComponent } from "./list/list-condominio.component";
   ],
   declarations: [
     ListCondominioComponent,
-    AddEditCondominioComponent
+    AddEditCondominioComponent,
+    OverviewCondominioComponent
   ],
   providers: []
 })
