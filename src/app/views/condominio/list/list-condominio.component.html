@@ -1,0 +1,66 @@
+<div class="animated fadeIn">
+	<header class="header header-sticky mb-4"></header>
+
+	<div class="row">
+		<div class="col">
+			<div class="card">
+				<div class="card-header">
+					<div class="card-label"> Condomínio </div>
+
+					<div class="card-header-actions">
+						<a class="btn btn-primary rounded-pill" routerLink="add">
+							<i class="fa fa-plus"></i> Novo Registro
+						</a>
+				</div>
+			</div>
+
+			<div class="card-body table-responsive">
+				<table class="table table-striped border datatable">
+					<thead>
+						<tr>
+							<th>Código</th>
+							<th width="15%">Nome</th>
+							<th width="12%">CNPJ</th>
+							<th>Valor Cond. 2 Quartos</th>
+							<th>Valor Cond. 3 Quartos</th>
+							<th>Valor Cond. Sala Comercial</th>
+							<th>Valor m³ água</th>
+							<th>Taxa Salão de Festas</th>
+							<th>Taxa limpeza Salão de Festas</th>
+							<th>Taxa de Mudança</th>
+							<th width="10%" style="text-align: center">Ações</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr *ngFor="let condominio of condominios">
+							<td>{{ condominio.id }}</td>
+							<td>{{ condominio.name }}</td>
+							<td>{{ condominio.cnpj }}</td>
+							<td style="text-align: center">{{ condominio.condominio2quartos }}</td>
+							<td style="text-align: center">{{ condominio.condominio3quartos }}</td>
+							<td style="text-align: center">{{ condominio.condominiosalacomercial }}</td>
+							<td style="text-align: center">{{ condominio.valoragua }}</td>
+							<td style="text-align: center">{{ condominio.valorsalaofestas }}</td>
+							<td style="text-align: center">{{ condominio.valorlimpezasalaofestas }}</td>
+							<td style="text-align: center">{{ condominio.valormudanca }}</td>
+							<td style="text-align: center">
+								<a class="btn btn-success btn-sm rounded-pill" routerLink="overview/{{condominio.id}}" style="cursor: pointer;">
+									<i class="fa fa-search"></i>
+								</a>
+				
+								<a class="btn btn-primary btn-sm rounded-pill" routerLink="edit/{{condominio.id}}" style="cursor: pointer;">
+									<i class="fa fa-pencil"></i>
+								</a>
+				
+								<a class="btn btn-danger btn-sm rounded-pill" (click)="delete(condominio)" style="cursor: pointer;">
+									<i class="fa fa-trash"></i>
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

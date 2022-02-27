@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "../../containers/shared.module";
 import { CondominioRoutingModule } from "./condominio-routing.module";
+import { ListCondominioComponent } from "./list/list-condominio.component";
 
 @NgModule({
   imports: [
@@ -12,7 +13,9 @@ import { CondominioRoutingModule } from "./condominio-routing.module";
     ReactiveFormsModule,
     SharedModule
   ],
-  declarations: [],
+  declarations: [
+    ListCondominioComponent
+  ],
   providers: []
 })
 export class CondominioModule {
