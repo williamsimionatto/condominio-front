@@ -1,0 +1,104 @@
+<div class="animated fadeIn">
+    <header class="header header-sticky mb-4"></header>
+
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-label"> Perfis </div>
+                </div>
+
+                <div class="card-body">
+                    <form [formGroup]="condominioForm" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="col-sm-2 col-xs-12">
+                                <input-container errorMessage="i" label="Cód">
+                                    <input id="id" class="form-control" formControlName="id" autocomplete="off" [readonly]="true">
+                                </input-container>
+                            </div>
+
+                            <div class="col-sm-4 col-xs-12">
+                                <input-container errorMessage="Nome é obrigatório" label="Nome">
+                                    <input id="name" class="form-control" formControlName="name" autocomplete="off" [readonly]="readonly">
+                                </input-container>
+                            </div>
+
+                            <div class="col-sm-4 col-xs-12">
+                                <input-container errorMessage="CNPJ é obrigatório" label="CNPJ">
+                                    <input id="cnpj" class="form-control" formControlName="cnpj" autocomplete="off" [readonly]="readonly">
+                                </input-container>
+                            </div>
+
+                            <div class="col-sm-2 col-xs-2">
+                                <input-container errorMessage="Valor Cond. 2 Quartos é obrigatório" label="Valor Cond. 2 Quartos" ng-model="number">
+                                    <input id="condominio2quartos" class="form-control input-value" 
+                                           formControlName="condominio2quartos" autocomplete="off" [readonly]="readonly"
+                                           (blur)="formatValue('condominio2quartos', $event)">
+                                </input-container>
+                            </div>
+
+                            <div class="col-sm-2 col-xs-2">
+                                <input-container errorMessage="Valor Cond. 3 Quartos é obrigatório" label="Valor Cond. 3 Quartos">
+                                    <input id="condominio3quartos" class="form-control input-value" 
+                                           formControlName="condominio3quartos" autocomplete="off" [readonly]="readonly"
+                                           (blur)="formatValue('condominio3quartos', $event)">
+                                </input-container>
+                            </div>
+
+                            <div class="col-sm-2 col-xs-2">
+                                <input-container errorMessage="Valor Cond. Sala Comercial é obrigatório" label="Valor Cond. Sala Comercial">
+                                    <input id="condominiosalacomercial" class="form-control input-value" 
+                                           formControlName="condominiosalacomercial" autocomplete="off" [readonly]="readonly"
+                                           (blur)="formatValue('condominiosalacomercial', $event)">
+                                </input-container>
+                            </div>
+
+                            <div class="col-sm-2 col-xs-2">
+                                <input-container errorMessage="Valor Água é obrigatório" label="Valor Água">
+                                    <input id="valoragua" class="form-control input-value" 
+                                           formControlName="valoragua" autocomplete="off" [readonly]="readonly"
+                                           (blur)="formatValue('valoragua', $event)">
+                                </input-container>
+                            </div>
+
+                            <div class="col-sm-2 col-xs-2">
+                                <input-container errorMessage="Taxa Salão de Festas é obrigatório" label="Taxa Salão de Festas">
+                                    <input id="valorsalaofestas" class="form-control input-value"
+                                           formControlName="valorsalaofestas" autocomplete="off" [readonly]="readonly"
+                                           (blur)="formatValue('valorsalaofestas', $event)">
+                                </input-container>
+                            </div>
+
+                            <div class="col-sm-2 col-xs-2">
+                                <input-container errorMessage="Taxa limpeza Salão de Festas é obrigatório" label="Taxa limpeza Salão de Festas">
+                                    <input id="valorlimpezasalaofestas" class="form-control input-value" 
+                                           formControlName="valorlimpezasalaofestas" autocomplete="off" [readonly]="readonly"
+                                           (blur)="formatValue('valorlimpezasalaofestas', $event)">
+                                </input-container>
+                            </div>
+
+                            <div class="col-sm-2 col-xs-2">
+                                <input-container errorMessage="Taxa Mudança é obrigatório" label="Taxa Mudança">
+                                    <input id="valormudanca" class="form-control input-value" 
+                                           formControlName="valormudanca" autocomplete="off" [readonly]="readonly"
+                                           (blur)="formatValue('valormudanca', $event)">
+                                </input-container>
+                            </div>
+                        </div>
+    
+                        <hr>
+
+                        <div class="form-group form-footer">
+                            <a routerLink="/condominio" class="btn btn-light rounded-pill btnVoltar">Voltar</a>
+
+                            <button [disabled]="loading || condominioForm.invalid" class="btn btn-primary rounded-pill" *ngIf="!readonly">
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                Salvar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

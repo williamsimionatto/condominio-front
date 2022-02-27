@@ -7,6 +7,6 @@ export type CondominioParams = {
   condominiosalacomercial: number;
   valoragua: number;
   valorsalaofestas: number;
-  valorlimepzasalao: number;
+  valorlimpezasalaofestas: number;
   valormudanca: number;
 }

@@ -23,6 +23,11 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+
+registerLocaleData(localePt);
+
 const APP_CONTAINERS = [
   DefaultLayoutComponent
 ];
@@ -88,7 +93,7 @@ import { CondominioModule } from './views/condominio/condominio.module';
     NgProgressHttpModule,
     ToastrModule.forRoot(),
     SharedModule.forRoot(),
-    NgSelectModule
+    NgSelectModule,
   ],
   declarations: [
     AppComponent,
@@ -112,6 +117,7 @@ import { CondominioModule } from './views/condominio/condominio.module';
     },
     IconSetService,
     ConfirmationDialogService,
+    { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
   bootstrap: [ AppComponent ],
   entryComponents: [ ConfirmationDialogComponent ]
