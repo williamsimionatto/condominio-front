@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -22,6 +22,11 @@ import { DefaultLayoutComponent } from './containers';
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
+
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+
+registerLocaleData(localePt);
 
 const APP_CONTAINERS = [
   DefaultLayoutComponent
@@ -55,6 +60,7 @@ import { SharedModule } from './containers/shared.module';
 import { PermissaoModule } from './views/permissao/permissao.module';
 import { ConfirmationDialogService } from './service/confirmation-dialog/confirmation-dialog';
 import { ConfirmationDialogComponent } from './containers/confirmation-dialog/confirmation-dialog.component';
+import { CondominioModule } from './views/condominio/condominio.module';
 
 @NgModule({
   imports: [
@@ -75,6 +81,7 @@ import { ConfirmationDialogComponent } from './containers/confirmation-dialog/co
     ChartsModule,
     IconModule,
     IconSetModule.forRoot(),
+    CondominioModule,
     UserModule,
     PerfilModule,
     PermissaoModule,
@@ -86,7 +93,7 @@ import { ConfirmationDialogComponent } from './containers/confirmation-dialog/co
     NgProgressHttpModule,
     ToastrModule.forRoot(),
     SharedModule.forRoot(),
-    NgSelectModule
+    NgSelectModule,
   ],
   declarations: [
     AppComponent,
@@ -109,7 +116,8 @@ import { ConfirmationDialogComponent } from './containers/confirmation-dialog/co
       useClass: HashLocationStrategy
     },
     IconSetService,
-    ConfirmationDialogService
+    ConfirmationDialogService,
+    { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
   bootstrap: [ AppComponent ],
   entryComponents: [ ConfirmationDialogComponent ]

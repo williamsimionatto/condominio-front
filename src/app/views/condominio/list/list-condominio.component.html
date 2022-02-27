@@ -1,0 +1,68 @@
+<div class="animated fadeIn">
+	<header class="header header-sticky mb-4"></header>
+
+	<div class="row">
+		<div class="col">
+			<div class="card">
+				<div class="card-header">
+					<div class="card-label"> Condomínio </div>
+
+					<div class="card-header-actions">
+						<a class="btn btn-primary rounded-pill" routerLink="add">
+							<i class="fa fa-plus"></i> Novo Registro
+						</a>
+				</div>
+			</div>
+
+			<div class="card-body table-responsive">
+				<table class="table table-striped border datatable">
+					<thead>
+						<tr style="text-align: center">
+							<th>Código</th>
+							<th width="15%">Nome</th>
+							<th width="12%">CNPJ</th>
+							<th style="text-align: center">Valor Cond. 2 Quartos</th>
+							<th style="text-align: center">Valor Cond. 3 Quartos</th>
+							<th style="text-align: center">Valor Cond. Sala Comercial</th>
+							<th style="text-align: center">Valor m³ água</th>
+							<th style="text-align: center">Taxa Salão de Festas</th>
+							<th style="text-align: center">Taxa limpeza Salão de Festas</th>
+							<th style="text-align: center">Taxa de Mudança</th>
+							<th width="10%" style="text-align: center">Ações</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr *ngFor="let condominio of condominios" style="text-align: center">
+							<td>{{ condominio.id }}</td>
+							<td>{{ condominio.name }}</td>
+							<td>{{ condominio.cnpj }}</td>
+
+							<td>{{ condominio.condominio2quartos | currency: 'BRL'}}</td>
+							<td>{{ condominio.condominio3quartos | currency: 'BRL'}}</td>
+							<td>{{ condominio.condominiosalacomercial | currency: 'BRL'}}</td>
+							<td>{{ condominio.valoragua | currency: 'BRL'}}</td>
+							<td>{{ condominio.valorsalaofestas | currency: 'BRL'}}</td>
+							<td>{{ condominio.valorlimpezasalaofestas | currency: 'BRL'}}</td>
+							<td>{{ condominio.valormudanca | currency: 'BRL'}}</td>
+
+							<td style="cursor: pointer;">
+								<a class="btn btn-success btn-sm rounded-pill" routerLink="overview/{{condominio.id}}" >
+									<i class="fa fa-search"></i>
+								</a>
+
+								<a class="btn btn-primary btn-sm rounded-pill" routerLink="edit/{{condominio.id}}">
+									<i class="fa fa-pencil"></i>
+								</a>
+				
+								<a class="btn btn-danger btn-sm rounded-pill" (click)="delete(condominio)">
+									<i class="fa fa-trash"></i>
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
