@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewChildren } from "@angular/core";
+import { Component, Input, OnInit, ViewChild, ViewChildren } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { CondominoParams } from "../../../model/condomino.model";
 import { ConfirmationDialogService } from "../../../service/confirmation-dialog/confirmation-dialog";
@@ -61,7 +61,6 @@ export class DetailCondominosComponent implements OnInit {
     this.condominos.sort((a: CondominoParams, b: CondominoParams) => {
       return a.apartamento > b.apartamento ? 1 : -1;
     })
-
   }
 
   onSubmit() {
@@ -71,9 +70,13 @@ export class DetailCondominosComponent implements OnInit {
 
   openEmptyModal() {
     let modal = this.modalDialogService.open('Condôminos')
+
     modal.componentInstance.condominoEmmiter.subscribe(condomino => {
-      if (condomino !== null)
+      if (condomino !== null) {
+        condomino.id = Math.max.apply(Math, this.condominos.map(function(o) { return o.id; })) + 1;
+
         this.condominos.push(condomino);
+      }
     })
   }
 
