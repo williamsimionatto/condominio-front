@@ -6,19 +6,21 @@
             </div>
 
             <div class="mestreDetalhe-info">
-                <button type="button">
+                <button type="button" *ngIf="enableAddButton() && !enableCountLabel()">
                     <i class="fa fa-plus-square"></i>
                 </button>
 
-                <button type="button">
+                <button type="button" *ngIf="hasCondominoSelected() && !enableCountLabel()">
                     <i class="fa fa-pencil-square"></i>
                 </button>
 
-                <button type="button">
+                <button type="button" *ngIf="hasCondominoSelected()" (click)="removeCondomino()">
                     <i class="fa fa-trash-o"></i>
                 </button>
 
-                <span class="badge countRegistros"></span>
+                <span class="badge countRegistros" *ngIf="enableCountLabel()">
+                    {{countRegistros()}}
+                </span>
             </div>
         </div>
 
@@ -26,15 +28,24 @@
             <table class="table table-striped border datatable tableDetalhe">
                 <thead>
                     <tr>
+                        <th>Apartamento</th>
                         <th>Nome</th>
                         <th>CPF</th>
+                        <th>Síndico</th>
+                        <th>Tipo</th>
+                        <th>Número Quartos</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <tr class="">
-                        <td>João</td>
-                        <td>123.456.789-00</td>
+                    <tr [ngClass]="isCondominoSelected(condomino) ? 'active' : ''" *ngFor="let condomino of condominos"
+                        (click)="selectCondomino(condomino)">
+                        <td>{{condomino.apartamento}}</td>
+                        <td>{{condomino.nome}}</td>
+                        <td>{{condomino.cpf}}</td>
+                        <td>{{condomino.sindico ? 'Sim' : 'Não'}}</td>
+                        <td>{{condomino.tipo}}</td>
+                        <td>{{condomino.numeroquartos}}</td>
                     </tr>
                 </tbody>
             </table>

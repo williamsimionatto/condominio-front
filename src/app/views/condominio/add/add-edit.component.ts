@@ -1,9 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { first } from "rxjs/operators";
 import { CondominioService } from "../../../service/condominio/condominio.service";
 import { NotificationService } from "../../../service/notification/notification.service";
+import { DetailCondominosComponent } from "../../condominos/detail/detail-condomino.component";
 
 @Component({
   templateUrl: "./add-edit.component.html",
@@ -16,6 +17,8 @@ export class AddEditCondominioComponent implements OnInit {
   readonly = false
   loading = false
   submitted = false
+
+  @ViewChild(DetailCondominosComponent) detail;
 
   constructor(
     private formBuilder: FormBuilder,
