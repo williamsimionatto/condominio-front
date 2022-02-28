@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { CondominoParams } from "../../../model/condomino.model";
+import { ConfirmationDialogService } from "../../../service/confirmation-dialog/confirmation-dialog";
+import { NotificationService } from "../../../service/notification/notification.service";
 
 @Component({
   selector: "app-detail-condomino",
@@ -30,14 +32,31 @@ export class DetailCondominosComponent implements OnInit {
       sindico: false,
       tipo: "Apartamento",
       numeroquartos: 3,
+    }, 
+    {
+      id: 24,
+      apartamento: 202,
+      condominio: 4,
+      nome: "Pedro da Silva",
+      cpf: "654.321.987-00",
+      sindico: false,
+      tipo: "Apartamento",
+      numeroquartos: 3
     }
   ]
 
   condominosSelected: CondominoParams[] = [];
 
-  constructor() { }
+  constructor(
+    private notificationService: NotificationService,
+    private confirmationDialogService: ConfirmationDialogService
+  ) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.condominos.sort((a: CondominoParams, b: CondominoParams) => {
+      return a.apartamento > b.apartamento ? 1 : -1;
+    })
+  }
 
   onSubmit() {
     console.log('submit detail')  
@@ -55,7 +74,7 @@ export class DetailCondominosComponent implements OnInit {
     return this.condominosSelected.length >= 0;
   }
 
-  countRegistros() {
+  showCountingRegisters() {
     return `${this.condominosSelected.length} registros`;
   }
 
@@ -71,10 +90,25 @@ export class DetailCondominosComponent implements OnInit {
     return this.condominosSelected.find(c => c.id === condomino.id);
   }
 
+  removeItem = (array, itemToRemove) =>  array.filter(v => v !== itemToRemove);
+
   removeCondomino() {
-    this.condominosSelected.forEach(condomino => {
-      this.condominos.splice(this.condominos.indexOf(condomino), 1);
-      this.condominosSelected.splice(this.condominosSelected.indexOf(condomino), 1);
-    });
+    this.confirmationDialogService.confirm('Remover Condômino(s)', 'Deseja realmente este(s) Condômino(s)? Esta ação não poderá ser desfeita.', 'Remover', 'Cancelar', "lg")
+      .then((confirmed) => {
+        if (!confirmed) {
+          return
+        }
+
+        if (this.condominosSelected.length === this.condominos.length) {
+          this.condominos = [];
+          this.condominosSelected = [];
+        } else {
+          this.condominosSelected.forEach(condomino => {
+            this.condominos = this.removeItem(this.condominos, condomino);
+            this.condominosSelected = this.removeItem(this.condominosSelected, condomino);
+          })
+        }
+      }).catch(() => {
+      })
   }
 }
