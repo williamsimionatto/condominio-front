@@ -6,7 +6,7 @@
             </div>
 
             <div class="mestreDetalhe-info">
-                <button type="button" *ngIf="enableAddButton() && !enableCountLabel()">
+                <button type="button" *ngIf="enableAddButton() && !enableCountLabel()" (click)="openEmptyModal()">
                     <i class="fa fa-plus-square"></i>
                 </button>
 
@@ -41,7 +41,7 @@
                     <tr [ngClass]="isCondominoSelected(condomino) ? 'active' : ''" *ngFor="let condomino of condominos"
                         (click)="selectCondomino(condomino)">
                         <td>{{condomino.apartamento}}</td>
-                        <td>{{condomino.nome}}</td>
+                        <td>{{condomino.name}}</td>
                         <td>{{condomino.cpf}}</td>
                         <td>{{condomino.sindico ? 'Sim' : 'Não'}}</td>
                         <td>{{condomino.tipo}}</td>

@@ -62,6 +62,7 @@ import { ConfirmationDialogService } from './service/confirmation-dialog/confirm
 import { ConfirmationDialogComponent } from './containers/confirmation-dialog/confirmation-dialog.component';
 import { CondominioModule } from './views/condominio/condominio.module';
 import { CondominiosModule } from './views/condominos/condominos.module';
+import { ModalDialogService } from './service/modal/modal-dialog.service';
 import { DetailCondominosComponent } from './views/condominos/detail/detail-condomino.component';
 
 @NgModule({
@@ -104,7 +105,7 @@ import { DetailCondominosComponent } from './views/condominos/detail/detail-cond
     P404Component,
     P500Component,
     LoginComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
   ],
   providers: [
     AuthGuardService,
@@ -120,6 +121,7 @@ import { DetailCondominosComponent } from './views/condominos/detail/detail-cond
     },
     IconSetService,
     ConfirmationDialogService,
+    ModalDialogService,
     { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
   bootstrap: [ AppComponent ],

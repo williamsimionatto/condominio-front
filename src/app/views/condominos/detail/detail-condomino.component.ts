@@ -1,7 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ViewChildren } from "@angular/core";
+import { NgForm } from "@angular/forms";
 import { CondominoParams } from "../../../model/condomino.model";
 import { ConfirmationDialogService } from "../../../service/confirmation-dialog/confirmation-dialog";
+import { ModalDialogService } from "../../../service/modal/modal-dialog.service";
 import { NotificationService } from "../../../service/notification/notification.service";
+import { ModalCondominosComponent } from "../add/modal-condominos.component";
 
 @Component({
   selector: "app-detail-condomino",
@@ -17,9 +20,9 @@ export class DetailCondominosComponent implements OnInit {
       id: 4,
       apartamento: 101,
       condominio: 4,
-      nome: "João da Silva",
+      name: "João da Silva",
       cpf: "123.456.789-00",
-      sindico: true,
+      sindico: 'S',
       tipo: "Apartamento",
       numeroquartos: 2,
     },
@@ -27,9 +30,9 @@ export class DetailCondominosComponent implements OnInit {
       id: 14,
       apartamento: 201,
       condominio: 4,
-      nome: "Maria da Silva",
+      name: "Maria da Silva",
       cpf: "987.654.321-00",
-      sindico: false,
+      sindico: 'N',
       tipo: "Apartamento",
       numeroquartos: 3,
     }, 
@@ -37,9 +40,9 @@ export class DetailCondominosComponent implements OnInit {
       id: 24,
       apartamento: 202,
       condominio: 4,
-      nome: "Pedro da Silva",
+      name: "Pedro da Silva",
       cpf: "654.321.987-00",
-      sindico: false,
+      sindico: 'N',
       tipo: "Apartamento",
       numeroquartos: 3
     }
@@ -49,17 +52,29 @@ export class DetailCondominosComponent implements OnInit {
 
   constructor(
     private notificationService: NotificationService,
-    private confirmationDialogService: ConfirmationDialogService
+    private confirmationDialogService: ConfirmationDialogService,
+    private modalDialogService: ModalDialogService
   ) { }
+
 
   ngOnInit() { 
     this.condominos.sort((a: CondominoParams, b: CondominoParams) => {
       return a.apartamento > b.apartamento ? 1 : -1;
     })
+
   }
 
   onSubmit() {
-    console.log('submit detail')  
+    console.log('submit detail')
+    console.log(this.modalDialogService.getCondomino())
+  }
+
+  openEmptyModal() {
+    let modal = this.modalDialogService.open('Condôminos')
+    modal.componentInstance.condominoEmmiter.subscribe(condomino => {
+      if (condomino !== null)
+        this.condominos.push(condomino);
+    })
   }
 
   hasCondominoSelected() {

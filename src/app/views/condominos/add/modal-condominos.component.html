@@ -1,0 +1,63 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ title }}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+</div>
+
+<div class="modal-body">
+  <form [formGroup]="condominoForm" (ngSubmit)="onSubmit(condominoForm)">
+    <div class="row">
+        <div class="col-sm-2 col-xs-12">
+            <input-container errorMessage="i" label="Cód">
+                <input id="id" class="form-control" formControlName="id" autocomplete="off" [readonly]="true">
+            </input-container>
+        </div>
+
+        <div class="col-sm-6 col-xs-12">
+          <input-container errorMessage="Nome é obrigatório" label="Nome">
+              <input id="name" class="form-control" formControlName="name" autocomplete="off" [readonly]="readonly">
+          </input-container>
+        </div>
+
+        <div class="col-sm-6 col-xs-12">
+          <input-container errorMessage="CPF é obrigatório" label="CPF">
+              <input id="cpf" class="form-control" formControlName="cpf" autocomplete="off" [readonly]="readonly">
+          </input-container>
+        </div>
+
+        <div class="col-sm-3 col-xs-12">
+          <input-container errorMessage="Apartamento é obrigatório" label="Apartamento">
+              <input id="apartamento" class="form-control" formControlName="apartamento" autocomplete="off" [readonly]="readonly">
+          </input-container>
+        </div>
+
+        <div class="col-sm-3 col-xs-12">
+          <input-container errorMessage="Síndico é obrigatório" label="Síndico">
+            <ng-select [items]="sindicoOptions" bindLabel="name" bindValue="value" id="sindico" formControlName="sindico" ngDefaultControl>
+            </ng-select>
+          </input-container>
+        </div>
+
+        <div class="col-sm-3 col-xs-12">
+          <input-container errorMessage="Tipo é obrigatório" label="Tipo">
+            <ng-select [items]="tipoOptions" bindLabel="name" bindValue="value" id="tipo" formControlName="tipo" ngDefaultControl>
+            </ng-select>
+          </input-container>
+        </div>
+
+        <div class="col-sm-3 col-xs-12">
+          <input-container errorMessage="Número de Quartos é obrigatório" label="Número de Quartos">
+              <input id="numeroquartos" class="form-control" formControlName="numeroquartos" autocomplete="off" [readonly]="readonly">
+          </input-container>
+        </div>
+    </div>
+
+    <div class="form-group form-footer inline-footer">
+        <button [disabled]="loading || condominoForm.invalid" class="btn btn-primary rounded-pill" *ngIf="!readonly">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Salvar
+        </button>
+    </div>
+  </form>
+</div>

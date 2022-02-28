@@ -1,10 +1,10 @@
 export type CondominoParams = {
   id?: number;  
-  apartamento: number;
-  condominio: number;
-  nome: string;
+  apartamento: number | string;
+  condominio?: number;
+  name: string;
   cpf: string;
-  sindico: boolean;
+  sindico: string;
   tipo: string;
-  numeroquartos: number;
+  numeroquartos: number | string;
 }

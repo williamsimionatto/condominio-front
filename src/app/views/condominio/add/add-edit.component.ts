@@ -25,7 +25,8 @@ export class AddEditCondominioComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private condominioService: CondominioService,
-    private notificationService: NotificationService) {}
+    private notificationService: NotificationService
+  ) {}
 
   ngOnInit() {
     this.id = this.route.snapshot.params["id"]
@@ -57,6 +58,7 @@ export class AddEditCondominioComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true
+
     if (this.condominioForm.invalid) {
       return this.notificationService.showError("Preencha os campos obrigatórios", "Erro");
     }
