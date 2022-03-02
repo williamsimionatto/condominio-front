@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { first } from "rxjs/operators";
 import { CondominoParams } from "../../../model/condomino.model";
+import { CondominoService } from "../../../service/condomino/condomino.service";
 import { ConfirmationDialogService } from "../../../service/confirmation-dialog/confirmation-dialog";
 import { ModalDialogService } from "../../../service/modal/modal-dialog.service";
 import { NotificationService } from "../../../service/notification/notification.service";
@@ -13,56 +15,40 @@ import { NotificationService } from "../../../service/notification/notification.
   ]
 })
 export class DetailCondominosComponent implements OnInit {
-  condominos: CondominoParams[] = [
-    {
-      id: 4,
-      apartamento: 101,
-      condominio: 4,
-      name: "João da Silva",
-      cpf: "123.456.789-00",
-      sindico: 'S',
-      tipo: "A",
-      numeroquartos: 2,
-    },
-    {
-      id: 14,
-      apartamento: 201,
-      condominio: 4,
-      name: "Maria da Silva",
-      cpf: "987.654.321-00",
-      sindico: 'N',
-      tipo: "A",
-      numeroquartos: 3,
-    }, 
-    {
-      id: 24,
-      apartamento: 202,
-      condominio: 4,
-      name: "Pedro da Silva",
-      cpf: "654.321.987-00",
-      sindico: 'N',
-      tipo: "A",
-      numeroquartos: 3
-    }
-  ]
-
+  condominos: CondominoParams[] = []
   condominosSelected: CondominoParams[] = [];
 
   constructor(
+    private condominoService: CondominoService,
     private notificationService: NotificationService,
     private confirmationDialogService: ConfirmationDialogService,
     private modalDialogService: ModalDialogService
   ) { }
 
   ngOnInit() { 
+    this.getCondominos();
+
     this.condominos.sort((a: CondominoParams, b: CondominoParams) => {
       return a.apartamento > b.apartamento ? 1 : -1;
     })
   }
 
-  onSubmit(condominio: number) {
-    console.log('submit detail')
-    console.log(this.modalDialogService.getCondomino())
+  private getCondominos() {
+    this.condominoService.getAll()
+      .subscribe(condominos => {
+        this.condominos = condominos;
+      })
+  }
+
+  async save(condominio: number) {
+    this.condominos.forEach((condomino: CondominoParams) => {
+      condomino.condominio = condominio;
+      this.condominoService.create(condomino).pipe(first()).subscribe(() => {
+        error: () => {
+          this.notificationService.showError('Erro ao salvar Condômino', 'Erro');
+        }
+      })
+    })
   }
 
   openEmptyModal() {

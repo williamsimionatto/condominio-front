@@ -73,6 +73,7 @@ export class AddEditCondominioComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
+          this.detail.save(this.condominioForm.value.id);
           this.notificationService.showSuccess("Condomínio cadastrado com sucesso", "Sucesso");
           this.router.navigate(["/condominio"]);
         },
@@ -83,14 +84,16 @@ export class AddEditCondominioComponent implements OnInit {
       });
   }
 
-  private update() {
+  private async update() {
     this.condominioService
       .update(this.condominioForm.value)
       .pipe(first())
       .subscribe({
-        next: () => {
-          this.notificationService.showSuccess("Condomínio atualizado com sucesso", "Sucesso");
-          this.router.navigate(["/condominio"]);
+        next: async () => {
+          await this.detail.save(this.condominioForm.value.id).then(() => {
+            this.notificationService.showSuccess("Condomínio atualizado com sucesso", "Sucesso");
+            this.router.navigate(["/condominio"]);
+          });
         },
         error: error => {
           this.notificationService.showError(error.error.message, "Erro");

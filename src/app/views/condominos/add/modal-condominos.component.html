@@ -33,6 +33,12 @@
         </div>
 
         <div class="col-sm-3 col-xs-12">
+          <input-container errorMessage="Número de Quartos é obrigatório" label="Número de Quartos">
+              <input id="numeroquartos" class="form-control" formControlName="numeroquartos" autocomplete="off" [readonly]="readonly">
+          </input-container>
+        </div>
+
+        <div class="col-sm-3 col-xs-12">
           <input-container errorMessage="Síndico é obrigatório" label="Síndico">
             <ng-select [items]="sindicoOptions" bindLabel="name" bindValue="value" id="sindico" formControlName="sindico" ngDefaultControl>
             </ng-select>
@@ -43,12 +49,6 @@
           <input-container errorMessage="Tipo é obrigatório" label="Tipo">
             <ng-select [items]="tipoOptions" bindLabel="name" bindValue="value" id="tipo" formControlName="tipo" ngDefaultControl>
             </ng-select>
-          </input-container>
-        </div>
-
-        <div class="col-sm-3 col-xs-12">
-          <input-container errorMessage="Número de Quartos é obrigatório" label="Número de Quartos">
-              <input id="numeroquartos" class="form-control" formControlName="numeroquartos" autocomplete="off" [readonly]="readonly">
           </input-container>
         </div>
     </div>
