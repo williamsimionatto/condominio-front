@@ -1,10 +1,10 @@
-import { formatNumber } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { first } from "rxjs/operators";
 import { CondominioService } from "../../../service/condominio/condominio.service";
 import { NotificationService } from "../../../service/notification/notification.service";
+import { DetailCondominosComponent } from "../../condominos/detail/detail-condomino.component";
 
 @Component({
   templateUrl: "./add-edit.component.html",
@@ -18,12 +18,15 @@ export class AddEditCondominioComponent implements OnInit {
   loading = false
   submitted = false
 
+  @ViewChild(DetailCondominosComponent) detail;
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private condominioService: CondominioService,
-    private notificationService: NotificationService) {}
+    private notificationService: NotificationService
+  ) {}
 
   ngOnInit() {
     this.id = this.route.snapshot.params["id"]
@@ -55,6 +58,7 @@ export class AddEditCondominioComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true
+
     if (this.condominioForm.invalid) {
       return this.notificationService.showError("Preencha os campos obrigatórios", "Erro");
     }
@@ -69,6 +73,7 @@ export class AddEditCondominioComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
+          this.detail.save(this.condominioForm.value.id);
           this.notificationService.showSuccess("Condomínio cadastrado com sucesso", "Sucesso");
           this.router.navigate(["/condominio"]);
         },
@@ -79,14 +84,16 @@ export class AddEditCondominioComponent implements OnInit {
       });
   }
 
-  private update() {
+  private async update() {
     this.condominioService
       .update(this.condominioForm.value)
       .pipe(first())
       .subscribe({
-        next: () => {
-          this.notificationService.showSuccess("Condomínio atualizado com sucesso", "Sucesso");
-          this.router.navigate(["/condominio"]);
+        next: async () => {
+          await this.detail.save(this.condominioForm.value.id).then(() => {
+            this.notificationService.showSuccess("Condomínio atualizado com sucesso", "Sucesso");
+            this.router.navigate(["/condominio"]);
+          });
         },
         error: error => {
           this.notificationService.showError(error.error.message, "Erro");

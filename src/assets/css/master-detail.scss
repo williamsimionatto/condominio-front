@@ -1,0 +1,78 @@
+.badge {
+    background-color: #d1dade;
+    color: #5e5e5e;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    padding-bottom: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+    text-shadow: none;
+}
+
+.mestreDetalhe {
+    width: 100%;
+    float: left;
+    padding: 0 10px;
+    margin-top: 20px;
+}
+
+.mestreDetalhe > .mestreDetalhe-content {
+    width: 100%;
+    display: inline-block;
+}
+
+.mestreDetalhe > .mestreDetalhe-content > .mestreDetalhe-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 34px;
+}
+
+.mestreDetalhe > .mestreDetalhe-content > .mestreDetalhe-header > .mestreDetalhe-title {
+    border: 1px solid;
+    border-color: #ccc #ccc #d0d0d0;
+    padding: 5px 10px;
+    border-radius: 4px 4px 0px 0px;
+    background-color: #fff;
+}
+
+.mestreDetalhe > .mestreDetalhe-content > .mestreDetalhe-header > .mestreDetalhe-info {
+    border: 1px solid;
+    border-color: #ccc #ccc #d0d0d0;
+    border-radius: 4px 4px 0px 0px;
+    background-color: #fff;
+}
+
+.mestreDetalhe > .mestreDetalhe-content > .mestreDetalhe-header > .mestreDetalhe-info > button {
+    background-color: #fff0;
+    padding: 5px 10px;
+    border: 0;
+    float: left;
+}
+
+.mestreDetalhe > .mestreDetalhe-content > .mestreDetalhe-header > .mestreDetalhe-info > button > i {
+    font-size: 20px;
+    color: #20a8d8;
+}
+
+.mestreDetalhe > .mestreDetalhe-content > .mestreDetalhe-header > .mestreDetalhe-info > .countRegistros {
+    margin: 6px 4px;
+    background-color: #20a8d8;
+    color: #fff;
+    float: left;
+}
+
+.badge:empty {
+    display: none;
+}
+
+.mestreDetalhe > .mestreDetalhe-content > .mestreDetalhe-body > .tableDetalhe > tbody > tr {
+    cursor: pointer;
+}
+
+.active {
+    background-color: #30a4ef !important;
+    color: #fff !important;
+}

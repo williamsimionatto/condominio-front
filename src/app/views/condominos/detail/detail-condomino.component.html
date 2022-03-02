@@ -1,0 +1,54 @@
+<div class="mestreDetalhe">
+    <div class="mestreDetalhe-content">
+        <div class="mestreDetalhe-header">
+            <div class="mestreDetalhe-title">
+                <span>Condôminos</span>
+            </div>
+
+            <div class="mestreDetalhe-info">
+                <button type="button" *ngIf="enableAddButton() && !enableCountLabel()" (click)="openEmptyModal()">
+                    <i class="fa fa-plus-square"></i>
+                </button>
+
+                <button type="button" *ngIf="hasCondominoSelected() && !enableCountLabel()" (click)="openModalFor()">
+                    <i class="fa fa-pencil-square"></i>
+                </button>
+
+                <button type="button" *ngIf="hasCondominoSelected()" (click)="removeCondomino()">
+                    <i class="fa fa-trash-o"></i>
+                </button>
+
+                <span class="badge countRegistros" *ngIf="enableCountLabel()">
+                    {{showCountingRegisters()}}
+                </span>
+            </div>
+        </div>
+
+        <div class="mestreDetalhe-body table-responsive">
+            <table class="table table-striped border datatable tableDetalhe">
+                <thead>
+                    <tr>
+                        <th>Apartamento</th>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>Síndico</th>
+                        <th>Tipo</th>
+                        <th>Número Quartos</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr [ngClass]="isCondominoSelected(condomino) ? 'active' : ''" *ngFor="let condomino of condominos"
+                        (click)="selectCondomino(condomino)">
+                        <td>{{condomino.apartamento}}</td>
+                        <td>{{condomino.name}}</td>
+                        <td>{{condomino.cpf}}</td>
+                        <td>{{condomino.sindico == 'S' ? 'Sim' : 'Não'}}</td>
+                        <td>{{condomino.tipo == 'A' ? 'Apartamento' : 'Sala Comercial'}}</td>
+                        <td>{{condomino.numeroquartos}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

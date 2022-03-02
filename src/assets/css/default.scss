@@ -1,3 +1,7 @@
+* {
+  zoom: 101.5%;
+}
+
 .bg-success-gradient {
   background-color: var(--cui-success, #1b9e3e);
   background-image: linear-gradient(45deg, var(--cui-success-start, #2eb85c) 0%, var(--cui-success-stop, #1b9e3e 100%));  
@@ -44,4 +48,23 @@
 
 .input-value {
   text-align: right;
+}
+
+.inline-footer {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.table th, .table td {
+  padding: 0.25rem;
+  vertical-align: top;
+  border-top: 1px solid #c8ced3;
+}
+
+hr {
+  clear: both;
+  width: 100%;
+  margin: 15px -5px 10px;
+  border-color: #e7eaec;
 }
