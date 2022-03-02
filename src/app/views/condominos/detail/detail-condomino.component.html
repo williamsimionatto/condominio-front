@@ -40,11 +40,11 @@
                 <tbody>
                     <tr [ngClass]="isCondominoSelected(condomino) ? 'active' : ''" *ngFor="let condomino of condominos"
                         (click)="selectCondomino(condomino)">
-                        <td>{{condomino.apartamento}} . {{condomino.id}}</td>
+                        <td>{{condomino.apartamento}}</td>
                         <td>{{condomino.name}}</td>
                         <td>{{condomino.cpf}}</td>
-                        <td>{{condomino.sindico ? 'Sim' : 'Não'}}</td>
-                        <td>{{condomino.tipo}}</td>
+                        <td>{{condomino.sindico == 'S' ? 'Sim' : 'Não'}}</td>
+                        <td>{{condomino.tipo == 'A' ? 'Apartamento' : 'Sala Comercial'}}</td>
                         <td>{{condomino.numeroquartos}}</td>
                     </tr>
                 </tbody>

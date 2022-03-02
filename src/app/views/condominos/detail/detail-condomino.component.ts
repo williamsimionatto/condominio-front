@@ -1,10 +1,8 @@
-import { Component, Input, OnInit, ViewChild, ViewChildren } from "@angular/core";
-import { NgForm } from "@angular/forms";
+import { Component, Input, OnInit } from "@angular/core";
 import { CondominoParams } from "../../../model/condomino.model";
 import { ConfirmationDialogService } from "../../../service/confirmation-dialog/confirmation-dialog";
 import { ModalDialogService } from "../../../service/modal/modal-dialog.service";
 import { NotificationService } from "../../../service/notification/notification.service";
-import { ModalCondominosComponent } from "../add/modal-condominos.component";
 
 @Component({
   selector: "app-detail-condomino",
@@ -23,7 +21,7 @@ export class DetailCondominosComponent implements OnInit {
       name: "João da Silva",
       cpf: "123.456.789-00",
       sindico: 'S',
-      tipo: "Apartamento",
+      tipo: "A",
       numeroquartos: 2,
     },
     {
@@ -33,7 +31,7 @@ export class DetailCondominosComponent implements OnInit {
       name: "Maria da Silva",
       cpf: "987.654.321-00",
       sindico: 'N',
-      tipo: "Apartamento",
+      tipo: "A",
       numeroquartos: 3,
     }, 
     {
@@ -43,7 +41,7 @@ export class DetailCondominosComponent implements OnInit {
       name: "Pedro da Silva",
       cpf: "654.321.987-00",
       sindico: 'N',
-      tipo: "Apartamento",
+      tipo: "A",
       numeroquartos: 3
     }
   ]
@@ -56,14 +54,13 @@ export class DetailCondominosComponent implements OnInit {
     private modalDialogService: ModalDialogService
   ) { }
 
-
   ngOnInit() { 
     this.condominos.sort((a: CondominoParams, b: CondominoParams) => {
       return a.apartamento > b.apartamento ? 1 : -1;
     })
   }
 
-  onSubmit() {
+  onSubmit(condominio: number) {
     console.log('submit detail')
     console.log(this.modalDialogService.getCondomino())
   }
@@ -71,7 +68,7 @@ export class DetailCondominosComponent implements OnInit {
   openEmptyModal() {
     let modal = this.modalDialogService.open('Condôminos')
 
-    modal.componentInstance.condominoEmmiter.subscribe(condomino => {
+    modal.componentInstance.condominoEmmiter.subscribe((condomino: CondominoParams) => {
       if (condomino !== null) {
         condomino.id = Math.max.apply(Math, this.condominos.map(function(o) { return o.id; })) + 1;
 
