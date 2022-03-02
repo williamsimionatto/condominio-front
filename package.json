@@ -10,7 +10,7 @@
   "scripts": {
     "ng": "ng",
     "postinstall": "ngcc --properties es2015 browser module main --first-only",
-    "start": "node server.js",
+    "start": "SET NODE_OPTIONS=--openssl-legacy-provider && node server.js",
     "start-dev": "ng serve --open",
     "build": "ng build --prod --aot --build-optimizer --common-chunk --vendor-chunk --optimization --progress",
     "test": "ng test",
