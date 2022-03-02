@@ -24,6 +24,7 @@ export class ModalCondominosComponent {
   loading = false
   submitted = false
   condomino: CondominoParams = null
+  readonly = false;
 
   sindicoOptions = [
     { value: '', name: 'Selecione:' },
@@ -65,7 +66,7 @@ export class ModalCondominosComponent {
     }
   }
 
-  onSubmit(form: NgForm) {
+  onSubmit(form) {
     this.condomino = form.value
     this.condominoEmmiter.emit(this.condomino)
 
