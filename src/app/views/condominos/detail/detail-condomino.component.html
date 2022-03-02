@@ -10,7 +10,7 @@
                     <i class="fa fa-plus-square"></i>
                 </button>
 
-                <button type="button" *ngIf="hasCondominoSelected() && !enableCountLabel()">
+                <button type="button" *ngIf="hasCondominoSelected() && !enableCountLabel()" (click)="openModalFor()">
                     <i class="fa fa-pencil-square"></i>
                 </button>
 

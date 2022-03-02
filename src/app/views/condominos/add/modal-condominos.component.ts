@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { FormBuilder, FormGroup, NgForm, Validators } from "@angular/forms";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
+import { first } from "rxjs/operators";
 import { CondominoParams } from "../../../model/condomino.model";
+import { CondominoService } from "../../../service/condomino/condomino.service";
 
 @Component({
   selector: 'app-modal-dialog',
@@ -12,6 +14,7 @@ export class ModalCondominosComponent {
   @Input() message: string;
   @Input() btnOkText: string;
   @Input() btnCancelText: string;
+  @Input() idRef: number = null;
 
   @Output() condominoEmmiter = new EventEmitter<CondominoParams>();
 
@@ -35,11 +38,14 @@ export class ModalCondominosComponent {
   ]
 
   constructor(
+    private condominoService: CondominoService,
     private activeModal: NgbActiveModal,
     private formBuilder: FormBuilder,
   ) { }
 
   ngOnInit() {
+    this.isAddMode = !this.idRef
+
     this.condominoForm = this.formBuilder.group({
       id: this.formBuilder.control(""),
       apartamento: this.formBuilder.control("", [Validators.required]),
@@ -52,7 +58,10 @@ export class ModalCondominosComponent {
     })
 
     if (!this.isAddMode) {
-      // this.condominoForm.patchValue(this.condomino)
+      this.condominoService.getById(this.idRef.toString()).pipe(first()).subscribe(condomino => {
+        this.condomino = condomino
+        this.condominoForm.patchValue(this.condomino)
+      })
     }
   }
 

@@ -63,6 +63,20 @@ export class DetailCondominosComponent implements OnInit {
     })
   }
 
+  openModalFor() {
+    let condomino = this.condominosSelected[0];
+    let modal = this.modalDialogService.open('Condômino', condomino.id)
+
+    modal.componentInstance.condominoEmmiter.subscribe((condomino: CondominoParams) => {
+      if (condomino !== null) {
+        this.condominosSelected = [];
+
+        let index = this.condominos.findIndex(x => x.id === condomino.id)
+        this.condominos[index] = condomino;
+      }
+    })
+  }
+
   hasCondominoSelected() {
     return this.condominosSelected.length > 0;
   }

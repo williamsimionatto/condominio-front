@@ -11,13 +11,14 @@ export class ModalDialogService {
 
   condomino: CondominoParams = null;
 
-  public open(title: string): NgbModalRef {
+  public open(title: string, idRef?: number): NgbModalRef {
     const modalRef = this.modalService.open(ModalCondominosComponent, { size: 'lg' });
 
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.message = '';
     modalRef.componentInstance.btnOkText = 'Incluir';
     modalRef.componentInstance.btnCancelText = 'Cancelar';
+    modalRef.componentInstance.idRef = idRef;
 
     modalRef.componentInstance.condominoEmmiter.subscribe((result: CondominoParams) => {
       this.condomino = result;
