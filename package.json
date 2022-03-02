@@ -10,7 +10,7 @@
   "scripts": {
     "ng": "ng",
     "postinstall": "ngcc --properties es2015 browser module main --first-only",
-    "start": "SET NODE_OPTIONS=--openssl-legacy-provider && node server.js",
+    "start": "node server.js",
     "start-dev": "ng serve --open",
     "build": "ng build --prod --aot --build-optimizer --common-chunk --vendor-chunk --optimization --progress",
     "test": "ng test",
@@ -81,7 +81,7 @@
     "typescript": "~4.1.5"
   },
   "engines": {
-    "node": ">= 12",
-    "npm": ">= 6"
+    "node": "12.16.1",
+    "npm": "6.13.4"
   }
 }
