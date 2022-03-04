@@ -7,7 +7,6 @@ import { OverviewPermissaoComponent } from "./overview/overview-perfil.component
 const routes: Routes = [
   { path: "", component: ListPermissaoComponent },
   { path: "add", component: AddEditPermissaoComponent },
-  { path: "edit/:id", component: AddEditPermissaoComponent },
   { path: "overview/:id", component: OverviewPermissaoComponent },
 ]
 
