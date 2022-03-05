@@ -16,8 +16,8 @@ export class CondominoService extends Service {
     return this.http.get<CondominoParams[]>(`${environment.apiUrl}/condomino`, this.requestOptions);
   }
 
-  public getById(id: string) {
-    return this.http.get<CondominoParams>(`${environment.apiUrl}/condomino/${id}`, this.requestOptions);
+  public getByCondomino(id: number) {
+    return this.http.get<CondominoParams[]>(`${environment.apiUrl}/condomino/${id}`, this.requestOptions);
   }
 
   public create(condomino: CondominoParams) {

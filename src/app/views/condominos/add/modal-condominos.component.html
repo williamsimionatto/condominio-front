@@ -39,6 +39,13 @@
         </div>
 
         <div class="col-sm-3 col-xs-12">
+          <input-container errorMessage="Ativo é obrigatório" label="Ativo">
+            <ng-select [items]="ativoOptions" bindLabel="name" bindValue="value" id="ativo" formControlName="ativo" ngDefaultControl>
+            </ng-select>
+          </input-container>
+        </div>
+
+        <div class="col-sm-3 col-xs-12">
           <input-container errorMessage="Síndico é obrigatório" label="Síndico">
             <ng-select [items]="sindicoOptions" bindLabel="name" bindValue="value" id="sindico" formControlName="sindico" ngDefaultControl>
             </ng-select>

@@ -30,6 +30,7 @@
                         <th>Síndico</th>
                         <th>Tipo</th>
                         <th>Número Quartos</th>
+                        <th>Ativo</th>
                     </tr>
                 </thead>
 
@@ -42,6 +43,7 @@
                         <td>{{condomino.sindico == 'S' ? 'Sim' : 'Não'}}</td>
                         <td>{{condomino.tipo == 'A' ? 'Apartamento' : 'Sala Comercial'}}</td>
                         <td>{{condomino.numeroquartos}}</td>
+                        <td>{{condomino.ativo == 'S' ? 'Sim' : 'Não'}}</td>
                     </tr>
                 </tbody>
             </table>

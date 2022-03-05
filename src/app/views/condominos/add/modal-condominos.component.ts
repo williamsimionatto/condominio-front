@@ -38,6 +38,12 @@ export class ModalCondominosComponent {
     { value: 'S', name: 'Sala Comercial' },
   ]
 
+  ativoOptions = [
+    { value: '', name: 'Selecione:' },
+    { value: 'S', name: 'Sim' },
+    { value: 'N', name: 'Não' },
+  ]
+
   constructor(
     private condominoService: CondominoService,
     private activeModal: NgbActiveModal,
@@ -56,6 +62,7 @@ export class ModalCondominosComponent {
       sindico: this.formBuilder.control("", [Validators.required]),
       tipo: this.formBuilder.control("", [Validators.required]),
       numeroquartos: this.formBuilder.control("", [Validators.required]),
+      ativo: this.formBuilder.control("", [Validators.required]),
     })
     
     if (!this.isAddMode) {
