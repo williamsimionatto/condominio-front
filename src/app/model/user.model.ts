@@ -4,4 +4,6 @@ export type UserParams = {
   email: string;
   password: string;
   ativo: boolean;
+  perfilId: string;
+  cpf: string;
 }
