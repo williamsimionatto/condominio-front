@@ -65,7 +65,7 @@ export class DetailCondominosComponent implements OnInit {
 
   openModalFor() {
     let condomino = this.condominosSelected[0];
-    let modal = this.modalDialogService.open('Condômino', condomino.id)
+    let modal = this.modalDialogService.open('Condômino', condomino)
 
     modal.componentInstance.condominoEmmiter.subscribe((condomino: CondominoParams) => {
       if (condomino !== null) {
