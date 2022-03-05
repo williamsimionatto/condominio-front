@@ -1,0 +1,54 @@
+<div class="animated fadeIn">
+	<header class="header header-sticky mb-4"></header>
+
+    <div class="row">
+		<div class="col">
+			<div class="card">
+				<div class="card-header">
+					<div class="card-label"> Leitura d'água </div>
+
+					<div class="card-header-actions">
+						<a class="btn btn-primary rounded-pill" routerLink="add">
+							<i class="fa fa-plus"></i> Novo Registro
+						</a>
+                    </div>
+				</div>
+
+                <div class="card-body table-responsive">
+                    <table class="table table-striped border datatable">
+                        <thead>
+                            <tr>
+                                <th>Condomínio</th>
+                                <th>Data Leitura</th>
+                                <th>Data Vencimento</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr *ngFor="let leitura of leituraAgua">
+                                <td>{{leitura.condominio}}</td>
+                                <td>{{leitura.dataleitura}}</td>
+                                <td>{{leitura.datavencimento}}</td>
+
+                                <td style="cursor: pointer;">
+									<a class="btn btn-success btn-sm rounded-pill" routerLink="overview/{{leitura.id}}" >
+										<i class="fa fa-search"></i>
+									</a>
+	
+									<a class="btn btn-primary btn-sm rounded-pill" routerLink="edit/{{leitura.id}}">
+										<i class="fa fa-pencil"></i>
+									</a>
+					
+									<a class="btn btn-danger btn-sm rounded-pill" (click)="delete(leitura)">
+										<i class="fa fa-trash"></i>
+									</a>
+								</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+			</div>
+        </div>
+    </div>
+</div>

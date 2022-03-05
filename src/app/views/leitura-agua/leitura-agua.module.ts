@@ -3,11 +3,13 @@ import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
-import { LeituraAguaRoutingModule } from './leitura-agua-routing.module.ts';
+import { LeituraAguaRoutingModule } from './leitura-agua-routing.module';
 import { ListLeituraAguaComponent } from './list/list.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
+    CommonModule,
     FormsModule,
     ChartsModule,
     LeituraAguaRoutingModule,
@@ -15,7 +17,7 @@ import { ListLeituraAguaComponent } from './list/list.component';
     ButtonsModule.forRoot()
   ],
   declarations: [
-    ListLeituraAguaComponent,
+    ListLeituraAguaComponent
   ]
 })
 export class LeituraAguaModule { }
