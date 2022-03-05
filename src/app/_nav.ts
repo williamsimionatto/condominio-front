@@ -37,7 +37,13 @@ export const navItems: INavData[] = [
     name: 'Tarefas',
     url: '/tarefa',
     icon: 'fa fa-wrench',
-    children: []
+    children: [
+      {
+        name: 'Leitura d`água',
+        url: '/leituraagua',
+        icon: 'fa fa-tint'
+      }
+    ]
   },
   {
     name: 'Relatórios',

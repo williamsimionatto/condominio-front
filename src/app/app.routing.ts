@@ -11,11 +11,6 @@ import { LoginComponent } from './views/login/login.component';
 
 export const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full',
-  },
-  {
     path: 'login',
     component: LoginComponent,
     data: {
@@ -53,7 +48,11 @@ export const routes: Routes = [
         loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule),
         canActivate: [AuthGuard]
       },
-      
+      {
+        path: 'leituraagua',
+        loadChildren: () => import('./views/leitura-agua/leitura-agua.module').then(m => m.LeituraAguaModule),
+        canActivate: [AuthGuard]
+      },
       {
         path: 'perfil',
         loadChildren: () => import('./views/perfil/perfil.module').then(m => m.PerfilModule),
