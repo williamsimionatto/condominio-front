@@ -17,6 +17,7 @@ import { NotificationService } from "../../../service/notification/notification.
 export class DetailCondominosComponent implements OnInit {
   condominos: CondominoParams[] = []
   condominosSelected: CondominoParams[] = [];
+  @Input() readonly: boolean = false;
 
   constructor(
     private condominoService: CondominoService,

@@ -5,7 +5,7 @@
                 <span>Condôminos</span>
             </div>
 
-            <div class="mestreDetalhe-info">
+            <div class="mestreDetalhe-info" *ngIf="!readonly">
                 <button type="button" *ngIf="enableAddButton() && !enableCountLabel()" (click)="openEmptyModal()">
                     <i class="fa fa-plus-square"></i>
                 </button>
