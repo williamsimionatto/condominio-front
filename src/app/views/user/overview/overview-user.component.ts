@@ -44,6 +44,7 @@ export class OverUserViewComponent implements OnInit {
       password_confirmation: this.formBuilder.control('', [Validators.required]),
       active: this.formBuilder.control('', [Validators.required]),
       perfilId: this.formBuilder.control('', [Validators.required]),
+      cpf: this.formBuilder.control('', [Validators.required]),
     });
 
     this.userForm.get('active').disable();

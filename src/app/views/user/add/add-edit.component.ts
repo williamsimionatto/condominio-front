@@ -51,6 +51,7 @@ export class AddEditUserComponent implements OnInit {
       password_confirmation: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
       active: this.formBuilder.control('', [Validators.required]),
       perfilId: this.formBuilder.control('', [Validators.required]),
+      cpf: this.formBuilder.control('', [Validators.required, Validators.minLength(11)]),
     });
 
     this.getPerfis()

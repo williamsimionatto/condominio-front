@@ -23,6 +23,12 @@
                                 </input-container>
                             </div>
 
+                            <div class="col-sm-4 col-xs-12">
+                                <input-container errorMessage="CPF é obrigatório" label="CPF">
+                                    <input id="cpf" class="form-control" formControlName="cpf" autocomplete="off" [readonly]="readonly">
+                                </input-container>
+                            </div>
+
                             <div class="col-lg-5 col-md-5">
                                 <input-container errorMessage="E-mail é obrigatório" label="E-mail">
                                     <input id="email" class="form-control" formControlName="email" autocomplete="off" [readonly]="readonly">
