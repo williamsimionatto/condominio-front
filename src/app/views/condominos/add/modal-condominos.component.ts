@@ -14,7 +14,7 @@ export class ModalCondominosComponent {
   @Input() message: string;
   @Input() btnOkText: string;
   @Input() btnCancelText: string;
-  @Input() idRef: number = null;
+  @Input() condominoEdit: CondominoParams;
 
   @Output() condominoEmmiter = new EventEmitter<CondominoParams>();
 
@@ -45,7 +45,7 @@ export class ModalCondominosComponent {
   ) { }
 
   ngOnInit() {
-    this.isAddMode = !this.idRef
+    this.isAddMode = !this.condominoEdit?.id
 
     this.condominoForm = this.formBuilder.group({
       id: this.formBuilder.control(""),
@@ -57,12 +57,10 @@ export class ModalCondominosComponent {
       tipo: this.formBuilder.control("", [Validators.required]),
       numeroquartos: this.formBuilder.control("", [Validators.required]),
     })
-
+    
     if (!this.isAddMode) {
-      this.condominoService.getById(this.idRef.toString()).pipe(first()).subscribe(condomino => {
-        this.condomino = condomino
-        this.condominoForm.patchValue(this.condomino)
-      })
+      this.condomino = this.condominoEdit
+      this.condominoForm.patchValue(this.condomino)
     }
   }
 
