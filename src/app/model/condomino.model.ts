@@ -7,4 +7,5 @@ export type CondominoParams = {
   sindico: string;
   tipo: string;
   numeroquartos: number | string;
+  ativo: string;
 }

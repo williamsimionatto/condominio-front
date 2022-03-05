@@ -5,7 +5,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <div class="card-label"> Perfis </div>
+                    <div class="card-label"> Condomínio </div>
                 </div>
 
                 <div class="card-body">
@@ -100,10 +100,9 @@
                                            (blur)="formatValue('valormudanca', $event)">
                                 </input-container>
                             </div>
-
                         </div>
 
-                        <app-detail-condomino> </app-detail-condomino>
+                        <app-detail-condomino [condominioId]="this.id" [readonly]="readonly"> </app-detail-condomino>
 
                         <hr>
 

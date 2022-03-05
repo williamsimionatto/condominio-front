@@ -5,7 +5,12 @@ import { first } from "rxjs/operators";
 import { CondominioService } from "../../../service/condominio/condominio.service";
 import { PerfilService } from "../../../service/perfil/perfil.service";
 
-@Component({ templateUrl: '../add/add-edit.component.html' })
+@Component({ 
+  templateUrl: '../add/add-edit.component.html' ,
+  styleUrls: [
+    '../../../../assets/css/default.scss',
+  ]
+})
 export class OverviewCondominioComponent implements OnInit {
   condominioForm: FormGroup
   id: string
@@ -33,7 +38,9 @@ export class OverviewCondominioComponent implements OnInit {
       valoragua: this.formBuilder.control("", [Validators.required]),
       valorsalaofestas: this.formBuilder.control("", [Validators.required]),
       valorlimpezasalaofestas: this.formBuilder.control("", [Validators.required]),
-      valormudanca: this.formBuilder.control("", [Validators.required])
+      valormudanca: this.formBuilder.control("", [Validators.required]),
+      taxaboleto: this.formBuilder.control("", [Validators.required]),
+      taxabasicaagua: this.formBuilder.control("", [Validators.required])
     })
 
     if (!this.isAddMode) {

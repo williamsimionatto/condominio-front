@@ -5,7 +5,7 @@
                 <span>Condôminos</span>
             </div>
 
-            <div class="mestreDetalhe-info">
+            <div class="mestreDetalhe-info" *ngIf="!readonly">
                 <button type="button" *ngIf="enableAddButton() && !enableCountLabel()" (click)="openEmptyModal()">
                     <i class="fa fa-plus-square"></i>
                 </button>
@@ -30,18 +30,20 @@
                         <th>Síndico</th>
                         <th>Tipo</th>
                         <th>Número Quartos</th>
+                        <th>Ativo</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     <tr [ngClass]="isCondominoSelected(condomino) ? 'active' : ''" *ngFor="let condomino of condominos"
-                        (click)="selectCondomino(condomino)">
+                        (click)="!readonly && selectCondomino(condomino)">
                         <td>{{condomino.apartamento}}</td>
                         <td>{{condomino.name}}</td>
                         <td>{{condomino.cpf}}</td>
                         <td>{{condomino.sindico == 'S' ? 'Sim' : 'Não'}}</td>
                         <td>{{condomino.tipo == 'A' ? 'Apartamento' : 'Sala Comercial'}}</td>
                         <td>{{condomino.numeroquartos}}</td>
+                        <td>{{condomino.ativo == 'S' ? 'Sim' : 'Não'}}</td>
                     </tr>
                 </tbody>
             </table>

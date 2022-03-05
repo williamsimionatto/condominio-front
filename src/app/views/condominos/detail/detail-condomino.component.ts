@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { first } from "rxjs/operators";
+import { CondominioParams } from "../../../model/condominio.model";
 import { CondominoParams } from "../../../model/condomino.model";
 import { CondominoService } from "../../../service/condomino/condomino.service";
 import { ConfirmationDialogService } from "../../../service/confirmation-dialog/confirmation-dialog";
@@ -17,6 +18,8 @@ import { NotificationService } from "../../../service/notification/notification.
 export class DetailCondominosComponent implements OnInit {
   condominos: CondominoParams[] = []
   condominosSelected: CondominoParams[] = [];
+  @Input() readonly: boolean = false;
+  @Input() condominioId: number;
 
   constructor(
     private condominoService: CondominoService,
@@ -27,17 +30,12 @@ export class DetailCondominosComponent implements OnInit {
 
   ngOnInit() { 
     this.getCondominos();
-
-    this.condominos.sort((a: CondominoParams, b: CondominoParams) => {
-      return a.apartamento > b.apartamento ? 1 : -1;
-    })
   }
 
   private getCondominos() {
-    this.condominoService.getAll()
-      .subscribe(condominos => {
-        this.condominos = condominos;
-      })
+    this.condominoService.getByCondomino(this.condominioId).pipe(first()).subscribe(condominos => {
+      this.condominos = condominos;
+    })
   }
 
   async save(condominio: number) {
