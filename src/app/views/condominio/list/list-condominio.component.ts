@@ -23,7 +23,6 @@ export class ListCondominioComponent implements OnInit {
     this.condominioService.getAll().pipe(first()).subscribe(condominios => {
       this.condominios = condominios
     })
-
   }
 
   delete(condominioParams: CondominioParams) {
