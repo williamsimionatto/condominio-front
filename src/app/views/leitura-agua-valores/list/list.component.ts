@@ -64,7 +64,7 @@ export class ListLeituraAguaValoresComponent implements OnInit {
         leituraagua: idLeitura,
         condominio: this.condominio.id,
         condominoId: condominoData.condominoId,
-        consumo: condominoData.consumo,
+        consumo: condominoData.consumoAtual,
         condomino: condominoData.condomino,
         valorsalaofestas: condominoData.valorsalaofestas,
         valorlimpezasalaofestas: condominoData.valorlimpezasalaofestas,
