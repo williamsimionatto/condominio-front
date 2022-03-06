@@ -28,7 +28,7 @@ export class CondominioService extends Service {
     return this.http.put(`${environment.apiUrl}/condominio/${condominio.id}`, condominio, this.requestOptions);
   }
 
-  public delete(id: number) {
+  public delete(id: string) {
     return this.http.delete(`${environment.apiUrl}/condominio/${id}`, this.requestOptions);
   }
 }

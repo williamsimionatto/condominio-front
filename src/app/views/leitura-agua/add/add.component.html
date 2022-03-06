@@ -1,0 +1,56 @@
+<div class="animated fadeIn">
+    <header class="header header-sticky mb-4"></header>
+
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-label"> Leitura d'água </div>
+                </div>
+
+                <div class="card-body">
+                    <form [formGroup]="leituraAguaForm" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="col-sm-2 col-xs-12">
+                                <input-container errorMessage="i" label="Cód">
+                                    <input id="id" class="form-control" formControlName="id" autocomplete="off" [readonly]="true">
+                                </input-container>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label" for="inputSuccess">Condomínio</label>
+                                    <ng-select [items]="condominioOptions" bindLabel="label" bindValue="value" id="condominio" formControlName="condominio" ngDefaultControl>
+                                    </ng-select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2 col-xs-2">
+                                <input-container errorMessage="Data Leitura é obrigatório" label="Data Leitura">
+                                    <input id="dataleitura" class="form-control" formControlName="dataleitura" autocomplete="off" [readonly]="readonly">
+                                </input-container>
+                            </div>
+
+                            <div class="col-sm-2 col-xs-2">
+                                <input-container errorMessage="Data Vencimento é obrigatório" label="Data Vencimento">
+                                    <input id="datavencimento" class="form-control" formControlName="datavencimento" autocomplete="off" [readonly]="readonly">
+                                </input-container>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="form-group form-footer inline-footer">
+                            <a routerLink="/leituraagua" class="btn btn-light rounded-pill btnVoltar">Voltar</a>
+
+                            <button [disabled]="loading || leituraAguaForm.invalid" class="btn btn-primary rounded-pill" *ngIf="!readonly">
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                Salvar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

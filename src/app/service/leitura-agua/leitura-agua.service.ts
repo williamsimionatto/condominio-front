@@ -28,7 +28,7 @@ export class LeituraAguaService extends Service {
     return this.http.put(`${environment.apiUrl}/leituraagua/${leituraAgua.id}`, leituraAgua, this.requestOptions);
   }
 
-  public delete(id: number) {
+  public delete(id: string) {
     return this.http.delete(`${environment.apiUrl}/leituraagua/${id}`, this.requestOptions);
   }
 }

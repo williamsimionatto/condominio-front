@@ -6,6 +6,9 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { LeituraAguaRoutingModule } from './leitura-agua-routing.module';
 import { ListLeituraAguaComponent } from './list/list.component';
 import { CommonModule } from '@angular/common';
+import { AddEditLeituraAguaComponent } from './add/add.component';
+import { SharedModule } from '../../containers/shared.module';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   imports: [
@@ -14,10 +17,13 @@ import { CommonModule } from '@angular/common';
     ChartsModule,
     LeituraAguaRoutingModule,
     BsDropdownModule,
-    ButtonsModule.forRoot()
+    ButtonsModule.forRoot(),
+    SharedModule,    
+    NgSelectModule
   ],
   declarations: [
-    ListLeituraAguaComponent
+    ListLeituraAguaComponent,
+    AddEditLeituraAguaComponent
   ]
 })
 export class LeituraAguaModule { }

@@ -19,17 +19,17 @@
                         <thead>
                             <tr>
                                 <th>Condomínio</th>
-                                <th>Data Leitura</th>
-                                <th>Data Vencimento</th>
-                                <th width="10%" style="text-align: center">Ações</th>
+                                <th width="10%" style="text-align: center">Data Leitura</th>
+                                <th width="10%" style="text-align: center">Data Vencimento</th>
+                                <th width="11%" style="text-align: center">Ações</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             <tr *ngFor="let leitura of leituraAgua">
                                 <td>{{leitura.condominio}}</td>
-                                <td>{{leitura.dataleitura}}</td>
-                                <td>{{leitura.datavencimento}}</td>
+                                <td style="text-align: right">{{formatDateBr(leitura.dataleitura)}}</td>
+                                <td style="text-align: right">{{formatDateBr(leitura.datavencimento)}}</td>
 
                                 <td style="cursor: pointer;">
 									<a class="btn btn-success btn-sm rounded-pill" routerLink="overview/{{leitura.id}}" >

@@ -1,5 +1,5 @@
 export type CondominioParams = {
-  id?: number;
+  id?: string;
   name: string;
   cnpj: string;
   condominio2quartos: number;
