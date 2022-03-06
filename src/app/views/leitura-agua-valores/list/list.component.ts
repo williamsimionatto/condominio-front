@@ -57,6 +57,14 @@ export class ListLeituraAguaValoresComponent implements OnInit {
     }
   }
 
+  public async submit() {
+    console.log(this.condominos)
+  }
+
+  public async update() {
+    console.log('entrou update')
+  }
+
   private formatDate(date: string): string {
     let d = date.split("/")
     return d[2] + "-" + d[1] + "-" + d[0]
@@ -67,6 +75,7 @@ export class ListLeituraAguaValoresComponent implements OnInit {
       this.condominos = valores
       this.condominos.forEach(condomino => {
         this.atualizaTotal(condomino)
+        this.atualizaTotalizadores(condomino)
       })
     })
   }
@@ -88,10 +97,10 @@ export class ListLeituraAguaValoresComponent implements OnInit {
   }
 
   updateConsumo(condomino: LeituraAguaValoresParams) {
-    this.totalTalizadores.consumo -= condomino.consumo
+    this.totalTalizadores.consumo -= condomino.consumo | 0
     this.totalTalizadores.total -= condomino.total
 
-    let consumoAtual = parseFloat((document.getElementById("valorconsumoatual") as HTMLInputElement).value)
+    let consumoAtual = parseFloat((document.getElementById("valorconsumoatual_"+condomino.condomino) as HTMLInputElement).value) | 0
     let consumo = this.calculaDiferencaConsumo(condomino.consumoAnterior, consumoAtual)
 
     let index = this.condominos.indexOf(condomino)
@@ -99,8 +108,8 @@ export class ListLeituraAguaValoresComponent implements OnInit {
     this.condominos[index].consumo = consumo
 
     this.atualizaTotal(condomino)
-    this.totalTalizadores.consumo += consumo
-    this.totalTalizadores.total += condomino.total
+    this.totalTalizadores.consumo += consumo | 0
+    this.totalTalizadores.total += condomino.total 
   }
 
   calculaDiferencaConsumo(consumoAnterior: number, consumoAtual: number) {

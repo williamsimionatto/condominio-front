@@ -42,9 +42,9 @@
     
                         <td>
                             <div class="col-sm-12col-xs-4 form-group">
-                                <input type="number" id="valorconsumoatual" class="form-control" 
+                                <input type="number" id="valorconsumoatual_{{condomino.condomino}}" class="form-control" 
                                        autocomplete="off" value='{{condomino.consumoAtual}}'
-                                       (change)="updateConsumo(condomino)"
+                                       (change)="updateConsumo(condomino)" min="0"
                                 />
                             </div>
                         </td>

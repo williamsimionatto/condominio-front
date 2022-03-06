@@ -5,6 +5,8 @@ import { first } from "rxjs/operators";
 import { CondominioService } from "../../../service/condominio/condominio.service";
 import { LeituraAguaService } from "../../../service/leitura-agua/leitura-agua.service";
 import { NotificationService } from "../../../service/notification/notification.service";
+import { ListLeituraAguaValoresComponent } from "../../leitura-agua-valores/list/list.component";
+import { ListLeituraAguaComponent } from "../list/list.component";
 
 @Component({
   templateUrl: "./add.component.html",
@@ -22,6 +24,8 @@ export class AddEditLeituraAguaComponent implements OnInit {
   condominioOptions = [
     { value: "", label: "Selecione:" },
   ]
+
+  @ViewChild(ListLeituraAguaValoresComponent) condominos
 
   constructor(
     private formBuilder: FormBuilder,
@@ -65,7 +69,7 @@ export class AddEditLeituraAguaComponent implements OnInit {
     }
 
     this.loading = true
-    this.leituraAguaForm.value.condominio = this.leituraAguaForm.value.condominioid
+    this.leituraAguaForm.value.condominio = this.leituraAguaForm.value.condominio
     this.leituraAguaForm.value.dataleitura = this.formatDate(this.leituraAguaForm.value.dataleitura)
     this.leituraAguaForm.value.datavencimento = this.formatDate(this.leituraAguaForm.value.datavencimento)
 
@@ -78,8 +82,10 @@ export class AddEditLeituraAguaComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
-          this.notificationService.showSuccess("Leitura cadastrada com sucesso", "Sucesso");
-          this.router.navigate(["/leituraagua"]);
+          this.condominos.submit().then(() => {
+            this.notificationService.showSuccess("Leitura cadastrada com sucesso", "Sucesso");
+            this.router.navigate(["/leituraagua"]);
+          })
         },
         error: error => {
           this.notificationService.showError(error.error.message, "Erro");
