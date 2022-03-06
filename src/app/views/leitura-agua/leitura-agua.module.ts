@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { AddEditLeituraAguaComponent } from './add/add.component';
 import { SharedModule } from '../../containers/shared.module';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { OverviewLeituraAguaComponent } from './overview/overview-perfil.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
   ],
   declarations: [
     ListLeituraAguaComponent,
-    AddEditLeituraAguaComponent
+    AddEditLeituraAguaComponent,
+    OverviewLeituraAguaComponent
   ]
 })
 export class LeituraAguaModule { }
