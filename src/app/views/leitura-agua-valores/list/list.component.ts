@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { first } from "rxjs/operators";
 import { CondominioParams } from "../../../model/condominio.model";
 import { LeituraAguaValoresParams } from "../../../model/leitura-agua-valores.model";
+import { CondominioService } from "../../../service/condominio/condominio.service";
 import { ConfirmationDialogService } from "../../../service/confirmation-dialog/confirmation-dialog";
+import { LeituraAguaService } from "../../../service/leitura-agua/leitura-agua.service";
 import { NotificationService } from "../../../service/notification/notification.service";
 
 @Component({
@@ -14,51 +17,41 @@ import { NotificationService } from "../../../service/notification/notification.
 })
 export class ListLeituraAguaValoresComponent implements OnInit {
   @Input() condominioId
+  @Input() dataLeitura
+  @Input() idLeitura
+
   condominos: LeituraAguaValoresParams[] = []
-  condominio: CondominioParams
+  condominio: CondominioParams = null
 
   constructor(
     private notificationService: NotificationService,
-    private confirmationDialogService: ConfirmationDialogService
+    private confirmationDialogService: ConfirmationDialogService,
+    private condominioService: CondominioService,
+    private leituraAguaService: LeituraAguaService
   ) {}
 
   ngOnInit() {
-    this.condominio = {
-      id: this.condominioId,
-      name: "",
-      cnpj: "",
-      condominio2quartos: 101.84,
-      condominio3quartos: 125.11,
-      condominiosalacomercial: 75.65,
-      valoragua: 5.73,
-      valorsalaofestas: 25,
-      valorlimpezasalaofestas: 25,
-      valormudanca: 25,
-      taxaboleto: 3.08,
-      taxabasicaagua: 28.90,
-    }
+    this.getCondominio(this.condominioId)
+    this.getValores()
+  }
 
-    this.condominos = [
-      {
-        id: "1",
-        leituraagua: "1",
-        condomino: "202",
-        consumoAnterior: 1530,
-        consumoAtual: 1530,
-        consumo: 0,
-        valorcondominio: 125.11,
-        valoragua: 5.73,
-        valorsalaofestas: 0.00,
-        valorlimpezasalaofestas: 0.00,
-        valormudanca: 0.00,
-        taxaboleto: 3.08,
-        taxabasicaagua: 28.90,
-        total: 0
-      }
-    ]
+  private formatDate(date: string): string {
+    let d = date.split("/")
+    return d[2] + "-" + d[1] + "-" + d[0]
+  }
 
-    this.condominos.forEach(condomino => {
-      this.atualizaTotal(condomino)
+  public async getValores() {
+    this.leituraAguaService.getValores(this.idLeitura, this.formatDate(this.dataLeitura)).pipe(first()).subscribe(valores => {
+      this.condominos = valores
+      this.condominos.forEach(condomino => {
+        this.atualizaTotal(condomino)
+      })
+    })
+  }
+
+  async getCondominio(id: string) {
+    this.condominioService.getById(id).pipe(first()).subscribe(condominio => {
+      this.condominio = condominio
     })
   }
 
@@ -75,6 +68,10 @@ export class ListLeituraAguaValoresComponent implements OnInit {
 
   calculaDiferencaConsumo(consumoAnterior: number, consumoAtual: number) {
     return consumoAtual - consumoAnterior
+  }
+
+  isChecked(valor) {
+    return  valor > 0
   }
 
   atualizaTaxaUsoSalaoFestas(event, condomino: LeituraAguaValoresParams) {
@@ -100,8 +97,8 @@ export class ListLeituraAguaValoresComponent implements OnInit {
     let condominio = this.condominos[index]
 
     let total = (condomino.consumo * condominio.valoragua) +
-                condominio.taxabasicaagua + 
-                condominio.taxaboleto +
+                parseFloat(condominio.taxabasicaagua.toString()) + 
+                parseFloat(condominio.taxaboleto.toString()) +
                 condominio.valorcondominio + 
                 condominio.valorsalaofestas +
                 condominio.valorlimpezasalaofestas +

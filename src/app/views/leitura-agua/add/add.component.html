@@ -38,7 +38,9 @@
                             </div>
                         </div>
 
-                        <app-list-leitura-agua-valores [condominioId]="this.getCondominio()"></app-list-leitura-agua-valores>
+                        <app-list-leitura-agua-valores [condominioId]="this.getCondominio()" [idLeitura]="this.id" [dataLeitura]="this.getDataLeitura()" *ngIf="this.getCondominio() != '' && this.getDataLeitura() != '' ">
+
+                        </app-list-leitura-agua-valores>
 
                         <hr>
 
