@@ -99,7 +99,7 @@ export class ListLeituraAguaValoresComponent implements OnInit {
   public async getValoresCondominos() {
     this.leituraAguaService.getValoresCondominos(this.idLeitura, this.formatDate(this.dataLeitura)).pipe(first()).subscribe(valores => {
       this.condominos = valores
-      console.log(this.condominos)
+
       this.condominos.forEach(condomino => {
         this.atualizaTotal(condomino)
         this.atualizaTotalizadores(condomino)
