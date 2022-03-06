@@ -63,8 +63,8 @@ import { ConfirmationDialogComponent } from './containers/confirmation-dialog/co
 import { CondominioModule } from './views/condominio/condominio.module';
 import { CondominiosModule } from './views/condominos/condominos.module';
 import { ModalDialogService } from './service/modal/modal-dialog.service';
-import { DetailCondominosComponent } from './views/condominos/detail/detail-condomino.component';
 import { LeituraAguaModule } from './views/leitura-agua/leitura-agua.module';
+import { LeituraAguaValoresModule } from './views/leitura-agua-valores/leitura-agua-valores.module';
 
 @NgModule({
   imports: [
@@ -88,6 +88,7 @@ import { LeituraAguaModule } from './views/leitura-agua/leitura-agua.module';
     CondominioModule,
     CondominiosModule,
     LeituraAguaModule,
+    LeituraAguaValoresModule,
     UserModule,
     PerfilModule,
     PermissaoModule,
