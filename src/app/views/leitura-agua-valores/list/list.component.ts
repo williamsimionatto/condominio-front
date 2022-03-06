@@ -7,6 +7,15 @@ import { ConfirmationDialogService } from "../../../service/confirmation-dialog/
 import { LeituraAguaService } from "../../../service/leitura-agua/leitura-agua.service";
 import { NotificationService } from "../../../service/notification/notification.service";
 
+type Totalizadores = {
+  consumo: number;
+  condominio: number;
+  usoSalaoFesta: number;
+  limpezaSalaoFesta: number;
+  taxaMudanca: number;
+  total: number;
+}
+
 @Component({
   selector: "app-list-leitura-agua-valores",
   templateUrl: "./list.component.html",
@@ -16,12 +25,20 @@ import { NotificationService } from "../../../service/notification/notification.
   ]
 })
 export class ListLeituraAguaValoresComponent implements OnInit {
-  @Input() condominioId
-  @Input() dataLeitura
-  @Input() idLeitura
+  @Input() condominioId: string
+  @Input() dataLeitura: string
+  @Input() idLeitura: string
 
   condominos: LeituraAguaValoresParams[] = []
   condominio: CondominioParams = null
+  totalTalizadores: Totalizadores = {
+    consumo: 0,
+    condominio: 0,
+    usoSalaoFesta: 0,
+    limpezaSalaoFesta: 0,
+    taxaMudanca: 0,
+    total: 0
+  }
 
   constructor(
     private notificationService: NotificationService,
@@ -32,7 +49,12 @@ export class ListLeituraAguaValoresComponent implements OnInit {
 
   ngOnInit() {
     this.getCondominio(this.condominioId)
-    this.getValores()
+
+    if (this.idLeitura == undefined) {
+      this.getValores()
+    } else {
+      this.getValoresCondominos()
+    }
   }
 
   private formatDate(date: string): string {
@@ -49,6 +71,16 @@ export class ListLeituraAguaValoresComponent implements OnInit {
     })
   }
 
+  public async getValoresCondominos() {
+    this.leituraAguaService.getValoresCondominos(this.idLeitura, this.formatDate(this.dataLeitura)).pipe(first()).subscribe(valores => {
+      this.condominos = valores
+      this.condominos.forEach(condomino => {
+        this.atualizaTotal(condomino)
+        this.atualizaTotalizadores(condomino)
+      })
+    })
+  }
+
   async getCondominio(id: string) {
     this.condominioService.getById(id).pipe(first()).subscribe(condominio => {
       this.condominio = condominio
@@ -56,6 +88,9 @@ export class ListLeituraAguaValoresComponent implements OnInit {
   }
 
   updateConsumo(condomino: LeituraAguaValoresParams) {
+    this.totalTalizadores.consumo -= condomino.consumo
+    this.totalTalizadores.total -= condomino.total
+
     let consumoAtual = parseFloat((document.getElementById("valorconsumoatual") as HTMLInputElement).value)
     let consumo = this.calculaDiferencaConsumo(condomino.consumoAnterior, consumoAtual)
 
@@ -64,6 +99,8 @@ export class ListLeituraAguaValoresComponent implements OnInit {
     this.condominos[index].consumo = consumo
 
     this.atualizaTotal(condomino)
+    this.totalTalizadores.consumo += consumo
+    this.totalTalizadores.total += condomino.total
   }
 
   calculaDiferencaConsumo(consumoAnterior: number, consumoAtual: number) {
@@ -74,22 +111,46 @@ export class ListLeituraAguaValoresComponent implements OnInit {
     return  valor > 0
   }
 
+  atualizaTotalizadores(condomino: LeituraAguaValoresParams) {
+    this.totalTalizadores.consumo += condomino.consumo
+    this.totalTalizadores.condominio += condomino.valorcondominio
+    this.totalTalizadores.usoSalaoFesta += condomino.valorsalaofestas
+    this.totalTalizadores.limpezaSalaoFesta += condomino.valorlimpezasalaofestas
+    this.totalTalizadores.taxaMudanca += condomino.valormudanca
+    this.totalTalizadores.total += condomino.total
+  }
+
   atualizaTaxaUsoSalaoFestas(event, condomino: LeituraAguaValoresParams) {
+    this.totalTalizadores.usoSalaoFesta -= condomino.valorsalaofestas
+    this.totalTalizadores.total -= condomino.valorsalaofestas
+
     let index = this.condominos.indexOf(condomino)
     this.condominos[index].valorsalaofestas = event.target.checked ? this.condominio.valorsalaofestas : 0
     this.atualizaTotal(condomino)
+    this.totalTalizadores.usoSalaoFesta += condomino.valorsalaofestas
+    this.totalTalizadores.total += condomino.valorsalaofestas
   }
 
   atualizaTaxaLimpezaSalaoFestas(event, condomino: LeituraAguaValoresParams) {
+    this.totalTalizadores.limpezaSalaoFesta -= condomino.valorlimpezasalaofestas
+    this.totalTalizadores.total -= condomino.valorlimpezasalaofestas
+
     let index = this.condominos.indexOf(condomino)
     this.condominos[index].valorlimpezasalaofestas = event.target.checked ? this.condominio.valorlimpezasalaofestas : 0
     this.atualizaTotal(condomino)
+    this.totalTalizadores.limpezaSalaoFesta += condomino.valorlimpezasalaofestas
+    this.totalTalizadores.total += condomino.valorlimpezasalaofestas
   }
 
   atualizaTaxaMudanca(event, condomino: LeituraAguaValoresParams) {
+    this.totalTalizadores.taxaMudanca -= condomino.valormudanca
+    this.totalTalizadores.total -= condomino.valormudanca
+
     let index = this.condominos.indexOf(condomino)
     this.condominos[index].valormudanca = event.target.checked ? this.condominio.valormudanca : 0
     this.atualizaTotal(condomino)
+    this.totalTalizadores.taxaMudanca += condomino.valormudanca
+    this.totalTalizadores.total += condomino.valormudanca
   }
 
   atualizaTotal(condomino: LeituraAguaValoresParams) {

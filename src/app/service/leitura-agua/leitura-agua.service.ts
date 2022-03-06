@@ -28,6 +28,13 @@ export class LeituraAguaService extends Service {
     } , this.requestOptions);
   }
 
+  public getValoresCondominos(idLeitura: string, dataLeitura: string) {
+    return this.http.post<LeituraAguaValoresParams[]>(`${environment.apiUrl}/leituraagua/condomino/valores`, {
+      idLeitura,
+      dataLeitura
+    } , this.requestOptions);
+  }
+
   public create(leituraAgua: LeituraAguaParams) {
     return this.http.post(`${environment.apiUrl}/leituraagua`, leituraAgua, this.requestOptions);
   }

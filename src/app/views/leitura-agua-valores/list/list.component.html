@@ -28,8 +28,8 @@
 
                         <th>Valor Condomínio</th>
 
-                        <th style="text-align: center">Uso</th>
-                        <th style="text-align: center">Limpeza</th>
+                        <th style="text-align: center">Uso Salão</th>
+                        <th style="text-align: center">Limpeza Salão</th>
                         <th style="text-align: center">Mudança</th>
 
                         <th>Valor Total</th>
@@ -82,15 +82,15 @@
                 <tfoot>
                     <tr style="font-weight: bold;">
                         <td colspan="2" style="text-align: left">Total</td>
-                        <td style="text-align: right">{{consumoTotal | currency: 'BRL'}}</td>
+                        <td style="text-align: right">{{totalTalizadores.consumo}}</td>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="text-align: right">{{total | currency: 'BRL'}}</td>
+                        <td style="text-align: right">{{totalTalizadores.condominio | currency: 'BRL'}}</td>
+                        <td style="text-align: right">{{totalTalizadores.usoSalaoFesta | currency: 'BRL'}}</td>
+                        <td style="text-align: right">{{totalTalizadores.limpezaSalaoFesta | currency: 'BRL'}}</td>
+                        <td style="text-align: right">{{totalTalizadores.taxaMudanca | currency: 'BRL'}}</td>
+                        <td style="text-align: right">{{totalTalizadores.total | currency: 'BRL'}}</td>
                     </tr>
             </table>
         </div>

@@ -122,6 +122,10 @@ export class AddEditLeituraAguaComponent implements OnInit {
     return this.leituraAguaForm.value.condominio
   }
 
+  isValidDataLeitura() {
+    return this.leituraAguaForm.valid;
+  }
+
   getDataLeitura() {
     return this.leituraAguaForm.value.dataleitura
   }
