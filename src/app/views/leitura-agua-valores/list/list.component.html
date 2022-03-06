@@ -1,1 +1,83 @@
-skndakdnasklndalskndlasndlasndlkasndl
+<div class="mestreDetalhe">
+    <div class="mestreDetalhe-content">
+        <div class="mestreDetalhe-header">
+            <div class="mestreDetalhe-title">
+                <span>Condôminos</span>
+            </div>
+        </div>
+
+        <div class="mestreDetalhe-body table-responsive">
+            <table class="table table-striped border datatable tableDetalhe">
+                <thead>
+                    <tr>
+                        <th colspan="1"></th>
+                        <th colspan="2" style="width: 15%; text-align: center;">Consumo</th>
+                        <th colspan="4"></th>
+                        <th colspan="2" style="width: 15%; text-align: center;">Taxa Salão de Festas</th>
+                        <th colspan="2"></th>
+                    </tr>
+
+                    <tr>
+                        <th>Apartamento</th>
+                        <th width="10%">Atual</th>
+                        <th width="10%">Mês m³</th>
+
+                        <th>Valor Água</th>
+                        <th>Taxa Básica Água</th>
+                        <th>Taxa Boleto</th>
+
+                        <th>Valor Condomínio</th>
+
+                        <th style="text-align: center">Uso</th>
+                        <th style="text-align: center">Limpeza</th>
+                        <th style="text-align: center">Mudança</th>
+
+                        <th>Valor Total</th>
+                    </tr>
+                </thead>
+
+                <tr *ngFor="let condomino of condominos">
+                    <td>{{condomino.condomino}}</td>
+
+                    <td>
+                        <div class="col-sm-12col-xs-4 form-group">
+                            <input type="number" id="valorconsumoatual" class="form-control" 
+                                   autocomplete="off" value='{{condomino.consumoAtual}}'
+                                   (change)="updateConsumo(condomino)"
+                            />
+                        </div>
+                    </td>
+
+                    <td style="text-align: right">{{condomino.consumo}}</td>
+
+                    <td style="text-align: right">{{condominio.valoragua | currency: 'BRL'}}</td>
+                    <td style="text-align: right">{{condominio.taxabasicaagua | currency: 'BRL'}}</td>
+                    <td style="text-align: right">{{condominio.taxaboleto | currency: 'BRL'}}</td>
+
+                    <td style="text-align: right">{{condomino.valorcondominio | currency: 'BRL'}}</td>
+
+
+                    <td style="text-align: center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" (click)="atualizaTaxaUsoSalaoFestas($event, condomino)">
+                        </div>
+                    </td>
+
+                    <td style="text-align: center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" (click)="atualizaTaxaLimpezaSalaoFestas($event, condomino)">
+                        </div>
+                    </td>
+
+                    <td style="text-align: center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" (click)="atualizaTaxaMudanca($event, condomino)">
+                        </div>
+                    </td>
+
+                    <td style="text-align: right">{{condomino.total | currency: 'BRL'}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
