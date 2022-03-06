@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { first } from "rxjs/operators";
+import { LeituraAguaParams } from "../../../model/leitura-agua.model";
 import { CondominioService } from "../../../service/condominio/condominio.service";
 import { LeituraAguaService } from "../../../service/leitura-agua/leitura-agua.service";
 import { NotificationService } from "../../../service/notification/notification.service";
@@ -81,8 +82,8 @@ export class AddEditLeituraAguaComponent implements OnInit {
       .create(this.leituraAguaForm.value)
       .pipe(first())
       .subscribe({
-        next: () => {
-          this.condominos.submit().then(() => {
+        next: (ret: LeituraAguaParams) => {
+          this.condominos.submit(ret.id).then(() => {
             this.notificationService.showSuccess("Leitura cadastrada com sucesso", "Sucesso");
             this.router.navigate(["/leituraagua"]);
           })

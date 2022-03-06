@@ -28,6 +28,10 @@ export class LeituraAguaService extends Service {
     } , this.requestOptions);
   }
 
+  public save(leituraAgua) {
+    return this.http.post<LeituraAguaValoresParams>(`${environment.apiUrl}/leituraagua/condomino/valores/store`, leituraAgua, this.requestOptions);
+  }
+
   public getValoresCondominos(idLeitura: string, dataLeitura: string) {
     return this.http.post<LeituraAguaValoresParams[]>(`${environment.apiUrl}/leituraagua/condomino/valores`, {
       idLeitura,

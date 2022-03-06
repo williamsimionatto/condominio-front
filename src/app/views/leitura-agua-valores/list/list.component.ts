@@ -57,8 +57,24 @@ export class ListLeituraAguaValoresComponent implements OnInit {
     }
   }
 
-  public async submit() {
-    console.log(this.condominos)
+  public async submit(idLeitura: string) {
+    this.condominos.map(condominoData => {
+      let data = {
+        id: condominoData.id,
+        leituraagua: idLeitura,
+        condominio: this.condominio.id,
+        condominoId: condominoData.condominoId,
+        consumo: condominoData.consumo,
+        condomino: condominoData.condomino,
+        valorsalaofestas: condominoData.valorsalaofestas,
+        valorlimpezasalaofestas: condominoData.valorlimpezasalaofestas,
+        valormudanca: condominoData.valormudanca
+      }
+
+      this.leituraAguaService.save(data).pipe(first()).subscribe(() => {
+        console.log('salvo')
+      })
+    })
   }
 
   public async update() {
@@ -83,6 +99,7 @@ export class ListLeituraAguaValoresComponent implements OnInit {
   public async getValoresCondominos() {
     this.leituraAguaService.getValoresCondominos(this.idLeitura, this.formatDate(this.dataLeitura)).pipe(first()).subscribe(valores => {
       this.condominos = valores
+      console.log(this.condominos)
       this.condominos.forEach(condomino => {
         this.atualizaTotal(condomino)
         this.atualizaTotalizadores(condomino)
