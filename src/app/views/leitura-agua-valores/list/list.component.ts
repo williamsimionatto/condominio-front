@@ -90,6 +90,7 @@ export class ListLeituraAguaValoresComponent implements OnInit {
     this.leituraAguaService.getValores(this.idLeitura, this.formatDate(this.dataLeitura)).pipe(first()).subscribe(valores => {
       this.condominos = valores
       this.condominos.forEach(condomino => {
+        condomino.consumo = parseFloat(condomino.consumo.toString())
         this.atualizaTotal(condomino)
         this.atualizaTotalizadores(condomino)
       })
@@ -101,6 +102,7 @@ export class ListLeituraAguaValoresComponent implements OnInit {
       this.condominos = valores
 
       this.condominos.forEach(condomino => {
+        condomino.consumo = parseFloat(condomino.consumo.toString())
         this.atualizaTotal(condomino)
         this.atualizaTotalizadores(condomino)
       })
@@ -113,20 +115,24 @@ export class ListLeituraAguaValoresComponent implements OnInit {
     })
   }
 
+  // 08/03/2022
   updateConsumo(condomino: LeituraAguaValoresParams) {
-    this.totalTalizadores.consumo -= condomino.consumo | 0
-    this.totalTalizadores.total -= condomino.total
-
     let consumoAtual = parseFloat((document.getElementById("valorconsumoatual_"+condomino.condomino) as HTMLInputElement).value) | 0
     let consumo = this.calculaDiferencaConsumo(condomino.consumoAnterior, consumoAtual)
+
+    this.totalTalizadores.consumo = 0
+    this.totalTalizadores.total = 0
 
     let index = this.condominos.indexOf(condomino)
     this.condominos[index].consumoAtual = consumoAtual
     this.condominos[index].consumo = consumo
 
     this.atualizaTotal(condomino)
-    this.totalTalizadores.consumo += consumo | 0
-    this.totalTalizadores.total += condomino.total 
+    this.condominos.forEach(condomino => {
+      this.totalTalizadores.consumo += parseFloat(condomino.consumo.toString())
+      this.totalTalizadores.total += condomino.total
+
+    })
   }
 
   calculaDiferencaConsumo(consumoAnterior: number, consumoAtual: number) {
@@ -183,7 +189,7 @@ export class ListLeituraAguaValoresComponent implements OnInit {
     let index = this.condominos.indexOf(condomino)
     let condominio = this.condominos[index]
 
-    let total = (condomino.consumo * condominio.valoragua) +
+    let total = (parseFloat(condomino.consumo.toString()) * condominio.valoragua) +
                 parseFloat(condominio.taxabasicaagua.toString()) + 
                 parseFloat(condominio.taxaboleto.toString()) +
                 condominio.valorcondominio + 
