@@ -87,7 +87,7 @@ export class ListLeituraAguaValoresComponent implements OnInit {
   }
 
   public async getValores() {
-    this.leituraAguaService.getValores(this.idLeitura, this.formatDate(this.dataLeitura)).pipe(first()).subscribe(valores => {
+    this.leituraAguaService.getValores(this.idLeitura, this.dataLeitura).pipe(first()).subscribe(valores => {
       this.condominos = valores
       this.condominos.forEach(condomino => {
         condomino.consumo = parseFloat(condomino.consumo.toString())
@@ -98,7 +98,7 @@ export class ListLeituraAguaValoresComponent implements OnInit {
   }
 
   public async getValoresCondominos() {
-    this.leituraAguaService.getValoresCondominos(this.idLeitura, this.formatDate(this.dataLeitura)).pipe(first()).subscribe(valores => {
+    this.leituraAguaService.getValoresCondominos(this.idLeitura,this.dataLeitura).pipe(first()).subscribe(valores => {
       this.condominos = valores
 
       this.condominos.forEach(condomino => {
