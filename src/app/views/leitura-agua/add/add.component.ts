@@ -7,7 +7,6 @@ import { CondominioService } from "../../../service/condominio/condominio.servic
 import { LeituraAguaService } from "../../../service/leitura-agua/leitura-agua.service";
 import { NotificationService } from "../../../service/notification/notification.service";
 import { ListLeituraAguaValoresComponent } from "../../leitura-agua-valores/list/list.component";
-import { ListLeituraAguaComponent } from "../list/list.component";
 
 @Component({
   templateUrl: "./add.component.html",
@@ -44,8 +43,8 @@ export class AddEditLeituraAguaComponent implements OnInit {
     this.leituraAguaForm = this.formBuilder.group({
       id: this.formBuilder.control(this.id),
       condominio: this.formBuilder.control("", Validators.required),
-      dataleitura: this.formBuilder.control("", [Validators.required, Validators.pattern(this.datePattern)]),
-      datavencimento: this.formBuilder.control("", [Validators.required, Validators.pattern(this.datePattern)]),
+      dataleitura: this.formBuilder.control("", [Validators.required]),
+      datavencimento: this.formBuilder.control("", [Validators.required]),
     })
 
     this.getCondominios()
@@ -54,9 +53,6 @@ export class AddEditLeituraAguaComponent implements OnInit {
         .getById(this.id)
         .pipe(first())
         .subscribe(x => {
-          x.dataleitura = this.formatDateBr(x.dataleitura)
-          x.datavencimento = this.formatDateBr(x.datavencimento)
-
           this.leituraAguaForm.patchValue(x)
         })
     }
@@ -71,9 +67,6 @@ export class AddEditLeituraAguaComponent implements OnInit {
 
     this.loading = true
     this.leituraAguaForm.value.condominio = this.leituraAguaForm.value.condominio
-    this.leituraAguaForm.value.dataleitura = this.formatDate(this.leituraAguaForm.value.dataleitura)
-    this.leituraAguaForm.value.datavencimento = this.formatDate(this.leituraAguaForm.value.datavencimento)
-
     this.isAddMode ? this.create() : this.update();
   }
 
@@ -139,10 +132,5 @@ export class AddEditLeituraAguaComponent implements OnInit {
 
   public formatDateBr(date: string): string {
     return date.substring(8, 10) + '/' + date.substring(5, 7) + '/' + date.substring(0, 4)
-  }
-
-  private formatDate(date: string): string {
-    let d = date.split("/")
-    return d[2] + "-" + d[1] + "-" + d[0]
   }
 }
