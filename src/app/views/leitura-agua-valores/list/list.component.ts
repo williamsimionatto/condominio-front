@@ -66,24 +66,35 @@ export class ListLeituraAguaValoresComponent implements OnInit {
         condominoId: condominoData.condominoId,
         consumo: condominoData.consumoAtual,
         condomino: condominoData.condomino,
-        valorsalaofestas: condominoData.valorsalaofestas,
-        valorlimpezasalaofestas: condominoData.valorlimpezasalaofestas,
-        valormudanca: condominoData.valormudanca
+        consumoAnterior: condominoData.consumoAnterior,
+        qtdmudanca: condominoData.qtdmudanca,
+        qtdlimpezasalao: condominoData.qtdlimpezasalao,
+        qtdusosalao: condominoData.qtdusosalao,
       }
 
       this.leituraAguaService.save(data).pipe(first()).subscribe(() => {
-        console.log('salvo')
       })
     })
   }
 
-  public async update() {
-    console.log('entrou update')
-  }
+  public async update(idLeitura: string) {
+    this.condominos.map(condominoData => {
+      let data = {
+        id: condominoData.id,
+        leituraagua: idLeitura,
+        condominio: this.condominio.id,
+        condominoId: condominoData.condominoId,
+        consumo: condominoData.consumoAtual,
+        condomino: condominoData.condomino,
+        consumoAnterior: condominoData.consumoAnterior,
+        qtdmudanca: condominoData.qtdmudanca,
+        qtdlimpezasalao: condominoData.qtdlimpezasalao,
+        qtdusosalao: condominoData.qtdusosalao,
+      }
 
-  private formatDate(date: string): string {
-    let d = date.split("/")
-    return d[2] + "-" + d[1] + "-" + d[0]
+      this.leituraAguaService.updateValores(idLeitura, data).pipe(first()).subscribe(() => {
+      })
+    })
   }
 
   public async getValores() {
@@ -115,7 +126,6 @@ export class ListLeituraAguaValoresComponent implements OnInit {
     })
   }
 
-  // 08/03/2022
   updateConsumo(condomino: LeituraAguaValoresParams) {
     let consumoAtual = parseFloat((document.getElementById("valorconsumoatual_"+condomino.condomino) as HTMLInputElement).value) | 0
     let consumo = this.calculaDiferencaConsumo(condomino.consumoAnterior, consumoAtual)
@@ -139,63 +149,59 @@ export class ListLeituraAguaValoresComponent implements OnInit {
     return consumoAtual - consumoAnterior
   }
 
-  isChecked(valor) {
-    return  valor > 0
-  }
-
   atualizaTotalizadores(condomino: LeituraAguaValoresParams) {
     this.totalTalizadores.consumo += condomino.consumo
     this.totalTalizadores.condominio += condomino.valorcondominio
-    this.totalTalizadores.usoSalaoFesta += condomino.valorsalaofestas
-    this.totalTalizadores.limpezaSalaoFesta += condomino.valorlimpezasalaofestas
-    this.totalTalizadores.taxaMudanca += condomino.valormudanca
+    this.totalTalizadores.usoSalaoFesta += this.condominio.valorsalaofestas * condomino.qtdusosalao
+    this.totalTalizadores.limpezaSalaoFesta += this.condominio.valorlimpezasalaofestas * condomino.qtdlimpezasalao
+    this.totalTalizadores.taxaMudanca += this.condominio.valormudanca * condomino.qtdmudanca
     this.totalTalizadores.total += condomino.total
   }
 
-  atualizaTaxaUsoSalaoFestas(event, condomino: LeituraAguaValoresParams) {
-    this.totalTalizadores.usoSalaoFesta -= condomino.valorsalaofestas
-    this.totalTalizadores.total -= condomino.valorsalaofestas
+  atualizaTaxaUsoSalaoFestas(condomino: LeituraAguaValoresParams) {
+    this.totalTalizadores.usoSalaoFesta -= this.condominio.valorsalaofestas * condomino.qtdusosalao
+    this.totalTalizadores.total -= this.condominio.valorsalaofestas * condomino.qtdusosalao
 
     let index = this.condominos.indexOf(condomino)
-    this.condominos[index].valorsalaofestas = event.target.checked ? this.condominio.valorsalaofestas : 0
+    this.condominos[index].qtdusosalao = parseInt((document.getElementById("qtdusosalao_"+condomino.condomino) as HTMLInputElement).value) | 0
     this.atualizaTotal(condomino)
-    this.totalTalizadores.usoSalaoFesta += condomino.valorsalaofestas
-    this.totalTalizadores.total += condomino.valorsalaofestas
+    this.totalTalizadores.usoSalaoFesta += this.condominio.valorsalaofestas * condomino.qtdusosalao
+    this.totalTalizadores.total += this.condominio.valorsalaofestas * condomino.qtdusosalao
   }
 
-  atualizaTaxaLimpezaSalaoFestas(event, condomino: LeituraAguaValoresParams) {
-    this.totalTalizadores.limpezaSalaoFesta -= condomino.valorlimpezasalaofestas
-    this.totalTalizadores.total -= condomino.valorlimpezasalaofestas
+  atualizaTaxaLimpezaSalaoFestas(condomino: LeituraAguaValoresParams) {
+    this.totalTalizadores.limpezaSalaoFesta -= this.condominio.valorlimpezasalaofestas * condomino.qtdlimpezasalao
+    this.totalTalizadores.total -= this.condominio.valorlimpezasalaofestas * condomino.qtdlimpezasalao
 
     let index = this.condominos.indexOf(condomino)
-    this.condominos[index].valorlimpezasalaofestas = event.target.checked ? this.condominio.valorlimpezasalaofestas : 0
+    this.condominos[index].qtdlimpezasalao = parseInt((document.getElementById("qtdlimpezasalao_"+condomino.condomino) as HTMLInputElement).value) | 0
     this.atualizaTotal(condomino)
-    this.totalTalizadores.limpezaSalaoFesta += condomino.valorlimpezasalaofestas
-    this.totalTalizadores.total += condomino.valorlimpezasalaofestas
+    this.totalTalizadores.limpezaSalaoFesta += this.condominio.valorlimpezasalaofestas * condomino.qtdlimpezasalao
+    this.totalTalizadores.total += this.condominio.valorlimpezasalaofestas * condomino.qtdlimpezasalao
   }
 
-  atualizaTaxaMudanca(event, condomino: LeituraAguaValoresParams) {
-    this.totalTalizadores.taxaMudanca -= condomino.valormudanca
-    this.totalTalizadores.total -= condomino.valormudanca
+  atualizaTaxaMudanca(condomino: LeituraAguaValoresParams) {
+    this.totalTalizadores.taxaMudanca -= this.condominio.valormudanca * condomino.qtdmudanca
+    this.totalTalizadores.total -= this.condominio.valormudanca * condomino.qtdmudanca
 
     let index = this.condominos.indexOf(condomino)
-    this.condominos[index].valormudanca = event.target.checked ? this.condominio.valormudanca : 0
+    this.condominos[index].qtdmudanca = parseInt((document.getElementById("qtdmudanca_"+condomino.condomino) as HTMLInputElement).value) | 0
     this.atualizaTotal(condomino)
-    this.totalTalizadores.taxaMudanca += condomino.valormudanca
-    this.totalTalizadores.total += condomino.valormudanca
+    this.totalTalizadores.taxaMudanca += this.condominio.valormudanca * condomino.qtdmudanca
+    this.totalTalizadores.total += this.condominio.valormudanca * condomino.qtdmudanca
   }
 
   atualizaTotal(condomino: LeituraAguaValoresParams) {
     let index = this.condominos.indexOf(condomino)
     let condominio = this.condominos[index]
 
-    let total = (parseFloat(condomino.consumo.toString()) * condominio.valoragua) +
-                parseFloat(condominio.taxabasicaagua.toString()) + 
-                parseFloat(condominio.taxaboleto.toString()) +
-                condominio.valorcondominio + 
-                condominio.valorsalaofestas +
-                condominio.valorlimpezasalaofestas +
-                condominio.valormudanca
+    let total = (parseFloat(condomino.consumo.toString()) * this.condominio.valoragua) +
+                parseFloat(this.condominio.taxabasicaagua.toString()) + 
+                parseFloat(this.condominio.taxaboleto.toString()) +
+                condomino.valorcondominio + 
+                (this.condominio.valorsalaofestas * condomino.qtdusosalao) +
+                (this.condominio.valorlimpezasalaofestas * condomino.qtdlimpezasalao) +
+                (this.condominio.valormudanca * condomino.qtdmudanca)
 
     condominio.total = parseFloat((Math.round(total * 100) / 100).toFixed(2));
   }

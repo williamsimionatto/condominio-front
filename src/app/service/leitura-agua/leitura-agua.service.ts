@@ -22,21 +22,19 @@ export class LeituraAguaService extends Service {
   }
 
   public getValores(idLeitura: string, dataLeitura: string) {
-    return this.http.post<LeituraAguaValoresParams[]>(`${environment.apiUrl}/leituraagua/valores`, {
-      idLeitura,
-      dataLeitura
-    } , this.requestOptions);
+    return this.http.get<LeituraAguaValoresParams[]>(`${environment.apiUrl}/leituraagua/condominos?date=${dataLeitura}`, this.requestOptions);
   }
 
   public save(leituraAgua) {
-    return this.http.post<LeituraAguaValoresParams>(`${environment.apiUrl}/leituraagua/condomino/valores/store`, leituraAgua, this.requestOptions);
+    return this.http.post<LeituraAguaValoresParams>(`${environment.apiUrl}/leituraagua/condominos/valores`, leituraAgua, this.requestOptions);
+  }
+
+  public updateValores(id, leituraAgua) {
+    return this.http.put(`${environment.apiUrl}/leituraagua/condominos/valores/${id}`, leituraAgua, this.requestOptions);
   }
 
   public getValoresCondominos(idLeitura: string, dataLeitura: string) {
-    return this.http.post<LeituraAguaValoresParams[]>(`${environment.apiUrl}/leituraagua/condomino/valores`, {
-      idLeitura,
-      dataLeitura
-    } , this.requestOptions);
+    return this.http.get<LeituraAguaValoresParams[]>(`${environment.apiUrl}/leituraagua/condominos/valores?id=${idLeitura}&date=${dataLeitura}`, this.requestOptions);
   }
 
   public create(leituraAgua: LeituraAguaParams) {
