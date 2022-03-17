@@ -47,7 +47,9 @@ export class AddEditLeituraAguaComponent implements OnInit {
       datavencimento: this.formBuilder.control("", [Validators.required]),
     })
 
+
     this.getCondominios()
+
     if (!this.isAddMode) {
       this.leituraAguaService
         .getById(this.id)
@@ -93,9 +95,11 @@ export class AddEditLeituraAguaComponent implements OnInit {
       .update(this.leituraAguaForm.value)
       .pipe(first())
       .subscribe({
-        next: async () => {
-          this.notificationService.showSuccess("Leitura atualizada com sucesso", "Sucesso");
-          this.router.navigate(["/leituraagua"]);
+        next: async (ret: LeituraAguaParams) => {
+          this.condominos.update(ret.id).then(() => {
+            this.notificationService.showSuccess("Leitura atualizada com sucesso", "Sucesso");
+            this.router.navigate(["/leituraagua"]);
+          })
         },
         error: error => {
           this.notificationService.showError(error.error.message, "Erro");

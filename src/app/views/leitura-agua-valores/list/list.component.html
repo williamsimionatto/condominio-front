@@ -49,7 +49,7 @@
                                 />
                             </div>
                         </td>
-    
+
                         <td style="text-align: right">{{condomino.consumo}}</td>
     
                         <td style="text-align: right">{{condominio.valoragua | currency: 'BRL'}}</td>
@@ -59,21 +59,27 @@
                         <td style="text-align: right">{{condomino.valorcondominio | currency: 'BRL'}}</td>
     
                         <td style="text-align: center">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" [checked]="isChecked(condomino.valorsalaofestas)" (click)="atualizaTaxaUsoSalaoFestas($event, condomino)">
-                            </div>
+                            <input type="number" id="qtdusosalao_{{condomino.condomino}}" class="form-control"
+                                       autocomplete="off" value='{{condomino.qtdusosalao}}'
+                                       (change)="atualizaTaxaUsoSalaoFestas(condomino)" min="0"
+                                       style="width: 5rem"
+                            />
                         </td>
     
                         <td style="text-align: center">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" [checked]="isChecked(condomino.valorlimpezasalaofestas)" (click)="atualizaTaxaLimpezaSalaoFestas($event, condomino)">
-                            </div>
+                            <input type="number" id="qtdlimpezasalao_{{condomino.condomino}}" class="form-control"
+                                        autocomplete="off" value='{{condomino.qtdlimpezasalao}}'
+                                        (change)="atualizaTaxaLimpezaSalaoFestas(condomino)" min="0"
+                                        style="width: 5rem"
+                            />
                         </td>
     
                         <td style="text-align: center">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" [checked]="isChecked(condomino.taxamudanca)" (click)="atualizaTaxaMudanca($event, condomino)">
-                            </div>
+                            <input type="number" id="qtdmudanca_{{condomino.condomino}}" class="form-control"
+                                        autocomplete="off" value='{{condomino.qtdmudanca}}'
+                                        (change)="atualizaTaxaMudanca(condomino)" min="0"
+                                        style="width: 5rem"
+                            />
                         </td>
     
                         <td style="text-align: right">{{condomino.total | currency: 'BRL'}}</td>
