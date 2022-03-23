@@ -31,6 +31,7 @@ export class AddEditPerfilComponent implements OnInit {
     this.perfilForm = this.formBuilder.group({
       id: this.formBuilder.control(""),
       name: this.formBuilder.control("", [Validators.required, Validators.minLength(5)]),
+      sigla: this.formBuilder.control("", [Validators.required, Validators.maxLength(4)])
     })
 
     if (!this.isAddMode) {
