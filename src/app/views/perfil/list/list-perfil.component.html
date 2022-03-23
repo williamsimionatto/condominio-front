@@ -20,6 +20,7 @@
               <tr>
                 <th>Código</th>
                 <th>Nome</th>
+                <th>Sigla</th>
                 <th width="18%" style="text-align: center">Ações</th>
               </tr>
             </thead>
@@ -28,6 +29,7 @@
               <tr *ngFor="let perfil of perfis">
                 <td>{{ perfil.id }}</td>
                 <td>{{perfil.name}}</td>
+                <td>{{perfil.sigla}}</td>
                 <td style="text-align: center">
                   <a class="btn btn-dark btn-sm rounded-pill" routerLink="permissao/{{perfil.id}}" style="cursor: pointer;">
                     <i class="fa fa-lock"> Permissões </i>
