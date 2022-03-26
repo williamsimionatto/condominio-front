@@ -8,7 +8,7 @@
 					<div class="card-label"> Condomínio </div>
 
 					<div class="card-header-actions">
-						<a class="btn btn-primary rounded-pill" routerLink="add">
+						<a class="btn btn-primary rounded-pill" routerLink="add" *ngIf="hasPermission('inserir')">
 							<i class="fa fa-plus"></i> Novo Registro
 						</a>
 					</div>
