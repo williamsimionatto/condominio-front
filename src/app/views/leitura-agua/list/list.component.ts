@@ -4,6 +4,7 @@ import { LeituraAguaParams } from "../../../model/leitura-agua.model";
 import { ConfirmationDialogService } from "../../../service/confirmation-dialog/confirmation-dialog";
 import { LeituraAguaService } from "../../../service/leitura-agua/leitura-agua.service";
 import { NotificationService } from "../../../service/notification/notification.service";
+import { PermissionsService } from "../../../service/permissions/permissions.service";
 
 @Component({
   selector: 'app-list-leitura-agua',
@@ -12,17 +13,25 @@ import { NotificationService } from "../../../service/notification/notification.
 })
 export class ListLeituraAguaComponent implements OnInit {
   leituraAgua = null
+  permissions = null
 
   constructor(
     private leituraAguaService: LeituraAguaService,
     private notificationService: NotificationService,
-    private confirmationDialogService: ConfirmationDialogService
+    private confirmationDialogService: ConfirmationDialogService,
+    private permissionService: PermissionsService
   ) {}
 
   ngOnInit() {
     this.leituraAguaService.getAll().pipe(first()).subscribe(leituraAgua => {
       this.leituraAgua = leituraAgua
     })
+
+    this.permissions = this.permissionService.getPermissionsbySigla('TAR_LEITURAAGUA')
+  }
+
+  hasPermission(tipo: string): boolean {
+    return this.permissions[tipo] === 'S'
   }
 
   delete(leituraAguaParams: LeituraAguaParams) {

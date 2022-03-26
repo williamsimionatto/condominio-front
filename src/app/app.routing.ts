@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
 import { AuthGuardService as AuthGuard } from './service/auth/auth-guard.service';
+import { CanLoadService } from './service/can-load/can-load.service';
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
@@ -42,32 +43,38 @@ export const routes: Routes = [
       {
         path: 'condominio',
         loadChildren: () => import('./views/condominio/condominio.module').then(m => m.CondominioModule),
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        canLoad: [CanLoadService]
       },
       {
         path: 'dashboard',
         loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule),
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        canLoad: [CanLoadService]
       },
       {
         path: 'leituraagua',
         loadChildren: () => import('./views/leitura-agua/leitura-agua.module').then(m => m.LeituraAguaModule),
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        canLoad: [CanLoadService]
       },
       {
         path: 'perfil',
         loadChildren: () => import('./views/perfil/perfil.module').then(m => m.PerfilModule),
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        canLoad: [CanLoadService]
       },
       {
         path: 'permissao',
         loadChildren: () => import('./views/permissao/permissao.module').then(m => m.PermissaoModule),
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        canLoad: [CanLoadService]
       },
       {
         path: 'usuario',
         loadChildren: () => import('./views/user/user.module').then(m => m.UserModule),
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        canLoad: [CanLoadService]
       },
     ]
   },

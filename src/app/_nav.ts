@@ -1,4 +1,11 @@
 import { INavData } from '@coreui/angular';
+import { LocalStorageService } from './service';
+import { PermissionsService } from './service/permissions/permissions.service';
+
+function isDisabled(sigla: string) {
+  const permissionsService = new PermissionsService(new LocalStorageService());
+  return !permissionsService.hasPermission(sigla, 'consultar');
+}
 
 export const navItems: INavData[] = [
   {
@@ -14,22 +21,26 @@ export const navItems: INavData[] = [
       {
         name: 'Condomínio',
         url: '/condominio',
-        icon: 'fa fa-building'
+        icon: 'fa fa-building',
+        attributes: { disabled: isDisabled('CAD_CONDOMINIO') },
       },
       {
         name: 'Perfil',
         url: '/perfil',
-        icon: 'fa fa-user'
+        icon: 'fa fa-user',
+        attributes: { disabled: isDisabled('CAD_PERFIL') },
       },
       {
         name: 'Permissão',
         url: '/permissao',
-        icon: 'fa fa-lock'
+        icon: 'fa fa-lock',
+        attributes: { disabled: isDisabled('CAD_PERMISSAO') },
       },
       {
         name: 'Usuários',
         url: '/usuario',
-        icon: 'fa fa-users'
+        icon: 'fa fa-users',
+        attributes: { disabled: isDisabled('CAD_USUARIO') },
       }
     ]
   },

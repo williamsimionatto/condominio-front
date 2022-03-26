@@ -4,6 +4,7 @@ import { first } from 'rxjs/operators';
 import { UserService } from '../../../service';
 import { ConfirmationDialogService } from '../../../service/confirmation-dialog/confirmation-dialog';
 import { NotificationService } from '../../../service/notification/notification.service';
+import { PermissionsService } from '../../../service/permissions/permissions.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,18 +13,26 @@ import { NotificationService } from '../../../service/notification/notification.
 })
 export class ListUserComponent implements OnInit {
   users = null
+  permission = null
 
   constructor(
     private userService: UserService,
     private notificationService: NotificationService,
     private router: Router,
-    private confirmationDialogService: ConfirmationDialogService
+    private confirmationDialogService: ConfirmationDialogService,
+    private permissionService: PermissionsService
   ) {}
 
   ngOnInit(): void {
     this.userService.getAll().pipe(first()).subscribe(users => {
       this.users = users
     })
+
+    this.permission = this.permissionService.getPermissionsbySigla('CAD_USUARIO')
+  }
+
+  hasPermission(tipo: string): boolean {
+    return this.permission[tipo] === 'S'
   }
 
   delete(userParams) {

@@ -65,6 +65,7 @@ import { CondominiosModule } from './views/condominos/condominos.module';
 import { ModalDialogService } from './service/modal/modal-dialog.service';
 import { LeituraAguaModule } from './views/leitura-agua/leitura-agua.module';
 import { LeituraAguaValoresModule } from './views/leitura-agua-valores/leitura-agua-valores.module';
+import { CanLoadService } from './service/can-load/can-load.service';
 
 @NgModule({
   imports: [
@@ -112,6 +113,7 @@ import { LeituraAguaValoresModule } from './views/leitura-agua-valores/leitura-a
   ],
   providers: [
     AuthGuardService,
+    CanLoadService,
     Storage,
     { 
       provide: JWT_OPTIONS, 

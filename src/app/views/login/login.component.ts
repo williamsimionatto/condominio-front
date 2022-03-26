@@ -40,15 +40,15 @@ export class LoginComponent {
     this.loginService.login(this.loginForm.value).pipe(first()).subscribe({
       next: (data: any) => {
         data = data[0]
-        this.notifyService.showSuccess('Login realizado com sucesso', 'Sucesso');
         this.localStorageService.setItem('token', data.access_token);
         this.localStorageService.setItem('username', data.user.name);
+        this.localStorageService.setItem('permissions', JSON.stringify(data.permissions));
 
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/']);
       },
       error: (error: Error) => {
         this.loading = false
-        this.notifyService.showError('Usuário e/ou senha Incorretos', 'Erro');
+        this.notifyService.showError('Usuário ou senha Incorretos', 'Erro');
       }
     })
   }
