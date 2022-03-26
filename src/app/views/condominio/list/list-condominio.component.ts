@@ -4,6 +4,7 @@ import { CondominioParams } from "../../../model/condominio.model";
 import { CondominioService } from "../../../service/condominio/condominio.service";
 import { ConfirmationDialogService } from "../../../service/confirmation-dialog/confirmation-dialog";
 import { NotificationService } from "../../../service/notification/notification.service";
+import { PermissionsService } from "../../../service/permissions/permissions.service";
 
 @Component({
   selector: "app-list-condominio",
@@ -12,17 +13,25 @@ import { NotificationService } from "../../../service/notification/notification.
 })
 export class ListCondominioComponent implements OnInit {
   condominios = null
+  permissions = null
 
   constructor(
     private condominioService: CondominioService,
     private notificationService: NotificationService,
-    private confirmationDialogService: ConfirmationDialogService
+    private confirmationDialogService: ConfirmationDialogService,
+    private permissionService: PermissionsService
   ) {}
 
   ngOnInit() {
     this.condominioService.getAll().pipe(first()).subscribe(condominios => {
       this.condominios = condominios
     })
+
+    this.permissions = this.permissionService.getPermissionsbySigla('CAD_CONDOMINIO')
+  }
+
+  hasPermission(tipo: string): boolean {
+    return this.permissions[tipo] === 'S'
   }
 
   delete(condominioParams: CondominioParams) {

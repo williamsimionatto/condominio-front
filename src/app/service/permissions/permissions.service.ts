@@ -16,4 +16,13 @@ export class PermissionsService {
     const permission = permissions.filter(x => x.sigla === sigla)[0];
     return permission[tipo] === 'S';
   }
+
+  getPermissionsbySigla(sigla: string): any {
+    const permissions = JSON.parse(this.localStorageService.getItem("permissions"));
+    if (!permissions) {
+      return null;
+    }
+
+    return permissions.filter(x => x.sigla === sigla)[0];
+  }
 }

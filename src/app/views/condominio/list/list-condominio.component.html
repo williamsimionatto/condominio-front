@@ -31,13 +31,13 @@
 								<th width="10%" style="text-align: center">Ações</th>
 							</tr>
 						</thead>
-	
+
 						<tbody>
 							<tr *ngFor="let condominio of condominios" style="text-align: center">
 								<td>{{ condominio.id }}</td>
 								<td>{{ condominio.name }}</td>
 								<td>{{ condominio.cnpj }}</td>
-	
+
 								<td>{{ condominio.condominio2quartos | currency: 'BRL'}}</td>
 								<td>{{ condominio.condominio3quartos | currency: 'BRL'}}</td>
 								<td>{{ condominio.condominiosalacomercial | currency: 'BRL'}}</td>
@@ -45,17 +45,17 @@
 								<td>{{ condominio.valorsalaofestas | currency: 'BRL'}}</td>
 								<td>{{ condominio.valorlimpezasalaofestas | currency: 'BRL'}}</td>
 								<td>{{ condominio.valormudanca | currency: 'BRL'}}</td>
-	
+
 								<td style="cursor: pointer;">
-									<a class="btn btn-success btn-sm rounded-pill" routerLink="overview/{{condominio.id}}" >
+									<a class="btn btn-success btn-sm rounded-pill" routerLink="overview/{{condominio.id}}" *ngIf="hasPermission('consultar')">
 										<i class="fa fa-search"></i>
 									</a>
-	
-									<a class="btn btn-primary btn-sm rounded-pill" routerLink="edit/{{condominio.id}}">
+
+									<a class="btn btn-primary btn-sm rounded-pill" routerLink="edit/{{condominio.id}}" *ngIf="hasPermission('alterar')">
 										<i class="fa fa-pencil"></i>
 									</a>
-					
-									<a class="btn btn-danger btn-sm rounded-pill" (click)="delete(condominio)">
+
+									<a class="btn btn-danger btn-sm rounded-pill" (click)="delete(condominio)" *ngIf="hasPermission('excluir')">
 										<i class="fa fa-trash"></i>
 									</a>
 								</td>
