@@ -32,7 +32,7 @@
                 <td>{{ permissao.sigla }}</td>
 
                 <td style="text-align: center">
-                  <a class="btn btn-success btn-sm rounded-pill" routerLink="overview/{{permissao.id}}" style="cursor: pointer;">
+                  <a class="btn btn-success btn-sm rounded-pill" routerLink="overview/{{permissao.id}}" style="cursor: pointer;" *ngIf="hasPermission('consultar')">
                     <i class="fa fa-search"></i>
                   </a>
                 </td>

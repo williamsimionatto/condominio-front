@@ -3,6 +3,7 @@ import { first } from "rxjs/operators";
 import { ConfirmationDialogService } from "../../../service/confirmation-dialog/confirmation-dialog";
 import { NotificationService } from "../../../service/notification/notification.service";
 import { PermissaoService } from "../../../service/permissao/permissao.service";
+import { PermissionsService } from "../../../service/permissions/permissions.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -11,18 +12,26 @@ import { PermissaoService } from "../../../service/permissao/permissao.service";
 })
 export class ListPermissaoComponent implements OnInit {
   permissoes = null
+  permission = null
 
   constructor(
     private permissaoService: PermissaoService,
     private notificationService: NotificationService,
-    private confirmationDialogService: ConfirmationDialogService
+    private confirmationDialogService: ConfirmationDialogService,
+    private permissionService: PermissionsService
   ) {}
 
   ngOnInit() {
     this.permissaoService.getAll().pipe(first()).subscribe(permissoes => {
       this.permissoes = permissoes
     })
-  }
+    
+    this.permission = this.permissionService.getPermissionsbySigla('CAD_PERMISSAO')
+  } 
+ 
+  hasPermission(tipo: string): boolean {
+    return this.permission[tipo] === 'S'
+  }	
 
   delete(permissaoParams) {
     this.confirmationDialogService.confirm('Excluir Permissão', 'Deseja realmente excluir esta permissão? Esta ação não poderá ser desfeita.', 'Excluir', 'Cancelar', "lg")
