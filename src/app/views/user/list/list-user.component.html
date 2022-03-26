@@ -32,20 +32,21 @@
               <td>{{user.email}}</td>
               <td>{{user.perfilName}}</td>
               <td>{{user.active == 'S' ? 'Sim' : 'Não'}}</td>
+
               <td style="text-align: center">
                 <a class="btn btn-dark btn-sm rounded-pill" routerLink="password/{{user.id}}" style="cursor: pointer;">
                   <i class="fa fa-key"> Alterar Senha</i>
                 </a>
 
-                <a class="btn btn-success btn-sm rounded-pill" routerLink="overview/{{user.id}}" style="cursor: pointer;">
+                <a class="btn btn-success btn-sm rounded-pill" routerLink="overview/{{user.id}}" style="cursor: pointer;" *ngIf="hasPermission('consultar')">
                   <i class="fa fa-search"></i>
                 </a>
 
-                <a class="btn btn-primary btn-sm rounded-pill" routerLink="edit/{{user.id}}" style="cursor: pointer;">
+                <a class="btn btn-primary btn-sm rounded-pill" routerLink="edit/{{user.id}}" style="cursor: pointer;" *ngIf="hasPermission('alterar')">
                   <i class="fa fa-pencil"></i>
                 </a>
 
-                <a class="btn btn-danger btn-sm rounded-pill" (click)="delete(user)" style="cursor: pointer;">
+                <a class="btn btn-danger btn-sm rounded-pill" (click)="delete(user)" style="cursor: pointer;" *ngIf="hasPermission('exlcuir')">
                   <i class="fa fa-trash"></i>
                 </a>
               </td>
