@@ -52,6 +52,7 @@ export class PermissaoComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     this.loading = true;
+
     let data: any = {}
     this.permissoesPerfil.forEach((x, index)=> {
       data[index] = {
@@ -99,6 +100,11 @@ export class PermissaoComponent implements OnInit {
     this.permissoesPerfil.forEach(x => {
       x[tipo] = event.target.checked ? 'S' : 'N'
     })
+  }
+
+  changePermission(event, permission: PerfilPermissaoParams, tipo: string) {
+    let permissao = this.permissoesPerfil.find(x => x.id == permission.id)
+    permissao[tipo] = event.target.checked ? 'S' : 'N'
   }
 
   setNomePerfil(id: string) {
