@@ -14,8 +14,4 @@ export class CardHeaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  onAddClick() {
-    this.router.navigateByUrl(this.addUrl);
-  }
 }

@@ -5,11 +5,7 @@
 		<div class="col">
 			<div class="card">
 				<app-card-header title="Condomínio" *ngIf="hasPermission('inserir')">
-					<div class="card-header-actions">
-						<a class="btn btn-primary rounded-pill btnCadastrar" routerLink="add">
-							<i class="fa fa-plus"></i> Novo Registro
-						</a>
-					</div>
+					<app-card-header-actions></app-card-header-actions>
 				</app-card-header>
 
 				<div class="card-body table-responsive">
