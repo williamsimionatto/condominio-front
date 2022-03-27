@@ -41,22 +41,24 @@
 }
 
 .btnCadastrar {
-font-weight: bold;
+    font-weight: bold;
+    color: #fff !important;
+    cursor: pointer;
 }
 
 .card-label {
-font-weight: bold;
-display: inline-block;
-margin-top: 0.50rem;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 0.50rem;
 }
 
 .form-footer, .form-buttons {
-text-align: initial;
-display: flex;
-justify-content: flex-end;
-margin-top: 0;
+    text-align: initial;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0;
 }
 
 .btnVoltar {
-margin-right: 0.5rem;
+    margin-right: 0.5rem;
 }
