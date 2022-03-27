@@ -4,15 +4,13 @@
 	<div class="row">
 		<div class="col">
 			<div class="card">
-				<div class="card-header">
-					<div class="card-label"> Condomínio </div>
-
+				<app-card-header title="Condomínio" *ngIf="hasPermission('inserir')">
 					<div class="card-header-actions">
-						<a class="btn btn-primary rounded-pill" routerLink="add" *ngIf="hasPermission('inserir')">
+						<a class="btn btn-primary rounded-pill btnCadastrar" routerLink="add">
 							<i class="fa fa-plus"></i> Novo Registro
 						</a>
 					</div>
-				</div>
+				</app-card-header>
 
 				<div class="card-body table-responsive">
 					<table class="table table-striped border datatable">
