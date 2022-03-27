@@ -28,8 +28,10 @@ export class DetailCondominosComponent implements OnInit {
     private modalDialogService: ModalDialogService
   ) { }
 
-  ngOnInit() { 
-    this.getCondominos();
+  ngOnInit() {
+    if (this.condominioId) {
+      this.getCondominos();
+    }
   }
 
   private getCondominos() {
