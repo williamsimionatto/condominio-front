@@ -60,12 +60,6 @@ export const navItems: INavData[] = [
     name: 'Relatórios',
     url: '/relatorio',
     icon: 'fa fa-search',
-    children: [
-      {
-        name: 'Dashboard',
-        url: '/dashboard',
-        icon: 'icon-speedometer'
-      }
-    ]
+    children: []
   }
 ];

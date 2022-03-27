@@ -47,12 +47,6 @@ export const routes: Routes = [
         canLoad: [CanLoadService]
       },
       {
-        path: 'dashboard',
-        loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule),
-        canActivate: [AuthGuard],
-        canLoad: [CanLoadService]
-      },
-      {
         path: 'leituraagua',
         loadChildren: () => import('./views/leitura-agua/leitura-agua.module').then(m => m.LeituraAguaModule),
         canActivate: [AuthGuard],
