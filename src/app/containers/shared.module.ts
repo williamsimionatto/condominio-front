@@ -1,12 +1,30 @@
 import { CommonModule } from "@angular/common";
 import { ModuleWithProviders, NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
+import { CardHeaderActionsComponent } from "./card-header-actions/card-header-actions.component";
+import { CardHeaderComponent } from "./card-header/card-header.component";
 import { InputComponent } from "./input";
 
 @NgModule({
-  declarations: [InputComponent],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
-  exports: [InputComponent, CommonModule, FormsModule, ReactiveFormsModule ],
+  declarations: [
+    InputComponent,
+    CardHeaderComponent,
+    CardHeaderActionsComponent
+  ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  exports: [
+    InputComponent,
+    CardHeaderComponent,
+    CardHeaderActionsComponent,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule ],
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders<SharedModule> {
