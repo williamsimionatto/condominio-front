@@ -3,9 +3,7 @@ import { first } from "rxjs/operators";
 import { CondominioParams } from "../../../model/condominio.model";
 import { LeituraAguaValoresParams } from "../../../model/leitura-agua-valores.model";
 import { CondominioService } from "../../../service/condominio/condominio.service";
-import { ConfirmationDialogService } from "../../../service/confirmation-dialog/confirmation-dialog";
 import { LeituraAguaService } from "../../../service/leitura-agua/leitura-agua.service";
-import { NotificationService } from "../../../service/notification/notification.service";
 
 type Totalizadores = {
   consumo: number;
@@ -41,20 +39,18 @@ export class ListLeituraAguaValoresComponent implements OnInit {
   }
 
   constructor(
-    private notificationService: NotificationService,
-    private confirmationDialogService: ConfirmationDialogService,
     private condominioService: CondominioService,
     private leituraAguaService: LeituraAguaService
   ) {}
 
   ngOnInit() {
-    this.getCondominio(this.condominioId)
-
-    if (this.idLeitura == undefined) {
-      this.getValores()
-    } else {
-      this.getValoresCondominos()
-    }
+    this.getCondominio(this.condominioId).then(() => {
+      if (this.idLeitura == undefined) {
+        this.getValores()
+      } else {
+        this.getValoresCondominos()
+      }
+    })
   }
 
   public async submit(idLeitura: string) {
@@ -120,8 +116,8 @@ export class ListLeituraAguaValoresComponent implements OnInit {
     })
   }
 
-  async getCondominio(id: string) {
-    this.condominioService.getById(id).pipe(first()).subscribe(condominio => {
+  async getCondominio(id: string): Promise<void> {
+    await this.condominioService.getById(id).toPromise().then(condominio => {
       this.condominio = condominio
     })
   }
