@@ -4,8 +4,8 @@
 	<div class="row">
 		<div class="col">
 			<div class="card">
-				<app-card-header title="Condomínio" *ngIf="hasPermission('inserir')">
-					<app-card-header-actions></app-card-header-actions>
+				<app-card-header title="Condomínio" >
+					<app-card-header-actions *ngIf="hasPermission('inserir')"></app-card-header-actions>
 				</app-card-header>
 
 				<div class="card-body table-responsive">
