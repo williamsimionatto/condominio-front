@@ -5,6 +5,7 @@ import { NgSelectModule } from "@ng-select/ng-select";
 import { ButtonsModule } from "ngx-bootstrap/buttons";
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 import { SharedModule } from "../../containers/shared.module";
+import { LegendaValoresComponent } from "./legenda-valores/legenda-valores.component";
 import { LeituraAguaValoresRoutingModule } from "./leitura-agua-valroes-routing.module";
 import { ListLeituraAguaValoresComponent } from "./list/list.component";
 
@@ -19,10 +20,12 @@ import { ListLeituraAguaValoresComponent } from "./list/list.component";
     NgSelectModule,
   ],
   declarations: [
-    ListLeituraAguaValoresComponent
+    ListLeituraAguaValoresComponent,
+    LegendaValoresComponent
   ],
   exports: [
-    ListLeituraAguaValoresComponent
+    ListLeituraAguaValoresComponent,
+    LegendaValoresComponent
   ]
 })
 export class LeituraAguaValoresModule {}

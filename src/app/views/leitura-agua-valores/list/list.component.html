@@ -1,28 +1,6 @@
 <div class="mestreDetalhe">
-    <div class="row" style="width: 75%; margin-left: 0px;" *ngIf="condominio"> 
-        <div class="alert alert-info  fade show" role="alert"  >
-            <ul style="columns: 2; -webkit-columns: 2; -moz-columns: 2;">
-                <li style="list-style-type: disclosure-closed;">
-                    <b>Valor boleto:</b> {{condominio.taxaboleto | currency: 'BRL'}}
-                </li>
-                <li style="list-style-type: disclosure-closed;">
-                    <b>Valor Água:</b> {{condominio.valoragua | currency: 'BRL'}}
-                </li>
-                <li style="list-style-type: disclosure-closed;">
-                    <b>Taxa Básica:</b> {{condominio.taxabasicaagua | currency: 'BRL'}}
-                </li>
-                <li style="list-style-type: disclosure-closed;">
-                    <b>Valor Uso Salão de Festas:</b> {{condominio.valorsalaofestas | currency: 'BRL'}}
-                </li>
-                <li style="list-style-type: disclosure-closed;">
-                    <b>Valor Limpeza Salão de Festas:</b> {{condominio.valorlimpezasalaofestas | currency: 'BRL'}}
-                </li>
-                <li style="list-style-type: disclosure-closed;">
-                    <b>Valor Mudança:</b> {{condominio.valormudanca | currency: 'BRL'}}
-                </li>
-            </ul>
-        </div>
-    </div>
+    <app-legenda-valores *ngIf="condominio" [condominio]="condominio">
+    </app-legenda-valores>
 
     <div class="mestreDetalhe-content">
         <div class="mestreDetalhe-header">
