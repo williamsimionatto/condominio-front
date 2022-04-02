@@ -1,0 +1,10 @@
+.columns {
+    columns: 2; 
+    -webkit-columns: 2; 
+    -moz-columns: 2;
+    margin-left: -30px;
+}
+
+li {
+    list-style-type: disclosure-closed !important;
+}

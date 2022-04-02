@@ -1,0 +1,24 @@
+<div class="row" style="width: 75%; margin-left: 0px;"> 
+    <div class="alert alert-info  fade show" role="alert"  >
+        <ul class="columns">
+            <li>
+                <b>Valor boleto:</b> {{condominio.taxaboleto | currency: 'BRL'}}
+            </li>
+            <li>
+                <b>Valor Água:</b> {{condominio.valoragua | currency: 'BRL'}}
+            </li>
+            <li>
+                <b>Taxa Básica:</b> {{condominio.taxabasicaagua | currency: 'BRL'}}
+            </li>
+            <li>
+                <b>Valor Uso Salão de Festas:</b> {{condominio.valorsalaofestas | currency: 'BRL'}}
+            </li>
+            <li>
+                <b>Valor Limpeza Salão de Festas:</b> {{condominio.valorlimpezasalaofestas | currency: 'BRL'}}
+            </li>
+            <li>
+                <b>Valor Mudança:</b> {{condominio.valormudanca | currency: 'BRL'}}
+            </li>
+        </ul>
+    </div>
+</div>
