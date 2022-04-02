@@ -14,31 +14,3 @@ npm start
 # 
 
 Consome API REST: https://github.com/williamsimionatto/laravel-api
-
-#
-## Login e autenticação
-<img src="./img/login.png" width="350" title="Login">
-
-#
-## Cadastro de Usuários
-* Listagem de usuários já cadastrados
-
-    <img src="./img/cadastro.png" title="Cadastro">
-* Cadastrar novo usuário
-
-    <img src="./img/cadastro_novo_usuario.png"  title="Cadastro de usuário">
-
-* Alterar Senha de um Usuário
-
-    <img src="./img/alterar_senha.png"  title="Alterar senha">
-
-* Editar Usuário
-
-    <img src="./img/edicao_usuario.png"  title="Editar usuário">
-
-* Excluir Usuário
-
-    <img src="./img/exclusao_usuario.png"  title="Excluir usuário"> 
-
-# 
-Template By: https://coreui.io/angular/
