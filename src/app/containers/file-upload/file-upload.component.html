@@ -1,0 +1,13 @@
+<input type="file" class="file-input" 
+        [accept]="requiredFileType"
+        (change)="onFileSelected($event)" #fileUpload>
+
+<div class="file-upload">
+    {{fileName || "Nenhum arquivo selecionado."}}
+
+    <button type="button" class="upload-btn btn btn-primary btn-sm rounded-pill" (click)="fileUpload.click()">
+        <i class="fa fa-paperclip"></i>
+    </button>
+</div>
+
+<!-- <ngb-progressbar [showValue]="true" type="success" [value]="25"></ngb-progressbar> -->

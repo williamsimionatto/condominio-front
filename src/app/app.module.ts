@@ -66,6 +66,7 @@ import { ModalDialogService } from './service/modal/modal-dialog.service';
 import { LeituraAguaModule } from './views/leitura-agua/leitura-agua.module';
 import { LeituraAguaValoresModule } from './views/leitura-agua-valores/leitura-agua-valores.module';
 import { CanLoadService } from './service/can-load/can-load.service';
+import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -102,6 +103,7 @@ import { CanLoadService } from './service/can-load/can-load.service';
     ToastrModule.forRoot(),
     SharedModule.forRoot(),
     NgSelectModule,
+    NgbProgressbarModule
   ],
   declarations: [
     AppComponent,
