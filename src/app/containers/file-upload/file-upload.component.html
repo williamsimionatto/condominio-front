@@ -3,11 +3,16 @@
         (change)="onFileSelected($event)" #fileUpload>
 
 <div class="file-upload">
-    {{fileName || "Nenhum arquivo selecionado."}}
-
     <button type="button" class="upload-btn btn btn-primary btn-sm rounded-pill" (click)="fileUpload.click()">
         <i class="fa fa-paperclip"></i>
     </button>
-</div>
 
-<!-- <ngb-progressbar [showValue]="true" type="success" [value]="25"></ngb-progressbar> -->
+    <span class="file-name" *ngIf="fileName">
+        <p>
+            <a (click)="downloadFile(fileId)">{{fileName}}</a>
+            <a class="btn btn-danger btn-sm rounded-pill" (click)="deleteFile(fileId)">
+                <i class="fa fa-trash"></i>
+            </a>
+        </p>
+    </span>
+</div>

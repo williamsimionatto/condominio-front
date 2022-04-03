@@ -15,16 +15,20 @@ export class FileUploadComponent {
   requiredFileType: string;
   @Input()
   condomino: CondominoParams
+  @Input()
+  fileId: number;
 
   fileName: string = '';
   uploadProgress: number;
   uploadSub: Subscription;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+
+  }
 
   onFileSelected(event) {
     const file: File = event.target.files[0];
-    console.log(file)
+
     if (file) {
       this.fileName = file.name;
     //     const formData = new FormData();
@@ -37,22 +41,14 @@ export class FileUploadComponent {
     //     .pipe(
     //         finalize(() => this.reset())
     //     );
-      
-    //     this.uploadSub = upload$.subscribe(event => {
-    //       if (event.type == HttpEventType.UploadProgress) {
-    //         this.uploadProgress = Math.round(100 * (event.loaded / event.total));
-    //       }
-    //     })
     }
   }
 
-  cancelUpload() {
-    this.uploadSub.unsubscribe();
-    this.reset();
+  downloadFile(fileId: number) {
+    console.log('downloadFile', fileId);
   }
 
-  reset() {
-    this.uploadProgress = null;
-    this.uploadSub = null;
+  deleteFile(fileId: number) {
+    console.log('deleteFile', fileId);
   }
 }
