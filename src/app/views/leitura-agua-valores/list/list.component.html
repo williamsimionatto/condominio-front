@@ -81,7 +81,7 @@
                         <td style="text-align: right">{{condomino.total | currency: 'BRL'}}</td>
 
                         <td style="text-align: center" *ngIf="!isAddMode">
-                            <file-upload [condomino]="condomino" fileId=""></file-upload>
+                            <file-upload [condomino]="condomino" fileId="" [leituraId]="condomino.leituraagua"></file-upload>
                         </td>
                     </tr>
                 </tbody>

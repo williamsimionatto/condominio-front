@@ -1,9 +1,7 @@
 import { HttpClient, HttpEventType } from "@angular/common/http";
 import { Component, Input } from "@angular/core";
 import { Subscription } from "rxjs";
-import { finalize } from "rxjs/operators";
-import { CondominoParams } from "../../model/condomino.model";
-
+import { LeituraAguaValoresParams } from "../../model/leitura-agua-valores.model";
 @Component({
   selector: 'file-upload',
   templateUrl: "file-upload.component.html",
@@ -11,12 +9,10 @@ import { CondominoParams } from "../../model/condomino.model";
 })
 export class FileUploadComponent {
 
-  @Input()
-  requiredFileType: string;
-  @Input()
-  condomino: CondominoParams
-  @Input()
-  fileId: number;
+  @Input() requiredFileType: string;
+  @Input() condomino: LeituraAguaValoresParams
+  @Input() fileId: number;
+  @Input() leituraId: number;
 
   fileName: string = '';
   uploadProgress: number;
@@ -31,16 +27,10 @@ export class FileUploadComponent {
 
     if (file) {
       this.fileName = file.name;
-    //     const formData = new FormData();
-    //     formData.append("thumbnail", file);
-
-    //     const upload$ = this.http.post("/api/thumbnail-upload", formData, {
-    //         reportProgress: true,
-    //         observe: 'events'
-    //     })
-    //     .pipe(
-    //         finalize(() => this.reset())
-    //     );
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("leituraId", this.leituraId.toString());
+      formData.append("condominoId", this.condomino.condominoId.toString());
     }
   }
 
