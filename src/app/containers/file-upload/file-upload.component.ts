@@ -1,7 +1,9 @@
 import { HttpClient, HttpEventType } from "@angular/common/http";
 import { Component, Input } from "@angular/core";
 import { Subscription } from "rxjs";
+import { first } from "rxjs/operators";
 import { LeituraAguaValoresParams } from "../../model/leitura-agua-valores.model";
+import { LocalStorageService } from "../../service";
 @Component({
   selector: 'file-upload',
   templateUrl: "file-upload.component.html",
@@ -17,7 +19,7 @@ export class FileUploadComponent {
   fileName: string = '';
   uploadProgress: number;
   uploadSub: Subscription;
-
+  private localStorageService: LocalStorageService =  new LocalStorageService()
   constructor(private http: HttpClient) {
 
   }
@@ -35,7 +37,23 @@ export class FileUploadComponent {
   }
 
   downloadFile(fileId: number) {
-    console.log('downloadFile', fileId);
+    this.http.get(`http://127.0.0.1:8000/api/leituraagua/condominos/${this.condomino.leituraagua}/boleto`, {
+      headers: {
+        'Authorization': 'Bearer ' + this.localStorageService.getItem('token')
+      },
+      responseType: 'blob'
+    }).pipe(first()).subscribe(
+        (response: any) =>{
+          let dataType = response.type;
+          let binaryData = [];
+          binaryData.push(response);
+          let downloadLink = document.createElement('a');
+          downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+          downloadLink.setAttribute('download', 'boleto.pdf');
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+      }
+    );
   }
 
   deleteFile(fileId: number) {
