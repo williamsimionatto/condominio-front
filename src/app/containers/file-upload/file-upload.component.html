@@ -9,8 +9,8 @@
 
     <span class="file-name" *ngIf="fileName">
         <p>
-            <a (click)="downloadFile(fileId)">{{fileName}}</a>
-            <a class="btn btn-danger btn-sm rounded-pill" (click)="deleteFile(fileId)">
+            <a (click)="downloadFile()">{{fileName}}</a>
+            <a class="btn btn-danger btn-sm rounded-pill" (click)="deleteFile()">
                 <i class="fa fa-trash"></i>
             </a>
         </p>

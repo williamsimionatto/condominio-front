@@ -4,6 +4,7 @@ import { Subscription } from "rxjs";
 import { first } from "rxjs/operators";
 import { LeituraAguaValoresParams } from "../../model/leitura-agua-valores.model";
 import { LocalStorageService } from "../../service";
+import { FileDownloadService } from "../../service/file-download/file-download.service";
 @Component({
   selector: 'file-upload',
   templateUrl: "file-upload.component.html",
@@ -19,8 +20,8 @@ export class FileUploadComponent {
   fileName: string = '';
   uploadProgress: number;
   uploadSub: Subscription;
-  private localStorageService: LocalStorageService =  new LocalStorageService()
-  constructor(private http: HttpClient) {
+
+  constructor(private fileService: FileDownloadService) {
 
   }
 
@@ -36,13 +37,8 @@ export class FileUploadComponent {
     }
   }
 
-  downloadFile(fileId: number) {
-    this.http.get(`http://127.0.0.1:8000/api/leituraagua/condominos/${this.condomino.leituraagua}/boleto`, {
-      headers: {
-        'Authorization': 'Bearer ' + this.localStorageService.getItem('token')
-      },
-      responseType: 'blob'
-    }).pipe(first()).subscribe(
+  downloadFile() {
+    this.fileService.getById(this.condomino.leituraagua).pipe(first()).subscribe(
         (response: any) =>{
           let dataType = response.type;
           let binaryData = [];
@@ -56,7 +52,6 @@ export class FileUploadComponent {
     );
   }
 
-  deleteFile(fileId: number) {
-    console.log('deleteFile', fileId);
+  deleteFile() {
   }
 }
