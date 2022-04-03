@@ -38,7 +38,11 @@
                             </div>
                         </div>
 
-                        <app-list-leitura-agua-valores [condominioId]="this.getCondominio()" [idLeitura]="this.id" [dataLeitura]="this.getDataLeitura()" *ngIf="this.isValidDataLeitura()">
+                        <app-list-leitura-agua-valores [condominioId]="this.getCondominio()"
+                                                       [idLeitura]="this.id" 
+                                                       [dataLeitura]="this.getDataLeitura()" 
+                                                       [isAddMode]="isAddMode"
+                                                       *ngIf="this.isValidDataLeitura()">
 
                         </app-list-leitura-agua-valores>
 

@@ -26,6 +26,7 @@ export class ListLeituraAguaValoresComponent implements OnInit {
   @Input() condominioId: string
   @Input() dataLeitura: string
   @Input() idLeitura: string
+  @Input() isAddMode: boolean = false
 
   condominos: LeituraAguaValoresParams[] = []
   condominio: CondominioParams = null
