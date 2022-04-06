@@ -1,0 +1,18 @@
+<input type="file" class="file-input" 
+        [accept]="requiredFileType"
+        (change)="onFileSelected($event)" #fileUpload>
+
+<div class="file-upload">
+    <button type="button" class="upload-btn btn btn-primary btn-sm rounded-pill" (click)="fileUpload.click()">
+        <i class="fa fa-paperclip"></i>
+    </button>
+
+    <span class="file-name" *ngIf="(condomino.fileName || condomino.fileId)">
+        <p>
+            <a (click)="downloadFile()" title="Clique aqui para baixar o arquivo">{{condomino.fileName}}</a>
+            <a class="btn btn-danger btn-sm rounded-pill" (click)="deleteFile()">
+                <i class="fa fa-trash"></i>
+            </a>
+        </p>
+    </span>
+</div>

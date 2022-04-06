@@ -15,6 +15,6 @@ export default class Service {
   }
 
   public requestOptions = {                                                                                                                                                                                 
-    headers: new HttpHeaders(this.headerDict)
+    headers: new HttpHeaders(this.headerDict),
   }
 }
