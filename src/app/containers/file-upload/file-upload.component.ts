@@ -46,12 +46,13 @@ export class FileUploadComponent {
   downloadFile() {
     this.fileService.getById(this.condomino.leituraagua).pipe(first()).subscribe(
         (response: any) =>{
+          console.log(response)
           let dataType = response.type;
           let binaryData = [];
           binaryData.push(response);
           let downloadLink = document.createElement('a');
           downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
-          downloadLink.setAttribute('download', 'boleto.pdf');
+          downloadLink.setAttribute('download', this.condomino.fileName);
           document.body.appendChild(downloadLink);
           downloadLink.click();
       }
