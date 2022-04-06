@@ -35,4 +35,12 @@ export class FileDownloadService {
       }
     });
   }
+
+  public delete(id: string) {
+    return this.http.delete(`${environment.apiUrl}/leituraagua/condominos/${id}/boleto`, {
+      headers: {
+        'Authorization': 'Bearer ' + this.localStorageService.getItem('token')
+      }
+    });
+  }
 }

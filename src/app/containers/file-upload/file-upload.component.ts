@@ -59,5 +59,12 @@ export class FileUploadComponent {
   }
 
   deleteFile() {
+    this.fileService.delete(this.condomino.leituraagua.toString()).pipe(first()).subscribe(
+      (response: any) => {
+        this.notificationService.showSuccess(response.message, "Sucesso");
+        this.condomino.fileName = '';
+        this.condomino.fileId = null;
+      }
+    );
   }
 }
