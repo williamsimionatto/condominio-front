@@ -11,28 +11,22 @@ import { FileDownloadService } from "../../service/file-download/file-download.s
   styleUrls: ["file-upload.component.scss"]
 })
 export class FileUploadComponent {
-
-  @Input() requiredFileType: string;
   @Input() condomino: LeituraAguaValoresParams
-  @Input() fileId: number;
-  @Input() leituraId: number;
 
   fileName: string = '';
   uploadProgress: number;
   uploadSub: Subscription;
 
   constructor(private fileService: FileDownloadService) {
-
   }
 
   onFileSelected(event) {
     const file: File = event.target.files[0];
-
     if (file) {
-      this.fileName = file.name;
+      this.condomino.fileName = file.name;
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("leituraId", this.leituraId.toString());
+      formData.append("leituraId", this.condomino.leituraagua.toString());
       formData.append("condominoId", this.condomino.condominoId.toString());
     }
   }

@@ -110,6 +110,7 @@ export class ListLeituraAguaValoresComponent implements OnInit {
       this.condominos = valores
 
       this.condominos.forEach(condomino => {
+        console.log(condomino.fileId)
         condomino.consumo = parseFloat(condomino.consumo.toString())
         this.atualizaTotal(condomino)
         this.atualizaTotalizadores(condomino)

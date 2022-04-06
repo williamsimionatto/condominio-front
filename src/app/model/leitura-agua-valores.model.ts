@@ -11,4 +11,6 @@ export type LeituraAguaValoresParams = {
   qtdlimpezasalao: number
   qtdmudanca: number
   total: number
+  fileId?: number | null
+  fileName?: string | null
 }

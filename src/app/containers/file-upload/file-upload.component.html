@@ -7,9 +7,9 @@
         <i class="fa fa-paperclip"></i>
     </button>
 
-    <span class="file-name" *ngIf="fileName">
+    <span class="file-name" *ngIf="(condomino.fileName || condomino.fileId)">
         <p>
-            <a (click)="downloadFile()">{{fileName}}</a>
+            <a (click)="downloadFile()">{{condomino.fileName}}</a>
             <a class="btn btn-danger btn-sm rounded-pill" (click)="deleteFile()">
                 <i class="fa fa-trash"></i>
             </a>
