@@ -5,6 +5,7 @@ import { first } from "rxjs/operators";
 import { LeituraAguaValoresParams } from "../../model/leitura-agua-valores.model";
 import { LocalStorageService } from "../../service";
 import { FileDownloadService } from "../../service/file-download/file-download.service";
+import { NotificationService } from "../../service/notification/notification.service";
 @Component({
   selector: 'file-upload',
   templateUrl: "file-upload.component.html",
@@ -17,17 +18,28 @@ export class FileUploadComponent {
   uploadProgress: number;
   uploadSub: Subscription;
 
-  constructor(private fileService: FileDownloadService) {
-  }
+  constructor(
+    private fileService: FileDownloadService,
+    private notificationService: NotificationService
+  ) {}
 
   onFileSelected(event) {
     const file: File = event.target.files[0];
     if (file) {
-      this.condomino.fileName = file.name;
       const formData = new FormData();
+      this.condomino.fileName = '';
+      this.condomino.fileId = null;
       formData.append("file", file);
       formData.append("leituraId", this.condomino.leituraagua.toString());
       formData.append("condominoId", this.condomino.condominoId.toString());
+
+      this.fileService.save(formData, this.condomino.leituraagua.toString()).pipe(first()).subscribe(
+        (response: any) => {
+          this.notificationService.showSuccess(response.message, "Sucesso");
+          this.condomino.fileName = file.name;
+          this.condomino.fileId = response.fileId;
+        }
+      );
     }
   }
 

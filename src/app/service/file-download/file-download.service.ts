@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../../environments/environment";
 import { LocalStorageService } from "../local-storage/local-storage.service";
-import Service from "../service";
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +26,13 @@ export class FileDownloadService {
       responseType: 'blob'
     }
     );
+  }
+
+  public save(file, id: string) {
+    return this.http.post(`${environment.apiUrl}/leituraagua/condominos/${id}/boleto`, file, {
+      headers: {
+        'Authorization': 'Bearer ' + this.localStorageService.getItem('token')
+      }
+    });
   }
 }
