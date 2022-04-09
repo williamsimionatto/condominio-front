@@ -30,7 +30,7 @@ export class LeituraAguaService extends Service {
   }
 
   public updateValores(id, leituraAgua) {
-    return this.http.put(`${environment.apiUrl}/leituraagua/condominos/valores/${id}`, leituraAgua, this.requestOptions);
+    return this.http.put<void>(`${environment.apiUrl}/leituraagua/condominos/valores/${id}`, leituraAgua, this.requestOptions);
   }
 
   public getValoresCondominos(idLeitura: string, dataLeitura: string) {

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { first } from "rxjs/operators";
+import { Router } from "@angular/router";
+import { first, take } from "rxjs/operators";
 import { CondominioParams } from "../../../model/condominio.model";
 import { LeituraAguaValoresParams } from "../../../model/leitura-agua-valores.model";
 import { CondominioService } from "../../../service/condominio/condominio.service";
@@ -41,7 +42,7 @@ export class ListLeituraAguaValoresComponent implements OnInit {
 
   constructor(
     private condominioService: CondominioService,
-    private leituraAguaService: LeituraAguaService
+    private leituraAguaService: LeituraAguaService,
   ) {}
 
   ngOnInit() {
@@ -69,13 +70,12 @@ export class ListLeituraAguaValoresComponent implements OnInit {
         qtdusosalao: condominoData.qtdusosalao,
       }
 
-      this.leituraAguaService.save(data).pipe(first()).subscribe(() => {
-      })
+      this.leituraAguaService.save(data).pipe(first()).subscribe(() => {})
     })
   }
 
   public async update(idLeitura: string) {
-    this.condominos.map(condominoData => {
+    for await (const condominoData of this.condominos) {
       let data = {
         id: condominoData.id,
         leituraagua: idLeitura,
@@ -89,9 +89,24 @@ export class ListLeituraAguaValoresComponent implements OnInit {
         qtdusosalao: condominoData.qtdusosalao,
       }
 
-      this.leituraAguaService.updateValores(idLeitura, data).pipe(first()).subscribe(() => {
-      })
-    })
+      this.leituraAguaService.updateValores(idLeitura, data).pipe(first()).subscribe(() => {})
+    }
+    // this.condominos.map(async (condominoData): Promise<any> => {
+    //   let data = {
+    //     id: condominoData.id,
+    //     leituraagua: idLeitura,
+    //     condominio: this.condominio.id,
+    //     condominoId: condominoData.condominoId,
+    //     consumo: condominoData.consumoAtual,
+    //     condomino: condominoData.condomino,
+    //     consumoAnterior: condominoData.consumoAnterior,
+    //     qtdmudanca: condominoData.qtdmudanca,
+    //     qtdlimpezasalao: condominoData.qtdlimpezasalao,
+    //     qtdusosalao: condominoData.qtdusosalao,
+    //   }
+
+    //   this.leituraAguaService.updateValores(idLeitura, data).pipe(take(1)).subscribe(() => {})
+    // })
   }
 
   public async getValores() {
