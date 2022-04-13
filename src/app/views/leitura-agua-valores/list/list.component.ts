@@ -5,6 +5,7 @@ import { CondominioParams } from "../../../model/condominio.model";
 import { LeituraAguaValoresParams } from "../../../model/leitura-agua-valores.model";
 import { CondominioService } from "../../../service/condominio/condominio.service";
 import { LeituraAguaService } from "../../../service/leitura-agua/leitura-agua.service";
+import { NotificationService } from "../../../service/notification/notification.service";
 
 type Totalizadores = {
   consumo: number;
@@ -43,6 +44,7 @@ export class ListLeituraAguaValoresComponent implements OnInit {
   constructor(
     private condominioService: CondominioService,
     private leituraAguaService: LeituraAguaService,
+    private notificationService: NotificationService,
   ) {}
 
   ngOnInit() {
@@ -91,22 +93,6 @@ export class ListLeituraAguaValoresComponent implements OnInit {
 
       this.leituraAguaService.updateValores(idLeitura, data).pipe(first()).subscribe(() => {})
     }
-    // this.condominos.map(async (condominoData): Promise<any> => {
-    //   let data = {
-    //     id: condominoData.id,
-    //     leituraagua: idLeitura,
-    //     condominio: this.condominio.id,
-    //     condominoId: condominoData.condominoId,
-    //     consumo: condominoData.consumoAtual,
-    //     condomino: condominoData.condomino,
-    //     consumoAnterior: condominoData.consumoAnterior,
-    //     qtdmudanca: condominoData.qtdmudanca,
-    //     qtdlimpezasalao: condominoData.qtdlimpezasalao,
-    //     qtdusosalao: condominoData.qtdusosalao,
-    //   }
-
-    //   this.leituraAguaService.updateValores(idLeitura, data).pipe(take(1)).subscribe(() => {})
-    // })
   }
 
   public async getValores() {
@@ -153,8 +139,9 @@ export class ListLeituraAguaValoresComponent implements OnInit {
     this.condominos.forEach(condomino => {
       this.totalTalizadores.consumo += parseFloat(condomino.consumo.toString())
       this.totalTalizadores.total += condomino.total
-
     })
+
+    return true
   }
 
   calculaDiferencaConsumo(consumoAnterior: number, consumoAtual: number) {
@@ -216,5 +203,16 @@ export class ListLeituraAguaValoresComponent implements OnInit {
                 (this.condominio.valormudanca * condomino.qtdmudanca)
 
     condominio.total = parseFloat((Math.round(total * 100) / 100).toFixed(2));
+  }
+
+  validaValor(params: LeituraAguaValoresParams) {
+    if (params.consumo < 0) {
+      this.notificationService.showWarning("Consumo atual não pode ser menor que o consumo anterior!", "Erro");
+      let condomino = this.condominos.find(condomino => condomino.condomino == params.condomino)
+      condomino.consumoAtual = condomino.consumoAnterior;
+      condomino.consumo = 0;
+    }
+
+    return true
   }
 }
