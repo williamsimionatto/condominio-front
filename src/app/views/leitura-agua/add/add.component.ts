@@ -16,7 +16,7 @@ export class AddEditLeituraAguaComponent implements OnInit {
   leituraAguaForm: FormGroup
   id: string
   isAddMode: boolean
-  readonly = false
+  readonly = false;
   loading = false
   submitted = false
   datePattern = /^(0[1-9]|[12][0-9]|3[01])[-/.](0[1-9]|1[012])[-/.](19|20)\d\d$/i
@@ -132,6 +132,14 @@ export class AddEditLeituraAguaComponent implements OnInit {
 
   getDataLeitura() {
     return this.leituraAguaForm.value.dataleitura
+  }
+
+  getDataVencimento() {
+    return this.leituraAguaForm.value.datavencimento
+  }
+
+  isEnabledEdit() {
+    return new Date(this.leituraAguaForm.value.datavencimento) <= new Date()
   }
 
   public formatDateBr(date: string): string {

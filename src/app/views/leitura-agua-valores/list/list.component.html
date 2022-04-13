@@ -45,7 +45,7 @@
                                 <input type="number" id="valorconsumoatual_{{condomino.condomino}}" class="form-control" 
                                        autocomplete="off" value='{{condomino.consumoAtual}}'
                                        (change)="updateConsumo(condomino) && validaValor(condomino)" min="{{condomino.consumoAnterior}}"
-                                       style="width: 5rem"
+                                       style="width: 5rem" [disabled]="isEnabledEdit()"
                                 />
                             </div>
                         </td>
@@ -58,7 +58,7 @@
                             <input type="number" id="qtdusosalao_{{condomino.condomino}}" class="form-control"
                                        autocomplete="off" value='{{condomino.qtdusosalao}}'
                                        (change)="atualizaTaxaUsoSalaoFestas(condomino)" min="0"
-                                       style="width: 5rem"
+                                       style="width: 5rem" [disabled]="isEnabledEdit()"
                             />
                         </td>
     
@@ -66,7 +66,7 @@
                             <input type="number" id="qtdlimpezasalao_{{condomino.condomino}}" class="form-control"
                                         autocomplete="off" value='{{condomino.qtdlimpezasalao}}'
                                         (change)="atualizaTaxaLimpezaSalaoFestas(condomino)" min="0"
-                                        style="width: 5rem"
+                                        style="width: 5rem" [disabled]="isEnabledEdit()"
                             />
                         </td>
     
@@ -74,7 +74,7 @@
                             <input type="number" id="qtdmudanca_{{condomino.condomino}}" class="form-control"
                                         autocomplete="off" value='{{condomino.qtdmudanca}}'
                                         (change)="atualizaTaxaMudanca(condomino)" min="0"
-                                        style="width: 5rem"
+                                        style="width: 5rem" [disabled]="isEnabledEdit()"
                             />
                         </td>
     
