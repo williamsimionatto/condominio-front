@@ -41,6 +41,7 @@
                         <app-list-leitura-agua-valores [condominioId]="this.getCondominio()"
                                                        [idLeitura]="this.id" 
                                                        [dataLeitura]="this.getDataLeitura()" 
+                                                       [dataVencimento]="this.getDataVencimento()" 
                                                        [isAddMode]="isAddMode"
                                                        *ngIf="this.isValidDataLeitura()">
 
@@ -51,7 +52,7 @@
                         <div class="form-group form-footer inline-footer">
                             <a routerLink="/leituraagua" class="btn btn-light rounded-pill btnVoltar">Voltar</a>
 
-                            <button [disabled]="loading || leituraAguaForm.invalid" class="btn btn-primary rounded-pill" *ngIf="!readonly">
+                            <button [disabled]="loading || leituraAguaForm.invalid" class="btn btn-primary rounded-pill" *ngIf="!isEnabledEdit()">
                                 <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                                 Salvar
                             </button>

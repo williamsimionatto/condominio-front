@@ -27,6 +27,7 @@ type Totalizadores = {
 export class ListLeituraAguaValoresComponent implements OnInit {
   @Input() condominioId: string
   @Input() dataLeitura: string
+  @Input() dataVencimento: string
   @Input() idLeitura: string
   @Input() isAddMode: boolean = false
 
@@ -214,5 +215,9 @@ export class ListLeituraAguaValoresComponent implements OnInit {
     }
 
     return true
+  }
+
+  isEnabledEdit() {
+    return new Date(this.dataVencimento) <= new Date()
   }
 }
