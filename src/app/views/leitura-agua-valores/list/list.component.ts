@@ -91,22 +91,6 @@ export class ListLeituraAguaValoresComponent implements OnInit {
 
       this.leituraAguaService.updateValores(idLeitura, data).pipe(first()).subscribe(() => {})
     }
-    // this.condominos.map(async (condominoData): Promise<any> => {
-    //   let data = {
-    //     id: condominoData.id,
-    //     leituraagua: idLeitura,
-    //     condominio: this.condominio.id,
-    //     condominoId: condominoData.condominoId,
-    //     consumo: condominoData.consumoAtual,
-    //     condomino: condominoData.condomino,
-    //     consumoAnterior: condominoData.consumoAnterior,
-    //     qtdmudanca: condominoData.qtdmudanca,
-    //     qtdlimpezasalao: condominoData.qtdlimpezasalao,
-    //     qtdusosalao: condominoData.qtdusosalao,
-    //   }
-
-    //   this.leituraAguaService.updateValores(idLeitura, data).pipe(take(1)).subscribe(() => {})
-    // })
   }
 
   public async getValores() {
