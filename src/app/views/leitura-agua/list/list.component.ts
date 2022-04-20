@@ -65,6 +65,6 @@ export class ListLeituraAguaComponent implements OnInit {
   }
 
   public isEnabledToEdit(leitura): boolean {
-    return new Date(leitura.datavencimento) >= new Date()
+    return new Date(leitura.datavencimento) > new Date()
   }
 }
