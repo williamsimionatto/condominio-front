@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { first } from "rxjs/operators";
 import { CondominoParams } from "../../../model/condomino.model";
+import { UserParamsAuth } from "../../../model/user.model";
+import { LocalStorageService } from "../../../service";
 import { CondominoService } from "../../../service/condomino/condomino.service";
 import { FileDownloadService } from "../../../service/file-download/file-download.service";
 import { LeituraAguaService } from "../../../service/leitura-agua/leitura-agua.service";
@@ -16,15 +18,18 @@ export class LeituraAguaReportComponent implements OnInit {
   loading = false
   data = null
   condominos: CondominoParams[]
+  public user: UserParamsAuth;
 
   constructor(
     private formBuilder: FormBuilder,
     private leituraService: LeituraAguaService,
     private fileService: FileDownloadService,
-    private condominoService: CondominoService
+    private condominoService: CondominoService,
+    private localStorageService: LocalStorageService
   ) { }
 
   ngOnInit() {
+    this.user = JSON.parse(this.localStorageService.getItem('user'));
     this.filterForm = this.formBuilder.group({
       dataInicial: this.formBuilder.control("", [Validators.required]),
       dataFinal: this.formBuilder.control("", [Validators.required]),
@@ -33,6 +38,14 @@ export class LeituraAguaReportComponent implements OnInit {
 
     this.condominoService.getAll().pipe(first()).subscribe(x => {
       this.condominos = x
+
+      if (this.user.perfil.sigla == 'COND') {
+        let condomino = this.condominos.filter(x => x.cpf == this.user.cpf)
+        if (condomino.length === 1) {
+          this.f.condomino.setValue(condomino[0].id);
+          this.filterForm.get('condomino').disable();
+        }
+      }
     })
   }
 
