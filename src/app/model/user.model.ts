@@ -15,5 +15,6 @@ export type UserParamsAuth = {
   name: string;
   email: string;
   active: string;
+  cpf: string;
   perfil: PerfilParams;
 }

@@ -67,6 +67,7 @@ import { LeituraAguaModule } from './views/leitura-agua/leitura-agua.module';
 import { LeituraAguaValoresModule } from './views/leitura-agua-valores/leitura-agua-valores.module';
 import { CanLoadService } from './service/can-load/can-load.service';
 import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
+import { LeituraAguaReportModule } from './views/report/leituraagua/leitura-agua-report.module';
 
 @NgModule({
   imports: [
@@ -94,6 +95,7 @@ import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
     UserModule,
     PerfilModule,
     PermissaoModule,
+    LeituraAguaReportModule,
     FormsModule,
     NgProgressModule.withConfig({
       color: "red",

@@ -61,6 +61,13 @@ export const navItems: INavData[] = [
     name: 'Relatórios',
     url: '/relatorio',
     icon: 'fa fa-search',
-    children: []
+    children: [
+      {
+        name: 'Leitura d`água',
+        url: '/report/leituraagua',
+        icon: 'fa fa-tint',
+        attributes: { disabled: isDisabled('REL_LEITURAAGUA') },
+      }
+    ]
   }
 ];

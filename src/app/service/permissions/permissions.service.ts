@@ -9,6 +9,7 @@ export class PermissionsService {
 
   hasPermission(sigla: string, tipo: string): boolean {
     const permissions = JSON.parse(this.localStorageService.getItem("permissions"));
+
     if (!permissions) {
       return false;
     }

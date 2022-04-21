@@ -1,0 +1,83 @@
+<div class="animated fadeIn">
+    <header class="header header-sticky mb-4"></header>
+
+    <div class="row">
+		<div class="col">
+			<div class="card">
+                <div class="card-header">
+                    <div class="card-label"> Relatório Leitura Água </div>
+                </div>
+
+                <div class="card-body">
+                    <form [formGroup]="filterForm">
+                        <div class="row">
+                            <div class="col-sm-2 col-xs-12">
+                                <input-container errorMessage="Data Inicial é obrigatório" label="Data Inicial">
+                                    <input type="date" formControlName="dataInicial" id="dataInicial" class="form-control" autocomplete="off">
+                                </input-container>
+                            </div>
+    
+                            <div class="col-sm-2 col-xs-12">
+                                <input-container errorMessage="Data Final é obrigatório" label="Data Final">
+                                    <input type="date" formControlName="dataFinal" id="dataFinal" class="form-control" autocomplete="off">
+                                </input-container>
+                            </div>
+
+                            <div class="col-sm-3 col-xs-12">
+                                <input-container errorMessage="" label="Condômino">
+                                  <ng-select [items]="condominos" [searchable]="false" bindLabel="name" bindValue="id" id="condominos" formControlName="condomino" ngDefaultControl>
+                                  </ng-select>
+                                </input-container>
+                            </div>
+    
+                            <div class="ibox-buttons">
+                                <button [disabled]="filterForm.invalid" type="button" class="btn btn-primary rounded-pill" (click)="filter()">
+                                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                    Filtrar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div *ngIf="data">
+                        <hr>
+
+                        <div class="row">
+                            <div class="col col-lg-6 table-responsive overflow-table">
+                                <table class="table table-striped border datatable table-body">
+                                    <thead>
+                                        <tr>
+                                            <th width="6%">Data</th>
+                                            <th width="15%">Condômino</th>
+                                            <th width="5%">Consumo</th>
+                                            <th width="7%">Valor Total</th>
+                                            <th width="5%" style="text-align: center">Boleto</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody >
+                                        <tr *ngFor="let item of data">
+                                            <td width="6%">{{ formatDateBr(item.dataleitura) }}</td>
+                                            <td width="15%">{{ item.condominoName }}</td>
+                                            <td width="5%">{{ item.consumo }} m³</td>
+                                            <td width="7%">{{ item.valorTotal | currency: 'BRL' }}</td>
+
+                                            <td width="5%" style="text-align: center">
+                                                <a class="btn btn-primary btn-sm rounded-pill" (click)="downloadFile(item.fileId, item.fileName)" *ngIf="item.fileId">
+                                                    <i class="fa fa-download"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="col col-lg-6">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

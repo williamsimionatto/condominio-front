@@ -23,6 +23,10 @@ export class CanLoadService implements CanLoad {
     }, {
       route: 'leituraagua',
       sigla: 'TAR_LEITURAAGUA'
+    },
+    {
+      route: 'report/leituraagua',
+      sigla: 'REL_LEITURAAGUA'
     }
   ]
 

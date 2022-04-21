@@ -65,6 +65,12 @@ export const routes: Routes = [
         canLoad: [CanLoadService]
       },
       {
+        path: 'report/leituraagua',
+        loadChildren: () => import('./views/report/leituraagua/leitura-agua-report.module').then(m => m.LeituraAguaReportModule),
+        canActivate: [AuthGuard],
+        canLoad: [CanLoadService]
+      },
+      {
         path: 'usuario',
         loadChildren: () => import('./views/user/user.module').then(m => m.UserModule),
         canActivate: [AuthGuard],
