@@ -63,6 +63,7 @@ export class ModalCondominosComponent {
       tipo: this.formBuilder.control("", [Validators.required]),
       numeroquartos: this.formBuilder.control("", [Validators.required]),
       ativo: this.formBuilder.control("", [Validators.required]),
+      position: this.formBuilder.control("", [Validators.required]),
     })
     
     if (!this.isAddMode) {

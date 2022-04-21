@@ -8,4 +8,5 @@ export type CondominoParams = {
   tipo: string;
   numeroquartos: number | string;
   ativo: string;
+  position: number;
 }
