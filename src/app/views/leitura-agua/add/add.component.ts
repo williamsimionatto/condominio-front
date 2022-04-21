@@ -139,7 +139,7 @@ export class AddEditLeituraAguaComponent implements OnInit {
   }
 
   isEnabledEdit() {
-    return new Date(this.leituraAguaForm.value.datavencimento) <= new Date()
+    return new Date(this.leituraAguaForm.value.datavencimento) < new Date()
   }
 
   public formatDateBr(date: string): string {

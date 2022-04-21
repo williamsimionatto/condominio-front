@@ -23,7 +23,7 @@ export const navItems: INavData[] = [
         url: '/condominio',
         icon: 'fa fa-building',
         attributes: { disabled: isDisabled('CAD_CONDOMINIO') },
-      },
+      }, 
       {
         name: 'Perfil',
         url: '/perfil',
@@ -52,7 +52,8 @@ export const navItems: INavData[] = [
       {
         name: 'Leitura d`água',
         url: '/leituraagua',
-        icon: 'fa fa-tint'
+        icon: 'fa fa-tint',
+        attributes: { disabled: isDisabled('TAR_LEITURAAGUA') },
       }
     ]
   },

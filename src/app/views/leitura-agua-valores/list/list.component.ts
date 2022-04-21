@@ -218,6 +218,6 @@ export class ListLeituraAguaValoresComponent implements OnInit {
   }
 
   isEnabledEdit() {
-    return new Date(this.dataVencimento) <= new Date()
+    return new Date(this.dataVencimento) < new Date()
   }
 }
