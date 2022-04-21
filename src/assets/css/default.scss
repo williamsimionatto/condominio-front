@@ -79,3 +79,17 @@ hr {
   display: inline-block;
   margin-top: 28px;
 }
+
+.overflow-table {
+  max-height:350px;
+  display:block;
+  overflow-y:auto;
+}
+
+.table-body {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  display:table;
+  border-spacing: 0;
+}

@@ -34,6 +34,39 @@
 
                     <div *ngIf="data">
                         <hr>
+
+                        <div class="row">
+                            <div class="col col-lg-6 table-responsive overflow-table">
+                                <table class="table table-striped border datatable table-body">
+                                    <thead>
+                                        <tr>
+                                            <th width="6%">Data</th>
+                                            <th width="15%">Condômino</th>
+                                            <th width="5%">Consumo</th>
+                                            <th width="7%">Valor Total</th>
+                                            <th width="5%" style="text-align: center">Boleto</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody >
+                                        <tr *ngFor="let item of data">
+                                            <td width="6%">{{ formatDateBr(item.dataleitura) }}</td>
+                                            <td width="15%">{{ item.condominoName }}</td>
+                                            <td width="5%">{{ item.consumo }} m³</td>
+                                            <td width="7%">{{ item.valorTotal | currency: 'BRL' }}</td>
+                                            <td width="5%" style="text-align: center">
+                                                <a class="btn btn-primary btn-sm rounded-pill">
+                                                    <i class="fa fa-download"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="col col-lg-6">
+                                
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
