@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
-import { LoginSuccessParams } from '../../model/login-success.model';
 import { LocalStorageService } from '../../service';
 import { LoginService } from '../../service/login/login.service';
 import { NotificationService } from '../../service/notification/notification.service';
@@ -41,14 +40,15 @@ export class LoginComponent {
       next: (data: any) => {
         data = data[0]
         this.localStorageService.setItem('token', data.access_token);
-        this.localStorageService.setItem('username', data.user.name);
+        this.localStorageService.setItem('user', JSON.stringify(data.user));
         this.localStorageService.setItem('permissions', JSON.stringify(data.permissions));
 
+        this.loading = false
         this.router.navigate(['/']);
       },
       error: (error: Error) => {
         this.loading = false
-        this.notifyService.showError('Usuário ou senha Incorretos', 'Erro');
+        this.notifyService.showError('Credenciais inválidas', 'Erro');
       }
     })
   }
