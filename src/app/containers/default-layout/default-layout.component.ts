@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import { Router } from '@angular/router';
+import { UserParamsAuth } from '../../model/user.model';
 import { LocalStorageService } from '../../service';
 import { navItems } from '../../_nav';
 
@@ -10,10 +11,10 @@ import { navItems } from '../../_nav';
 export class DefaultLayoutComponent {
   public sidebarMinimized = true;
   public navItems = navItems;
-  public name: string
+  public user: UserParamsAuth;
 
   constructor(private localStorageService: LocalStorageService, private router: Router) { 
-    this.name = this.localStorageService.getItem('username')
+    this.user = JSON.parse(this.localStorageService.getItem('user'));
   }
 
   toggleMinimize(e) {
