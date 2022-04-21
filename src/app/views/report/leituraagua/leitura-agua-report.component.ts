@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { first } from "rxjs/operators";
+import { FileDownloadService } from "../../../service/file-download/file-download.service";
 import { LeituraAguaService } from "../../../service/leitura-agua/leitura-agua.service";
 
 @Component({
@@ -15,7 +16,8 @@ export class LeituraAguaReportComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private leituraService: LeituraAguaService
+    private leituraService: LeituraAguaService,
+    private fileService: FileDownloadService
   ) { }
 
   ngOnInit() {
@@ -34,6 +36,22 @@ export class LeituraAguaReportComponent implements OnInit {
       })
 
     this.loading = false
+  }
+
+  downloadFile(id: number, name: string) {
+    this.fileService.getById(id.toString()).pipe(first()).subscribe(
+      (response: any) =>{
+        console.log(response)
+        let dataType = response.type;
+        let binaryData = [];
+        binaryData.push(response);
+        let downloadLink = document.createElement('a');
+        downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+        downloadLink.setAttribute('download', name);
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+    }
+  );
   }
 
   public formatDateBr(date: string): string {

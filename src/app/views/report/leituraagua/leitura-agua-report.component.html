@@ -53,8 +53,9 @@
                                             <td width="15%">{{ item.condominoName }}</td>
                                             <td width="5%">{{ item.consumo }} m³</td>
                                             <td width="7%">{{ item.valorTotal | currency: 'BRL' }}</td>
+
                                             <td width="5%" style="text-align: center">
-                                                <a class="btn btn-primary btn-sm rounded-pill">
+                                                <a class="btn btn-primary btn-sm rounded-pill" (click)="downloadFile(item.fileId, item.fileName)" *ngIf="item.fileId">
                                                     <i class="fa fa-download"></i>
                                                 </a>
                                             </td>
