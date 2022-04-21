@@ -1,0 +1,38 @@
+<div class="animated fadeIn">
+    <header class="header header-sticky mb-4"></header>
+
+    <div class="row">
+		<div class="col">
+			<div class="card">
+                <div class="card-header">
+                    <div class="card-label"> Relatório Leitura Água </div>
+                </div>
+
+                <div class="card-body">
+                    <form [formGroup]="condominioForm">
+                        <div class="row">
+                            <div class="col-sm-2 col-xs-12">
+                                <input-container errorMessage="Data Inicial é obrigatório" label="Data Inicial">
+                                    <input type="date" formControlName="dataInicial" id="dataInicial" class="form-control" autocomplete="off">
+                                </input-container>
+                            </div>
+    
+                            <div class="col-sm-2 col-xs-12">
+                                <input-container errorMessage="Data Final é obrigatório" label="Data Final">
+                                    <input type="date" formControlName="dataFinal" id="dataFinal" class="form-control" autocomplete="off">
+                                </input-container>
+                            </div>
+    
+                            <div class="ibox-buttons">
+                                <button [disabled]="filterForm.invalid" type="button" class="btn btn-primary rounded-pill">
+                                    <i class="fa fa-search"></i>
+                                    Filtrar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

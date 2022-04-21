@@ -66,7 +66,7 @@ export const routes: Routes = [
       },
       {
         path: 'report/leituraagua',
-        loadChildren: () => import('./views/report/leituraagua/leitura-agua-report-module').then(m => m.LeituraAguaReportModule),
+        loadChildren: () => import('./views/report/leituraagua/leitura-agua-report.module').then(m => m.LeituraAguaReportModule),
         canActivate: [AuthGuard],
         canLoad: [CanLoadService]
       },

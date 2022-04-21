@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "../../../containers/shared.module";
 import { LeituraAguaReportRoutingModule } from "./leitura-agua-report-routing.module";
 
-
 @NgModule({
   imports: [
     CommonModule,
