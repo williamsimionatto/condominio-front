@@ -48,4 +48,8 @@ export class LeituraAguaService extends Service {
   public delete(id: string) {
     return this.http.delete(`${environment.apiUrl}/leituraagua/${id}`, this.requestOptions);
   }
+
+  public report(dataInicial: string, dataFinal: string) {
+    return this.http.get(`${environment.apiUrl}/report/leituraagua?dataInicial=${dataInicial}&dataFinal=${dataFinal}`, this.requestOptions);
+  }
 }

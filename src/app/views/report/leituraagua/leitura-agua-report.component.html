@@ -9,7 +9,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form [formGroup]="condominioForm">
+                    <form [formGroup]="filterForm">
                         <div class="row">
                             <div class="col-sm-2 col-xs-12">
                                 <input-container errorMessage="Data Inicial é obrigatório" label="Data Inicial">
@@ -24,13 +24,17 @@
                             </div>
     
                             <div class="ibox-buttons">
-                                <button [disabled]="filterForm.invalid" type="button" class="btn btn-primary rounded-pill">
-                                    <i class="fa fa-search"></i>
+                                <button [disabled]="filterForm.invalid" type="button" class="btn btn-primary rounded-pill" (click)="filter()">
+                                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                                     Filtrar
                                 </button>
                             </div>
                         </div>
                     </form>
+
+                    <div *ngIf="data">
+                        <hr>
+                    </div>
                 </div>
             </div>
         </div>

@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "../../../containers/shared.module";
 import { LeituraAguaReportRoutingModule } from "./leitura-agua-report-routing.module";
+import { LeituraAguaReportComponent } from "./leitura-agua-report.component";
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { LeituraAguaReportRoutingModule } from "./leitura-agua-report-routing.mo
     SharedModule
   ],
   declarations: [
+    LeituraAguaReportComponent
   ],
 })
 export class LeituraAguaReportModule {

@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { first } from "rxjs/operators";
+import { LeituraAguaService } from "../../../service/leitura-agua/leitura-agua.service";
 
 @Component({
   selector: 'leitura-agua-report',
@@ -8,12 +10,12 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 })
 export class LeituraAguaReportComponent implements OnInit {
   filterForm: FormGroup
-
-  dataInicial = undefined;
-  dataFinal = undefined;
+  loading = false
+  data = null
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private leituraService: LeituraAguaService
   ) { }
 
   ngOnInit() {
@@ -22,4 +24,17 @@ export class LeituraAguaReportComponent implements OnInit {
       dataFinal: this.formBuilder.control("", [Validators.required])
     })
   }
+
+  filter() {
+    this.loading = true
+    this.leituraService.report(this.f.dataInicial.value, this.f.dataFinal.value)
+      .pipe(first())
+      .subscribe(x => {
+        this.data = x
+      })
+
+    this.loading = false
+  }
+
+  get f() { return this.filterForm.controls }
 }
