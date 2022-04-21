@@ -38,6 +38,9 @@ export class LeituraAguaReportComponent implements OnInit {
 
     this.condominoService.getAll().pipe(first()).subscribe(x => {
       this.condominos = x
+      this.condominos.map(x => {
+        x.name = x.apartamento + ' - ' + x.name
+      })
 
       if (this.user.perfil.sigla == 'COND') {
         let condomino = this.condominos.filter(x => x.cpf == this.user.cpf)
@@ -45,6 +48,8 @@ export class LeituraAguaReportComponent implements OnInit {
           this.f.condomino.setValue(condomino[0].id);
           this.filterForm.get('condomino').disable();
         }
+
+        this.condominos = condomino;
       }
     })
   }
