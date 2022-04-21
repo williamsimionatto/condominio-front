@@ -49,7 +49,12 @@ export class LeituraAguaService extends Service {
     return this.http.delete(`${environment.apiUrl}/leituraagua/${id}`, this.requestOptions);
   }
 
-  public report(dataInicial: string, dataFinal: string) {
-    return this.http.get(`${environment.apiUrl}/report/leituraagua?dataInicial=${dataInicial}&dataFinal=${dataFinal}`, this.requestOptions);
+  public report(dataInicial: string, dataFinal: string, condomino: number) {
+    let query: string = `?dataInicial=${dataInicial}&dataFinal=${dataFinal}`;
+    if (condomino) {
+      query += `&condomino=${condomino}`;
+    }
+
+    return this.http.get(`${environment.apiUrl}/report/leituraagua${query}` , this.requestOptions);
   }
 }

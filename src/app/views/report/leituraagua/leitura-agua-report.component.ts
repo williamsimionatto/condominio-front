@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { first } from "rxjs/operators";
+import { CondominoParams } from "../../../model/condomino.model";
+import { CondominoService } from "../../../service/condomino/condomino.service";
 import { FileDownloadService } from "../../../service/file-download/file-download.service";
 import { LeituraAguaService } from "../../../service/leitura-agua/leitura-agua.service";
 
@@ -13,26 +15,37 @@ export class LeituraAguaReportComponent implements OnInit {
   filterForm: FormGroup
   loading = false
   data = null
+  condominos: CondominoParams[]
 
   constructor(
     private formBuilder: FormBuilder,
     private leituraService: LeituraAguaService,
-    private fileService: FileDownloadService
+    private fileService: FileDownloadService,
+    private condominoService: CondominoService
   ) { }
 
   ngOnInit() {
     this.filterForm = this.formBuilder.group({
       dataInicial: this.formBuilder.control("", [Validators.required]),
-      dataFinal: this.formBuilder.control("", [Validators.required])
+      dataFinal: this.formBuilder.control("", [Validators.required]),
+      condomino: this.formBuilder.control("", [])
+    })
+
+    this.condominoService.getAll().pipe(first()).subscribe(x => {
+      this.condominos = x
     })
   }
 
   filter() {
     this.loading = true
-    this.leituraService.report(this.f.dataInicial.value, this.f.dataFinal.value)
+    this.leituraService.report(this.f.dataInicial.value, this.f.dataFinal.value, this.f.condomino.value)
       .pipe(first())
-      .subscribe(x => {
+      .subscribe(
+        (x) => {
         this.data = x
+      },
+      (error) => {
+        console.log(error)
       })
 
     this.loading = false
