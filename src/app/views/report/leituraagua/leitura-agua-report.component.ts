@@ -30,12 +30,6 @@ export class LeituraAguaReportComponent implements OnInit {
 
   ngOnInit() {
     this.user = JSON.parse(this.localStorageService.getItem('user'));
-    this.filterForm = this.formBuilder.group({
-      dataInicial: this.formBuilder.control("", [Validators.required]),
-      dataFinal: this.formBuilder.control("", [Validators.required]),
-      condomino: this.formBuilder.control("", [])
-    })
-
     this.condominoService.getAll().pipe(first()).subscribe(x => {
       this.condominos = x
       this.condominos.map(x => {
@@ -47,10 +41,16 @@ export class LeituraAguaReportComponent implements OnInit {
         if (condomino.length === 1) {
           this.f.condomino.setValue(condomino[0].id);
           this.filterForm.get('condomino').disable();
+        } else {
+          this.condominos = condomino;
         }
-
-        this.condominos = condomino;
       }
+    })
+
+    this.filterForm = this.formBuilder.group({
+      dataInicial: this.formBuilder.control("", [Validators.required]),
+      dataFinal: this.formBuilder.control("", [Validators.required]),
+      condomino: this.formBuilder.control("", (this.user.perfil.sigla === 'COND') ? [Validators.required] : [])
     })
   }
 
