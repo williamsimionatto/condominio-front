@@ -48,10 +48,7 @@ export class BarChartCompoent implements OnInit {
     const keys = Object.keys(groupedData);
 
     keys.forEach(key => {
-      let dataLeitura = new Date(key)
-      var month = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"][dataLeitura.getMonth()];
-      var year = dataLeitura.getFullYear();
-      const name = `${month}/${year}`
+      const name: string = this.dateFull(key)
       categories.push(name)
 
       const serieData = groupedData[key]
@@ -63,13 +60,18 @@ export class BarChartCompoent implements OnInit {
       data: consumoTotal
     })
 
-    this.barChart(categories, series)
+    this.columnChart(categories, series)
   }
 
-  barChart(categories: string[], seriesData: SerieParams[]) {
-    console.log(categories)
+  private dateFull(date: string): string {
+      const newDate = new Date(date)
+      const month = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"][newDate.getMonth()];
+      const year = newDate.getFullYear();
+      return `${month}/${year}`
+  }
 
-    HighCharts.chart('barChart', {
+  columnChart(categories: string[], seriesData: SerieParams[]) {
+    HighCharts.chart('columnChart', {
       chart: {
         type: 'column'
       },
