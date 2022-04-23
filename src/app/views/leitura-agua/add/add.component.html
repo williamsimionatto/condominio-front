@@ -38,7 +38,7 @@
                             </div>
 
                             <div class="ibox-buttons">
-                                <button [disabled]="leituraAguaForm.invalid" type="button" class="btn btn-primary rounded-pill" (click)="findCondominos()">
+                                <button [disabled]="leituraAguaForm.invalid || !isAddMode" type="button" class="btn btn-primary rounded-pill" (click)="findCondominos()">
                                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                                     Buscar
                                 </button>
