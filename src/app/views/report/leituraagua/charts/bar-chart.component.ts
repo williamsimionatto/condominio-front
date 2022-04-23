@@ -30,12 +30,6 @@ export class BarChartCompoent implements OnInit, OnChanges {
     this.prepareChartData(this.chartData)
   }
 
-  prepareChartData(data: LeituraAguaReportParams[]) {
-    if (this.user.perfil.sigla === 'ADMIN' || this.user.perfil.sigla === 'SIND') {
-      this.prepareSindicoChartData(data)
-    }
-  }
-
   groupBy(xs, key: string): LeituraAguaReportParams[] {
     return xs.reduce(function(rv, x) {
       (rv[x[key]] = rv[x[key]] || []).push(x);
@@ -43,7 +37,7 @@ export class BarChartCompoent implements OnInit, OnChanges {
     }, {});
   };
 
-  prepareSindicoChartData(data: LeituraAguaReportParams[]) {
+  prepareChartData(data: LeituraAguaReportParams[]) {
     let series: SerieParams[] = []
     let categories: string[] = []
     let consumoTotal: number[] = []
@@ -93,8 +87,6 @@ export class BarChartCompoent implements OnInit, OnChanges {
       title: {
         text: 'Histórico Consumo de Água'
       },
-      legend: {
-      },
       xAxis: {
         categories: categories,
         labels: {
@@ -120,6 +112,7 @@ export class BarChartCompoent implements OnInit, OnChanges {
               text: `Consumo médio no período ${consumeAVG.toFixed(1)} m³`,
               align: 'right',
               y: -10,
+              x: -10,
               style: {
                 fontSize: '12px',
                 color: 'black',
