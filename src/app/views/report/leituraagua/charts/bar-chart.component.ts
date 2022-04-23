@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
 import * as HighCharts from 'highcharts';
+import { Observable } from "rxjs";
 import { LeituraAguaReportParams } from "../../../../model/leitura-agua.model";
 import { UserParamsAuth } from "../../../../model/user.model";
 import { LocalStorageService } from "../../../../service";
@@ -9,16 +10,23 @@ import { LocalStorageService } from "../../../../service";
   templateUrl: './bar-chart.component.html',
   styleUrls: ['../../../../../assets/css/default.scss']
 })
-export class BarChartCompoent implements OnInit {
+export class BarChartCompoent implements OnInit, OnChanges {
   @Input() chartData: LeituraAguaReportParams[]
 
   public user: UserParamsAuth;
   constructor(
     private localStorageService: LocalStorageService
-  ) {}
+  ) {
+    this.user = JSON.parse(this.localStorageService.getItem('user'));
+  }
 
   ngOnInit() {
-    this.user = JSON.parse(this.localStorageService.getItem('user'));
+    console.log('entou no onInit');
+    this.prepareChartData(this.chartData)
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.chartData = changes.chartData.currentValue
     this.prepareChartData(this.chartData)
   }
 
@@ -85,14 +93,23 @@ export class BarChartCompoent implements OnInit {
       title: {
         text: 'Histórico Consumo de Água'
       },
+      legend: {
+      },
       xAxis: {
         categories: categories,
+        labels: {
+          rotation: -45,
+          style: {
+              fontSize: '13px',
+              fontFamily: 'Verdana, sans-serif'
+          }
+        }
       },
       yAxis: {
         min: 0,
         title: {
           text: 'Consumo (m³)',
-          align: 'middle'
+          align: 'high'
         },
         plotLines: [
           {
@@ -100,7 +117,7 @@ export class BarChartCompoent implements OnInit {
             color: 'black',
             zIndex: 4,
             label: {
-              text: 'Consumo médio no período',
+              text: `Consumo médio no período ${consumeAVG.toFixed(1)} m³`,
               align: 'right',
               y: -10,
               style: {
