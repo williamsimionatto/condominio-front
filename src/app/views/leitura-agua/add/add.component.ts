@@ -20,6 +20,7 @@ export class AddEditLeituraAguaComponent implements OnInit {
   loading = false
   submitted = false
   datePattern = /^(0[1-9]|[12][0-9]|3[01])[-/.](0[1-9]|1[012])[-/.](19|20)\d\d$/i
+  showCondominos = false;
 
   condominioOptions = [
     { value: "", label: "Selecione:" },
@@ -56,6 +57,8 @@ export class AddEditLeituraAguaComponent implements OnInit {
         .subscribe(x => {
           this.leituraAguaForm.patchValue(x)
         })
+
+      this.showCondominos = true
     }
   }
 
@@ -108,7 +111,13 @@ export class AddEditLeituraAguaComponent implements OnInit {
       });
   }
 
-  get f() { return this.leituraAguaForm.controls }
+  public async findCondominos() {
+    if (new Date(this.leituraAguaForm.value.datavencimento) < new Date(this.leituraAguaForm.value.dataleitura)) { 
+      return this.notificationService.showError("Data de vencimento deve ser maior que a data de leitura", "Erro");
+    }
+
+    await this.isUniqueDataLeitura()
+  }
 
   private getCondominios() {
     this.condiminioService.getAll().pipe(first()).subscribe(
@@ -126,7 +135,7 @@ export class AddEditLeituraAguaComponent implements OnInit {
     return this.leituraAguaForm.value.condominio
   }
 
-  isValidDataLeitura() {
+  isValidForm() {
     return this.leituraAguaForm.valid;
   }
 
@@ -139,10 +148,29 @@ export class AddEditLeituraAguaComponent implements OnInit {
   }
 
   isEnabledEdit() {
-    return new Date(this.leituraAguaForm.value.datavencimento) < new Date()
+    return !this.isAddMode && (new Date(this.leituraAguaForm.value.datavencimento) < new Date());
   }
 
   public formatDateBr(date: string): string {
     return date.substring(8, 10) + '/' + date.substring(5, 7) + '/' + date.substring(0, 4)
   }
+
+  private async isUniqueDataLeitura() {
+    return this.leituraAguaService.isUniqueDataLeitura(this.leituraAguaForm.value.condominio, this.leituraAguaForm.value.dataleitura).pipe(first()).subscribe(
+      (data : any) => {
+        if (!data.unique) {
+          this.notificationService.showInfo("Já existe uma leitura cadastrada para o mês-ano informado!", "Atenção");
+          this.loading = false;
+        } else {
+          this.showCondominos = true;
+        }
+      },
+    );
+  }
+
+  setShowCondominos(val: boolean) {
+    this.showCondominos = val;
+  }
+
+  get f() { return this.leituraAguaForm.controls }
 }
