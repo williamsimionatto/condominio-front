@@ -37,6 +37,9 @@ export class BarChartCompoent implements OnInit {
 
   prepareSindicoChartData(data: LeituraAguaReportParams[]) {
     let series: SerieParams[] = []
+    let categories: string[] = []
+    let consumoTotal: number[] = []
+
     let sortedData = data.sort((a, b) => {
       return a.dataleitura > b.dataleitura ? 1 : -1
     })
@@ -45,68 +48,61 @@ export class BarChartCompoent implements OnInit {
     const keys = Object.keys(groupedData);
 
     keys.forEach(key => {
+      let dataLeitura = new Date(key)
+      var month = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"][dataLeitura.getMonth()];
+      var year = dataLeitura.getFullYear();
+      const name = `${month}/${year}`
+      categories.push(name)
+
       const serieData = groupedData[key]
-      const consumo = serieData.reduce((a, b) => a + parseInt(b.consumo), 0)
-      series.push({
-        type: undefined,
-        name: key,
-        data: [consumo]
-      })
+      consumoTotal.push(serieData.reduce((a, b) => a + parseInt(b.consumo), 0))
     })
+
+    series.push({
+      name: 'Consumo Total',
+      data: consumoTotal
+    })
+
+    this.barChart(categories, series)
   }
 
-  barChart() {
+  barChart(categories: string[], seriesData: SerieParams[]) {
+    console.log(categories)
+
     HighCharts.chart('barChart', {
       chart: {
-        type: 'bar'
+        type: 'column'
       },
       title: {
-        text: 'Historic World Population by Region'
+        text: 'Histórico Consumo de Água'
       },
       xAxis: {
-        categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
+        categories: categories,
       },
       yAxis: {
         min: 0,
         title: {
-          text: 'Population (millions)',
-          align: 'high'
-        },
+          text: 'Consumo (m³)',
+          align: 'middle'
+        }
       },
       tooltip: {
-        valueSuffix: ' millions'
+        valueSuffix: ' m³'
       },
       plotOptions: {
-        bar: {
+        column: {
           dataLabels: {
-            enabled: true
+            enabled: false
           }
         }
       },
-      series: [{
-        type: undefined,
-        name: 'Year 1800',
-        data: [107, 31, 635, 203, 2]
-      }, {
-        type: undefined,
-        name: 'Year 1900',
-        data: [133, 156, 947, 408, 6]
-      }, {
-        type: undefined,
-        name: 'Year 2000',
-        data: [814, 841, 3714, 727, 31]
-      }, {
-        type: undefined,
-        name: 'Year 2016',
-        data: [1216, 1001, 4436, 738, 40]
-      }]
+      series: seriesData as HighCharts.Options['series']
     });
   }
-
 }
 
 export type SerieParams = {
-  type: string,
-  name: string,
+  type?: string,
+  name?: string,
   data: number[]
 }
