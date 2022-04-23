@@ -110,6 +110,10 @@ export class AddEditLeituraAguaComponent implements OnInit {
   }
 
   public async findCondominos() {
+    if (new Date(this.leituraAguaForm.value.datavencimento) < new Date(this.leituraAguaForm.value.dataleitura)) { 
+      return this.notificationService.showError("Data de vencimento deve ser maior que a data de leitura", "Erro");
+    }
+
     await this.isUniqueDataLeitura()
   }
 
@@ -142,7 +146,7 @@ export class AddEditLeituraAguaComponent implements OnInit {
   }
 
   isEnabledEdit() {
-    return new Date(this.leituraAguaForm.value.datavencimento) < new Date()
+    return !this.isAddMode && (new Date(this.leituraAguaForm.value.datavencimento) < new Date());
   }
 
   public formatDateBr(date: string): string {
@@ -160,6 +164,11 @@ export class AddEditLeituraAguaComponent implements OnInit {
         }
       },
     );
+  }
+
+  setShowCondominos(val: boolean) {
+    console.log(val)
+    this.showCondominos = val;
   }
 
   get f() { return this.leituraAguaForm.controls }
