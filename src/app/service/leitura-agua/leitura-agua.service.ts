@@ -57,4 +57,8 @@ export class LeituraAguaService extends Service {
 
     return this.http.get(`${environment.apiUrl}/report/leituraagua${query}` , this.requestOptions);
   }
+
+  public isUniqueDataLeitura(condominio: string, dataLeitura: string) {
+    return this.http.get<boolean>(`${environment.apiUrl}/leituraagua/isUniqueLeituraMonth?condominio=${condominio}&dataleitura=${dataLeitura}`, this.requestOptions);
+  }
 }

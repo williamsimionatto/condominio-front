@@ -36,6 +36,13 @@
                                     <input type="date" id="datavencimento" class="form-control" formControlName="datavencimento" autocomplete="off" [readonly]="readonly || !this.isAddMode">
                                 </input-container>
                             </div>
+
+                            <div class="ibox-buttons">
+                                <button [disabled]="leituraAguaForm.invalid" type="button" class="btn btn-primary rounded-pill" (click)="findCondominos()">
+                                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                    Buscar
+                                </button>
+                            </div>
                         </div>
 
                         <app-list-leitura-agua-valores [condominioId]="this.getCondominio()"
@@ -43,7 +50,7 @@
                                                        [dataLeitura]="this.getDataLeitura()" 
                                                        [dataVencimento]="this.getDataVencimento()" 
                                                        [isAddMode]="isAddMode"
-                                                       *ngIf="this.isValidDataLeitura()">
+                                                       *ngIf="showCondominos">
 
                         </app-list-leitura-agua-valores>
 
@@ -52,7 +59,7 @@
                         <div class="form-group form-footer inline-footer">
                             <a routerLink="/leituraagua" class="btn btn-light rounded-pill btnVoltar">Voltar</a>
 
-                            <button [disabled]="loading || leituraAguaForm.invalid" class="btn btn-primary rounded-pill" *ngIf="!isEnabledEdit()">
+                            <button [disabled]="(loading || leituraAguaForm.invalid || !showCondominos)" class="btn btn-primary rounded-pill" *ngIf="!isEnabledEdit()">
                                 <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                                 Salvar
                             </button>
