@@ -71,8 +71,8 @@
                                 </table>
                             </div>
 
-                            <div class="col col-lg-6">
-                                <div id="barChart"></div>
+                            <div class="col col-lg-6" *ngIf="data">
+                                <app-bar-chart [chartData]="data"></app-bar-chart>
                             </div>
                         </div>
                     </div>

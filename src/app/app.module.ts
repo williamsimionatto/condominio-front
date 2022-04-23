@@ -5,14 +5,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 import { IconModule, IconSetModule, IconSetService } from '@coreui/icons-angular';
-
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true
-};
 
 import { AppComponent } from './app.component';
 
@@ -51,7 +45,7 @@ import { AuthGuardService } from './service/auth/auth-guard.service';
 import { UserModule } from './views/user/user.module';
 import { PerfilModule } from './views/perfil/perfil.module';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgProgressModule } from 'ngx-progressbar';
 import { NgProgressHttpModule } from 'ngx-progressbar/http';
@@ -69,6 +63,7 @@ import { CanLoadService } from './service/can-load/can-load.service';
 import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 import { LeituraAguaReportModule } from './views/report/leituraagua/leitura-agua-report.module';
 import { ChartModule } from 'angular-highcharts';
+import { BarChartModule } from './views/report/leituraagua/charts/bar-chart.module';
 
 @NgModule({
   imports: [
@@ -107,7 +102,8 @@ import { ChartModule } from 'angular-highcharts';
     SharedModule.forRoot(),
     NgSelectModule,
     NgbProgressbarModule,
-    ChartModule
+    ChartModule,
+    BarChartModule,
   ],
   declarations: [
     AppComponent,

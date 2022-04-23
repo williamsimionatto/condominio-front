@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { SharedModule } from "../../../containers/shared.module";
+import { BarChartModule } from "./charts/bar-chart.module";
 import { LeituraAguaReportRoutingModule } from "./leitura-agua-report-routing.module";
 import { LeituraAguaReportComponent } from "./leitura-agua-report.component";
 
@@ -13,7 +14,8 @@ import { LeituraAguaReportComponent } from "./leitura-agua-report.component";
     ReactiveFormsModule,
     LeituraAguaReportRoutingModule,
     SharedModule,
-    NgSelectModule
+    NgSelectModule,
+    BarChartModule
   ],
   declarations: [
     LeituraAguaReportComponent
