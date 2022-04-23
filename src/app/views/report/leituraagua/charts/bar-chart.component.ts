@@ -60,7 +60,8 @@ export class BarChartCompoent implements OnInit {
       data: consumoTotal
     })
 
-    this.columnChart(categories, series)
+    const consumeAVG = this.consumeAVG(series)
+    this.columnChart(categories, series, consumeAVG)
   }
 
   private dateFull(date: string): string {
@@ -70,7 +71,13 @@ export class BarChartCompoent implements OnInit {
       return `${month}/${year}`
   }
 
-  columnChart(categories: string[], seriesData: SerieParams[]) {
+  private consumeAVG(series: SerieParams[]) {
+    const consumoTotal = series[0].data
+    const consumoAVG = consumoTotal.reduce((a, b) => a + b, 0) / consumoTotal.length
+    return consumoAVG
+  }
+
+  columnChart(categories: string[], seriesData: SerieParams[], consumeAVG: number) {
     HighCharts.chart('columnChart', {
       chart: {
         type: 'column'
@@ -86,7 +93,24 @@ export class BarChartCompoent implements OnInit {
         title: {
           text: 'Consumo (m³)',
           align: 'middle'
-        }
+        },
+        plotLines: [
+          {
+            value: consumeAVG,
+            color: 'black',
+            zIndex: 4,
+            label: {
+              text: 'Consumo médio no período',
+              align: 'right',
+              y: -10,
+              style: {
+                fontSize: '12px',
+                color: 'black',
+                fontWeight: 'bold'
+              }
+            }
+          }
+        ]
       },
       tooltip: {
         valueSuffix: ' m³'
