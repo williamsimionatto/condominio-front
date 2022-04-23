@@ -68,6 +68,7 @@ import { LeituraAguaValoresModule } from './views/leitura-agua-valores/leitura-a
 import { CanLoadService } from './service/can-load/can-load.service';
 import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 import { LeituraAguaReportModule } from './views/report/leituraagua/leitura-agua-report.module';
+import { ChartModule } from 'angular-highcharts';
 
 @NgModule({
   imports: [
@@ -105,7 +106,8 @@ import { LeituraAguaReportModule } from './views/report/leituraagua/leitura-agua
     ToastrModule.forRoot(),
     SharedModule.forRoot(),
     NgSelectModule,
-    NgbProgressbarModule
+    NgbProgressbarModule,
+    ChartModule
   ],
   declarations: [
     AppComponent,
