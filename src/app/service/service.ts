@@ -9,7 +9,7 @@ export default class Service {
   public headerDict = {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
-    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
     'Access-Control-Allow-Origin': '*',
     'Authorization': 'Bearer ' + this.localStorageService.getItem('token')
   }
