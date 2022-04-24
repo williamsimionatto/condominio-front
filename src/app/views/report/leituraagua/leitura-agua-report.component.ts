@@ -1,5 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Chart } from "angular-highcharts";
 import { first } from "rxjs/operators";
 import { CondominoParams } from "../../../model/condomino.model";
 import { UserParamsAuth } from "../../../model/user.model";
@@ -25,7 +26,8 @@ export class LeituraAguaReportComponent implements OnInit {
     private leituraService: LeituraAguaService,
     private fileService: FileDownloadService,
     private condominoService: CondominoService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private changeDetector: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -56,13 +58,14 @@ export class LeituraAguaReportComponent implements OnInit {
 
   filter() {
     this.loading = true
-    this.leituraService.report(this.f.dataInicial.value, this.f.dataFinal.value, this.f.condomino.value)
+
+    this.leituraService
+      .report(this.f.dataInicial.value, this.f.dataFinal.value, this.f.condomino.value)
       .pipe(first())
-      .subscribe(
-        (x) => {
-        this.data = x
-      },
-      (error) => {
+      .subscribe( (x) => {
+        this.data = x  
+        this.changeDetector.detectChanges();
+      }, (error) => {
         console.log(error)
       })
 

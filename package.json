@@ -1,11 +1,10 @@
 {
-  "name": "@coreui/coreui-free-angular-admin-template",
+  "name": "madre-paulina",
   "version": "2.11.2",
-  "description": "Tempaltes for Angular Aplication",
+  "description": "Madre-paulina",
   "author": {
     "name": "William Simionatto"
   },
-  "copyright": "Copyright 2021 creativeLabs Łukasz Holeczek",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -38,6 +37,8 @@
     "@coreui/icons-angular": "1.0.0-alpha.3",
     "@ng-bootstrap/ng-bootstrap": "^9.0.0",
     "@ng-select/ng-select": "^6.0",
+    "@types/highcharts": "^7.0.0",
+    "angular-highcharts": "^12.0.0",
     "angular-progress-bar": "^1.0.11",
     "bootstrap": "^4.6.0",
     "chart.js": "^2.9.4",
@@ -46,6 +47,7 @@
     "express": "^4.17.3",
     "flag-icon-css": "^3.5.0",
     "font-awesome": "^4.7.0",
+    "highcharts": "^10.0.0",
     "ng-http-progress": "^1.0.4",
     "ng2-charts": "^2.4.2",
     "ngx-bootstrap": "^6.2.0",

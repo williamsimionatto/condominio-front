@@ -17,6 +17,11 @@
     "lib": [
       "esnext",
       "dom"
-    ]
+    ],
+    "paths": {
+      // "https://code.highcharts.com/es-modules/masters/*.src.js": [
+      //   "./node_modules/highcharts/*.src"
+      // ]
+    }
   }
 }

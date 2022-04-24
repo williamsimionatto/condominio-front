@@ -39,11 +39,11 @@
                         </div>
                     </form>
 
-                    <div *ngIf="data">
-                        <hr>
+                    <div>
+                        <hr *ngIf="data">
 
                         <div class="row">
-                            <div class="col col-lg-6 table-responsive overflow-table">
+                            <div class="col col-lg-6 table-responsive overflow-table" *ngIf="data">
                                 <table class="table table-striped border datatable table-body">
                                     <thead>
                                         <tr>
@@ -54,7 +54,7 @@
                                             <th width="5%" style="text-align: center">Boleto</th>
                                         </tr>
                                     </thead>
-                                    <tbody >
+                                    <tbody>
                                         <tr *ngFor="let item of data">
                                             <td width="6%">{{ formatDateBr(item.dataleitura) }}</td>
                                             <td width="15%">{{ item.condominoName }}</td>
@@ -71,8 +71,8 @@
                                 </table>
                             </div>
 
-                            <div class="col col-lg-6">
-                                
+                            <div class="col col-lg-6" *ngIf="data">
+                                <app-bar-chart [chartData]="data"></app-bar-chart>
                             </div>
                         </div>
                     </div>
