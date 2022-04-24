@@ -1,11 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { first } from "rxjs/operators";
 import { PerfilService } from "../../../service/perfil/perfil.service";
+import { BaseComponent } from "../../base.component";
 
 @Component({ templateUrl: '../add/add-edit.component.html' })
-export class OverviewPerfilComponent implements OnInit {
+export class OverviewPerfilComponent extends BaseComponent implements OnInit {
   perfilForm: FormGroup
   id: string
   isAddMode: boolean
@@ -16,10 +17,17 @@ export class OverviewPerfilComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
+    private router: Router,
     private perfilService: PerfilService,
-  ) {}
+  ) {
+    super('CAD_PERFIL');
+  }
 
   ngOnInit() {
+    if (!this.canOverview()) {
+      this.router.navigate(["/"]);
+    }
+
     this.id = this.route.snapshot.params["id"]
     this.isAddMode = !this.id
     this.perfilForm = this.formBuilder.group({

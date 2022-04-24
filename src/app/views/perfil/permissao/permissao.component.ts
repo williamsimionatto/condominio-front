@@ -2,21 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
-import { PerfilParams } from '../../../model/perfil.model';
 import { PerfilPermissaoParams } from '../../../model/perfilpermissao.model';
-import { UserParams, UserParamsAuth } from '../../../model/user.model';
-import { LocalStorageService, UserService } from '../../../service';
+import { UserParamsAuth } from '../../../model/user.model';
 import { NotificationService } from '../../../service/notification/notification.service';
 import { PerfilService } from '../../../service/perfil/perfil.service';
 import { PerfilPermissaoService } from '../../../service/perfilpermissao/perfilpermissao.service';
-import { PermissionsService } from '../../../service/permissions/permissions.service';
+import { BaseComponent } from '../../base.component';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './permissao.component.html',
   styleUrls: ['../../../../assets/css/default.scss']
 })
-export class PermissaoComponent implements OnInit {
+export class PermissaoComponent extends BaseComponent implements OnInit {
   permissoesPerfil: PerfilPermissaoParams[]
   perfilPermissaoForm: FormGroup;
   perfil: any = {};
@@ -33,11 +31,15 @@ export class PermissaoComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private perfilService: PerfilService,
-    private localStorageService: LocalStorageService,
-    private permissionService: PermissionsService
-  ) {}
+  ) {
+    super('CAD_PERFIL');
+  }
 
   ngOnInit(): void {
+    if (!this.canOverview()) {
+      this.router.navigate(['/']);
+    }
+
     this.user = JSON.parse(this.localStorageService.getItem('user'));
     this.permission = this.permissionService.getPermissionsbySigla('CAD_PERFIL')
 

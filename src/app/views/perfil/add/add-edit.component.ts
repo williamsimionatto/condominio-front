@@ -10,7 +10,7 @@ import { BaseComponent } from "../../base.component";
   templateUrl: "./add-edit.component.html",
   styleUrls: ['../../../../assets/css/default.scss']
 })
-export class AddEditPerfilComponent  extends BaseComponent implements OnInit {
+export class AddEditPerfilComponent extends BaseComponent implements OnInit {
   perfilForm: FormGroup
   id: string
   isAddMode: boolean
