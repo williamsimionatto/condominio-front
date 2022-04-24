@@ -121,7 +121,7 @@ export class ListLeituraAguaValoresComponent implements OnInit {
 
   async getCondominio(id: string): Promise<void> {
     await this.condominioService.getById(id).toPromise().then(condominio => {
-      this.condominio = condominio
+      this.condominio = condominio[0]
     })
   }
 
