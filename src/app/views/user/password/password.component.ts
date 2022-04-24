@@ -98,7 +98,6 @@ export class PasswordComponent implements OnInit {
       .verifyPassword(data)
       .pipe(first())
       .subscribe((x: any) => {
-        console.log(x)
         if (x.ok) {
           this.loading = true
           this.updatePassword()
