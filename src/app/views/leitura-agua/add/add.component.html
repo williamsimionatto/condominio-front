@@ -45,12 +45,12 @@
                             </div>
                         </div>
 
-                        <app-list-leitura-agua-valores [condominioId]="this.getCondominio()"
+                        <app-list-leitura-agua-valores *ngIf="showCondominos"
+                                                       [condominioId]="this.getCondominio()"
                                                        [idLeitura]="this.id" 
                                                        [dataLeitura]="this.getDataLeitura()" 
                                                        [dataVencimento]="this.getDataVencimento()" 
-                                                       [isAddMode]="isAddMode"
-                                                       *ngIf="showCondominos">
+                                                       [isAddMode]="isAddMode">
 
                         </app-list-leitura-agua-valores>
 

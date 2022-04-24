@@ -56,9 +56,8 @@ export class AddEditLeituraAguaComponent implements OnInit {
         .pipe(first())
         .subscribe(x => {
           this.leituraAguaForm.patchValue(x)
+          this.showCondominos = true
         })
-
-      this.showCondominos = true
     }
   }
 
