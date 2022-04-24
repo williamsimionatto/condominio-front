@@ -49,7 +49,22 @@ export class ListLeituraAguaValoresComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getCondominio(this.condominioId)
+    this.condominioService.getById(this.condominioId).pipe(first()).subscribe(
+      (condominio) => {
+        this.condominio = condominio
+
+        if (this.condominio) {
+          if (this.idLeitura == undefined) {
+            this.getValores()
+          } else {
+            this.getValoresCondominos()
+          }
+        }
+      },
+      (error) => {
+        this.notificationService.showError(error.message, "Erro")
+      }
+    )
   }
 
   public async submit(idLeitura: string) {
@@ -91,7 +106,7 @@ export class ListLeituraAguaValoresComponent implements OnInit {
   }
 
   public async getValores() {
-    this.leituraAguaService.getValores(this.idLeitura, this.dataLeitura).pipe(first()).subscribe(valores => {
+    this.leituraAguaService.getValores(this.dataLeitura).pipe(first()).subscribe(valores => {
       this.condominos = valores
       this.condominos.forEach(condomino => {
         condomino.consumo = parseFloat(condomino.consumo.toString())
@@ -111,23 +126,6 @@ export class ListLeituraAguaValoresComponent implements OnInit {
         this.atualizaTotalizadores(condomino)
       })
     })
-  }
-
-  getCondominio(id: string) {
-    this.condominioService.getById(id).pipe(first()).subscribe(
-      condominio => {
-        this.condominio = condominio[0]
-
-        if (this.idLeitura == undefined) {
-          this.getValores()
-        } else {
-          this.getValoresCondominos()
-        }
-      },
-      (error) => {
-        this.notificationService.showError(error.message, "Erro")
-      }
-    )
   }
 
   updateConsumo(condomino: LeituraAguaValoresParams) {

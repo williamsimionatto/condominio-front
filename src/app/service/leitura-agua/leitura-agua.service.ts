@@ -21,7 +21,7 @@ export class LeituraAguaService extends Service {
     return this.http.get<LeituraAguaParams>(`${environment.apiUrl}/leituraagua/${id}`, this.requestOptions);
   }
 
-  public getValores(idLeitura: string, dataLeitura: string) {
+  public getValores(dataLeitura: string) {
     return this.http.get<LeituraAguaValoresParams[]>(`${environment.apiUrl}/leituraagua/condominos?date=${dataLeitura}`, this.requestOptions);
   }
 
