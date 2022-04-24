@@ -49,13 +49,7 @@ export class ListLeituraAguaValoresComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getCondominio(this.condominioId).then(() => {
-      if (this.idLeitura == undefined) {
-        this.getValores()
-      } else {
-        this.getValoresCondominos()
-      }
-    })
+    this.getCondominio(this.condominioId)
   }
 
   public async submit(idLeitura: string) {
@@ -119,10 +113,21 @@ export class ListLeituraAguaValoresComponent implements OnInit {
     })
   }
 
-  async getCondominio(id: string): Promise<void> {
-    await this.condominioService.getById(id).toPromise().then(condominio => {
-      this.condominio = condominio[0]
-    })
+  getCondominio(id: string) {
+    this.condominioService.getById(id).pipe(first()).subscribe(
+      condominio => {
+        this.condominio = condominio[0]
+
+        if (this.idLeitura == undefined) {
+          this.getValores()
+        } else {
+          this.getValoresCondominos()
+        }
+      },
+      (error) => {
+        this.notificationService.showError(error.message, "Erro")
+      }
+    )
   }
 
   updateConsumo(condomino: LeituraAguaValoresParams) {
