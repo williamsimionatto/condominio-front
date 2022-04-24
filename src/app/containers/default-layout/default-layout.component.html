@@ -20,7 +20,7 @@
         <div class="dropdown-header text-center">
           <strong>{{user.name}}</strong>
         </div>
-        <a class="dropdown-item" style="cursor: pointer;"><i class="fa fa-key"></i>Alterar senha</a>
+        <a class="dropdown-item" (click)="redirectToChangePassword()" style="cursor: pointer;"><i class="fa fa-key"></i>Alterar senha</a>
         <a class="dropdown-item" (click)="logout()" style="cursor: pointer;"><i class="fa fa-lock"></i> Logout</a>
       </div>
     </li>
