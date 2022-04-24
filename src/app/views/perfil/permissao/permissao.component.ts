@@ -4,11 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { PerfilParams } from '../../../model/perfil.model';
 import { PerfilPermissaoParams } from '../../../model/perfilpermissao.model';
-import { UserParams } from '../../../model/user.model';
-import { UserService } from '../../../service';
+import { UserParams, UserParamsAuth } from '../../../model/user.model';
+import { LocalStorageService, UserService } from '../../../service';
 import { NotificationService } from '../../../service/notification/notification.service';
 import { PerfilService } from '../../../service/perfil/perfil.service';
 import { PerfilPermissaoService } from '../../../service/perfilpermissao/perfilpermissao.service';
+import { PermissionsService } from '../../../service/permissions/permissions.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,6 +23,8 @@ export class PermissaoComponent implements OnInit {
   permissaoName: string;
   loading = false;
   submitted = false;
+  user: UserParamsAuth
+  permission = null
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,10 +32,15 @@ export class PermissaoComponent implements OnInit {
     private notificationService: NotificationService,
     private route: ActivatedRoute,
     private router: Router,
-    private perfilService: PerfilService
+    private perfilService: PerfilService,
+    private localStorageService: LocalStorageService,
+    private permissionService: PermissionsService
   ) {}
 
   ngOnInit(): void {
+    this.user = JSON.parse(this.localStorageService.getItem('user'));
+    this.permission = this.permissionService.getPermissionsbySigla('CAD_PERFIL')
+
     let id = this.route.snapshot.params['id'];
     this.perfil.id = id;
     this.perfilPermissaoForm = this.formBuilder.group({});
@@ -113,5 +121,9 @@ export class PermissaoComponent implements OnInit {
         this.perfil.name = data.name;
       }
     );
+  }
+
+  hasPermission(tipo: string): boolean {
+    return this.permission[tipo] === 'S'
   }
 }
