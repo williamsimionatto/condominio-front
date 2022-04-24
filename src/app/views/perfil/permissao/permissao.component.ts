@@ -2,26 +2,27 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
-import { PerfilParams } from '../../../model/perfil.model';
 import { PerfilPermissaoParams } from '../../../model/perfilpermissao.model';
-import { UserParams } from '../../../model/user.model';
-import { UserService } from '../../../service';
+import { UserParamsAuth } from '../../../model/user.model';
 import { NotificationService } from '../../../service/notification/notification.service';
 import { PerfilService } from '../../../service/perfil/perfil.service';
 import { PerfilPermissaoService } from '../../../service/perfilpermissao/perfilpermissao.service';
+import { BaseComponent } from '../../base.component';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './permissao.component.html',
   styleUrls: ['../../../../assets/css/default.scss']
 })
-export class PermissaoComponent implements OnInit {
+export class PermissaoComponent extends BaseComponent implements OnInit {
   permissoesPerfil: PerfilPermissaoParams[]
   perfilPermissaoForm: FormGroup;
   perfil: any = {};
   permissaoName: string;
   loading = false;
   submitted = false;
+  user: UserParamsAuth
+  permission = null
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,10 +30,19 @@ export class PermissaoComponent implements OnInit {
     private notificationService: NotificationService,
     private route: ActivatedRoute,
     private router: Router,
-    private perfilService: PerfilService
-  ) {}
+    private perfilService: PerfilService,
+  ) {
+    super('CAD_PERFIL');
+  }
 
   ngOnInit(): void {
+    if (!this.canOverview()) {
+      this.router.navigate(['/']);
+    }
+
+    this.user = JSON.parse(this.localStorageService.getItem('user'));
+    this.permission = this.permissionService.getPermissionsbySigla('CAD_PERFIL')
+
     let id = this.route.snapshot.params['id'];
     this.perfil.id = id;
     this.perfilPermissaoForm = this.formBuilder.group({});
@@ -113,5 +123,9 @@ export class PermissaoComponent implements OnInit {
         this.perfil.name = data.name;
       }
     );
+  }
+
+  hasPermission(tipo: string): boolean {
+    return this.permission[tipo] === 'S'
   }
 }

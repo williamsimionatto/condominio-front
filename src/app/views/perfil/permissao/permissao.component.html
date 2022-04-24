@@ -16,28 +16,28 @@
                                     <th>Permissão</th>
                                     <th style="text-align: center">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" (click)="checkAllByTipoPermissao($event, 'consultar')">
+                                            <input class="form-check-input" type="checkbox" (click)="checkAllByTipoPermissao($event, 'consultar')" disabled="!hasPermission('alterar')">
                                             <label class="form-check-label"> Consultar </label>
                                         </div>
                                     </th>
 
                                     <th style="text-align: center">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" (click)="checkAllByTipoPermissao($event, 'inserir')">
+                                            <input class="form-check-input" type="checkbox" (click)="checkAllByTipoPermissao($event, 'inserir')" disabled="!hasPermission('alterar')">
                                             <label class="form-check-label"> Incluir </label>
                                         </div>
                                     </th>
 
                                     <th style="text-align: center">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" (click)="checkAllByTipoPermissao($event, 'alterar')">
+                                            <input class="form-check-input" type="checkbox" (click)="checkAllByTipoPermissao($event, 'alterar')" disabled="!hasPermission('alterar')">
                                             <label class="form-check-label"> Alterar </label>
                                         </div>
                                     </th>
 
                                     <th style="text-align: center">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" (click)="checkAllByTipoPermissao($event, 'excluir')">
+                                            <input class="form-check-input" type="checkbox" (click)="checkAllByTipoPermissao($event, 'excluir')" disabled="!hasPermission('alterar')">
                                             <label class="form-check-label"> Excluir </label>
                                         </div>
                                     </th>
@@ -48,7 +48,8 @@
                                 <tr *ngFor="let permissao of permissoesPerfil">
                                     <td>
                                         <div class="form-check">
-                                            <input class="form-check-input" id="permissaoName{{permissao.id}}" type="checkbox" (click)="checkAllByPermissao($event, permissao.id)">
+                                            <input class="form-check-input" id="permissaoName{{permissao.id}}" type="checkbox" (click)="checkAllByPermissao($event, permissao.id)"
+                                                    disabled="!hasPermission('alterar')">
                                             <label class="form-check-label" for="permissaoName{{permissao.id}}"> {{ permissao.name }} </label>
                                         </div>
                                     </td>
@@ -56,28 +57,32 @@
                                     <td width="5%">
                                         <div class="form-check">
                                             <input class="form-check-input" id="consultar{{permissao.id}}" type="checkbox"
-                                                   (click)="changePermission($event, permissao, 'consultar')" [checked]="permissao.consultar === 'S'">
+                                                   (click)="changePermission($event, permissao, 'consultar')" [checked]="permissao.consultar === 'S'"
+                                                   disabled="!hasPermission('alterar')">
                                         </div>
                                     </td>
 
                                     <td width="5%">
                                         <div class="form-check">
                                             <input class="form-check-input" id="incluir{{permissao.id}}" type="checkbox"
-                                                   (click)="changePermission($event, permissao, 'inserir')" [checked]="permissao.inserir === 'S'">
+                                                   (click)="changePermission($event, permissao, 'inserir')" [checked]="permissao.inserir === 'S'"
+                                                   disabled="!hasPermission('alterar')">
                                         </div>
                                     </td>
 
                                     <td width="5%">
                                         <div class="form-check">
                                             <input class="form-check-input" id="alterar{{permissao.id}}" type="checkbox"
-                                                   (click)="changePermission($event, permissao, 'alterar')" [checked]="permissao.alterar === 'S'">
+                                                   (click)="changePermission($event, permissao, 'alterar')" [checked]="permissao.alterar === 'S'"
+                                                   disabled="!hasPermission('alterar')">
                                         </div>
                                     </td>
 
                                     <td width="5%">
                                         <div class="form-check">
                                             <input class="form-check-input" id="excluir{{permissao.id}}" type="checkbox"
-                                                   (click)="changePermission($event, permissao, 'excluir')" [checked]="permissao.excluir === 'S'">
+                                                   (click)="changePermission($event, permissao, 'excluir')" [checked]="permissao.excluir === 'S'"
+                                                   disabled="!hasPermission('alterar')">
                                         </div>
                                     </td>
                                 </tr>
@@ -88,7 +93,7 @@
                         <div class="form-group form-footer">
                             <a routerLink="/perfil" class="btn btn-light rounded-pill btnVoltar">Voltar</a>
 
-                            <button [disabled]="loading" class="btn btn-primary rounded-pill">
+                            <button [disabled]="loading" class="btn btn-primary rounded-pill" *ngIf="hasPermission('alterar')">
                                 <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                                 Salvar
                             </button>

@@ -5,6 +5,8 @@ import { PerfilService } from "../../../service/perfil/perfil.service";
 import { first } from "rxjs/operators";
 import { ConfirmationDialogService } from "../../../service/confirmation-dialog/confirmation-dialog";
 import { PermissionsService } from "../../../service/permissions/permissions.service";
+import { UserParamsAuth } from "../../../model/user.model";
+import { LocalStorageService } from "../../../service";
 
 @Component({
   selector: 'app-dashboard',
@@ -14,16 +16,19 @@ import { PermissionsService } from "../../../service/permissions/permissions.ser
 export class ListPerfilComponent implements OnInit {
   perfis = null
   permission = null
+  user: UserParamsAuth
 
   constructor(
     private perfilService: PerfilService,
     private router: Router,
     private notificationService: NotificationService,
     private confirmationDialogService: ConfirmationDialogService,
+    private localStorageService: LocalStorageService,
     private permissionService: PermissionsService
   ) {}
 
   ngOnInit() {
+    this.user = JSON.parse(this.localStorageService.getItem('user'));
     this.perfilService.getAll().pipe(first()).subscribe(perfis => {
       this.perfis = perfis
     })
