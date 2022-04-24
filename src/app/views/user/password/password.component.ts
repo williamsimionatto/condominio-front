@@ -77,7 +77,7 @@ export class PasswordComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
-          this.router.navigate(['/usuario'], { relativeTo: this.route });
+          this.router.navigate(['/']);
           this.notificationService.showSuccess('Senha Atualizada com sucesso!', 'Sucesso');
         },
         error: ret => {

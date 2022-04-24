@@ -13,12 +13,19 @@ export class DefaultLayoutComponent {
   public navItems = navItems;
   public user: UserParamsAuth;
 
-  constructor(private localStorageService: LocalStorageService, private router: Router) { 
+  constructor(
+    private localStorageService: LocalStorageService,
+    private router: Router
+  ) {
     this.user = JSON.parse(this.localStorageService.getItem('user'));
   }
 
   toggleMinimize(e) {
     this.sidebarMinimized = e;
+  }
+
+  redirectToChangePassword() {
+    this.router.navigate([`/usuario/password/${this.user.id}`]);
   }
 
   logout() {

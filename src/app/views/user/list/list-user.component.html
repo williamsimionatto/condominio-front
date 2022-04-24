@@ -34,10 +34,6 @@
               <td>{{user.active == 'S' ? 'Sim' : 'Não'}}</td>
 
               <td style="text-align: center">
-                <a class="btn btn-dark btn-sm rounded-pill" routerLink="password/{{user.id}}" style="cursor: pointer;">
-                  <i class="fa fa-key"> Alterar Senha</i>
-                </a>
-
                 <a class="btn btn-success btn-sm rounded-pill" routerLink="overview/{{user.id}}" style="cursor: pointer;" *ngIf="hasPermission('consultar')">
                   <i class="fa fa-search"></i>
                 </a>
