@@ -4,12 +4,13 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { first } from "rxjs/operators";
 import { NotificationService } from "../../../service/notification/notification.service";
 import { PerfilService } from "../../../service/perfil/perfil.service";
+import { BaseComponent } from "../../base.component";
 
 @Component({
   templateUrl: "./add-edit.component.html",
   styleUrls: ['../../../../assets/css/default.scss']
 })
-export class AddEditPerfilComponent implements OnInit {
+export class AddEditPerfilComponent  extends BaseComponent implements OnInit {
   perfilForm: FormGroup
   id: string
   isAddMode: boolean
@@ -23,9 +24,15 @@ export class AddEditPerfilComponent implements OnInit {
     private router: Router,
     private perfilService: PerfilService,
     private notificationService: NotificationService
-  ) {}
+  ) {
+    super('CAD_PERFIL');
+  }
 
   ngOnInit() {
+    if (!this.canAdd()) {
+      this.router.navigate(["/"]);
+    }
+
     this.id = this.route.snapshot.params["id"]
     this.isAddMode = !this.id
     this.perfilForm = this.formBuilder.group({
@@ -88,4 +95,8 @@ export class AddEditPerfilComponent implements OnInit {
   }
 
   get f() { return this.perfilForm.controls }
+
+  canAdd(): boolean {
+    return this.permissions.inserir === 'S';
+  }
 }
