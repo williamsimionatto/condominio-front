@@ -92,5 +92,12 @@ export class LeituraAguaReportComponent implements OnInit {
     return date.substring(8, 10) + '/' + date.substring(5, 7) + '/' + date.substring(0, 4)
   }
 
+  public dateFull(date: string): string {
+    const newDate = new Date(date)
+    const month = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"][newDate.getMonth()];
+    const year = newDate.getFullYear();
+    return `${month}/${year}`
+  }
+
   get f() { return this.filterForm.controls }
 }

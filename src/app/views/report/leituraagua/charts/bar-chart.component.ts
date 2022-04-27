@@ -21,7 +21,6 @@ export class BarChartCompoent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log('entou no onInit');
     this.prepareChartData(this.chartData)
   }
 
