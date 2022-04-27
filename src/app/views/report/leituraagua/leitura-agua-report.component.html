@@ -47,19 +47,26 @@
                                 <table class="table table-striped border datatable table-body">
                                     <thead>
                                         <tr>
-                                            <th width="6%">Data</th>
-                                            <th width="15%">Condômino</th>
-                                            <th width="5%">Consumo</th>
-                                            <th width="7%">Valor Total</th>
+                                            <th colspan="2"></th>
+                                            <th colspan="2" style="text-align: center">Consumo</th>
+                                            <th colspan="2"></th>
+                                        </tr>
+                                        <tr>
+                                            <th width="6%" style="text-align: center">Leitura</th>
+                                            <th width="20%" style="text-align: center">Condômino</th>
+                                            <th style="text-align: center">m³</th>
+                                            <th width="5%" style="text-align: center">Dias</th>
+                                            <th width="7%" style="text-align: center">Valor Total</th>
                                             <th width="5%" style="text-align: center">Boleto</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr *ngFor="let item of data">
-                                            <td width="6%">{{ formatDateBr(item.dataleitura) }}</td>
-                                            <td width="15%">{{ item.condominoName }}</td>
-                                            <td width="5%">{{ item.consumo }} m³</td>
-                                            <td width="7%">{{ item.valorTotal | currency: 'BRL' }}</td>
+                                            <td width="6%">{{ dateFull(item.dataleitura) }}</td>
+                                            <td width="20%" class="nowrap">{{ item.condominoName }}</td>
+                                            <td style="text-align: right">{{ item.consumo }} m³</td>
+                                            <td width="5%" style="text-align: right">{{ item.diasConsumo }}</td>
+                                            <td width="7%" style="text-align: right">{{ item.valorTotal | currency: 'BRL' }}</td>
 
                                             <td width="5%" style="text-align: center">
                                                 <a class="btn btn-primary btn-sm rounded-pill" (click)="downloadFile(item.fileId, item.fileName)" *ngIf="item.fileId">
