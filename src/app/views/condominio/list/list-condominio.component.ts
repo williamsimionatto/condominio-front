@@ -1,28 +1,34 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { first } from "rxjs/operators";
 import { CondominioParams } from "../../../model/condominio.model";
 import { CondominioService } from "../../../service/condominio/condominio.service";
 import { ConfirmationDialogService } from "../../../service/confirmation-dialog/confirmation-dialog";
 import { NotificationService } from "../../../service/notification/notification.service";
-import { PermissionsService } from "../../../service/permissions/permissions.service";
+import { BaseComponent } from "../../base.component";
 
 @Component({
   selector: "app-list-condominio",
   templateUrl: "./list-condominio.component.html",
   styleUrls: ['../../../../assets/css/default.scss']
 })
-export class ListCondominioComponent implements OnInit {
+export class ListCondominioComponent extends BaseComponent implements OnInit {
   condominios = null
-  permissions = null
 
   constructor(
     private condominioService: CondominioService,
     private notificationService: NotificationService,
     private confirmationDialogService: ConfirmationDialogService,
-    private permissionService: PermissionsService
-  ) {}
+    private router: Router,
+  ) {
+    super('CAD_CONDOMINIO')
+  }
 
   ngOnInit() {
+    if (!this.canOverview()) {
+      this.router.navigate(['/not-found'])
+    }
+
     this.condominioService.getAll().pipe(first()).subscribe(condominios => {
       this.condominios = condominios
     })
