@@ -99,3 +99,66 @@ hr {
   overflow: hidden; 
   text-overflow: ellipsis;
 }
+
+.ibox.middle > .ibox-content {
+  width: 28%;
+  padding: 42px 0;
+  background-color: #fdfdfd;
+}
+
+.ibox {
+  clear: both;
+}
+
+.middle {
+  display: flex;
+  justify-content: center;
+  margin-top: 140px;
+}
+
+.ibox.middle > .ibox-content > .ibox-header, .ibox.middle > .ibox-content > .ibox-body, .ibox.middle > .ibox-content > .ibox-footer {
+  background-color: #fdfdfd;
+  border: none;
+}
+
+.ibox.middle > .ibox-content .ibox-header {
+  padding: 0;
+  height: unset;
+  margin-bottom: 5px;
+}
+
+.ibox.middle > .ibox-content .ibox-title {
+  text-align: center;
+  font-size: 16px;
+  width: 100%;
+}
+
+.ibox-header .ibox-title {
+  font-size: 13px;
+  font-weight: 600;
+  float: left;
+}
+
+.ibox.middle > .ibox-content > .ibox-header, .ibox.middle > .ibox-content > .ibox-body, .ibox.middle > .ibox-content > .ibox-footer {
+  background-color: #fdfdfd;
+  border: none;
+}
+
+.ibox.middle > .ibox-content .ibox-body {
+  text-align: center;
+  width: 100%;
+  padding: 0;
+}
+
+.inline-content {
+  clear: both;
+}
+
+.inline-body {
+  width: 100%;
+  display: inline-block;
+}
+
+.m-t {
+  margin-top: 15px;
+}
