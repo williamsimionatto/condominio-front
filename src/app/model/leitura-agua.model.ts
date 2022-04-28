@@ -13,4 +13,5 @@ export type LeituraAguaReportParams = {
   valorTotal: number,
   fileId: number,
   fileName: string
+  mesreferencia: string
 }
