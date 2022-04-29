@@ -25,7 +25,7 @@ export class OverviewPerfilComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     if (!this.canOverview()) {
-      this.router.navigate(["/"]);
+      this.router.navigate(["/not-found"]);
     }
 
     this.id = this.route.snapshot.params["id"]

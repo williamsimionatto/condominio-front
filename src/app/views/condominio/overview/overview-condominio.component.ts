@@ -1,9 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { first } from "rxjs/operators";
 import { CondominioService } from "../../../service/condominio/condominio.service";
 import { PerfilService } from "../../../service/perfil/perfil.service";
+import { BaseComponent } from "../../base.component";
 
 @Component({ 
   templateUrl: '../add/add-edit.component.html' ,
@@ -11,7 +12,7 @@ import { PerfilService } from "../../../service/perfil/perfil.service";
     '../../../../assets/css/default.scss',
   ]
 })
-export class OverviewCondominioComponent implements OnInit {
+export class OverviewCondominioComponent extends BaseComponent implements OnInit {
   condominioForm: FormGroup
   id: string
   isAddMode: boolean
@@ -23,9 +24,16 @@ export class OverviewCondominioComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private condominioService: CondominioService,
-  ) {}
+    private router: Router
+  ) {
+    super('CAD_CONDOMINIO');
+  }
 
   ngOnInit() {
+    if (!this.canOverview()) {
+      this.router.navigate(['/not-found'])
+    }
+
     this.id = this.route.snapshot.params["id"]
     this.isAddMode = !this.id
     this.condominioForm = this.formBuilder.group({

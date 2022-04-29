@@ -76,6 +76,13 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         canLoad: [CanLoadService]
       },
+      {
+      path: 'not-found',
+        component: P404Component,
+        data: {
+          title: 'Page 404'
+        }
+      }
     ]
   },
   { path: '**', component: P404Component }

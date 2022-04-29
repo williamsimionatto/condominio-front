@@ -158,7 +158,7 @@ export class AddEditLeituraAguaComponent implements OnInit {
     return this.leituraAguaService.isUniqueDataLeitura(this.leituraAguaForm.value.condominio, this.leituraAguaForm.value.dataleitura).pipe(first()).subscribe(
       (data : any) => {
         if (!data.unique) {
-          this.notificationService.showInfo("Já existe uma leitura cadastrada para o mês-ano informado!", "Atenção");
+          this.notificationService.showWarning("Já existe uma leitura cadastrada para o mês-ano informado!", "Atenção");
           this.loading = false;
         } else {
           this.showCondominos = true;

@@ -37,7 +37,7 @@ export class PermissaoComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.canOverview()) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/not-found']);
     }
 
     this.user = JSON.parse(this.localStorageService.getItem('user'));
