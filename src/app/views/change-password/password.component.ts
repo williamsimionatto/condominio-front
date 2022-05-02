@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
-import { UserParams } from '../../../model/user.model';
-import { UserService } from '../../../service';
-import { NotificationService } from '../../../service/notification/notification.service';
+import { UserParams, UserParamsAuth } from '../../model/user.model';
+import { LocalStorageService, UserService } from '../../service';
+import { NotificationService } from '../../service/notification/notification.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './password.component.html',
-  styleUrls: ['../../../../assets/css/default.scss']
+  styleUrls: ['../../../assets/css/default.scss']
 })
 export class PasswordComponent implements OnInit {
   user: UserParams
@@ -20,6 +20,7 @@ export class PasswordComponent implements OnInit {
   submitted = false;
   readonly = true;
   readonly_password = true;
+  userAuth: UserParamsAuth
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,11 +28,20 @@ export class PasswordComponent implements OnInit {
     private notificationService: NotificationService,
     private route: ActivatedRoute,
     private router: Router,
-  ) {}
+    private localStorageService: LocalStorageService
+  ) {
+    this.userAuth = JSON.parse(this.localStorageService.getItem('user'));
+  }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.isAddMode = !this.id;
+
+    if (this.id !== this.userAuth.id.toString()) {
+      this.router.navigate(['/not-found']);
+    }
+
+    this.notificationService.showInfo('Após alterar sua senha, você será redirecionado para a tela de login!', 'Aviso');
 
     this.passwordUserForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -60,7 +70,6 @@ export class PasswordComponent implements OnInit {
       this.notificationService.showError('A Nova Senha não confere!', 'Erro');
     }
 
-    
     this.verifyPassword()
   }
 
@@ -77,8 +86,9 @@ export class PasswordComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
-          this.router.navigate(['/']);
           this.notificationService.showSuccess('Senha Atualizada com sucesso!', 'Sucesso');
+          this.localStorageService.clear();
+          this.router.navigate(['/login']);
         },
         error: ret => {
           this.notificationService.showError('Aconteceu um erro ao atualizar a senha!', 'Erro');

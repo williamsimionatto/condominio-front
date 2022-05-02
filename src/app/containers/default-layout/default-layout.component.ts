@@ -25,12 +25,11 @@ export class DefaultLayoutComponent {
   }
 
   redirectToChangePassword() {
-    this.router.navigate([`/usuario/password/${this.user.id}`]);
+    this.router.navigate([`/alterarsenha/${this.user.id}`]);
   }
 
   logout() {
     this.localStorageService.clear();
-
     this.router.navigate(['/login']);
   }
 }
