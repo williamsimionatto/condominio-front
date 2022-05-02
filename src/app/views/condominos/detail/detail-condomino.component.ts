@@ -6,6 +6,7 @@ import { CondominoService } from "../../../service/condomino/condomino.service";
 import { ConfirmationDialogService } from "../../../service/confirmation-dialog/confirmation-dialog";
 import { ModalDialogService } from "../../../service/modal/modal-dialog.service";
 import { NotificationService } from "../../../service/notification/notification.service";
+import { BaseComponent } from "../../base.component";
 
 @Component({
   selector: "app-detail-condomino",
@@ -15,7 +16,7 @@ import { NotificationService } from "../../../service/notification/notification.
     '../../../../assets/css/master-detail.scss',
   ]
 })
-export class DetailCondominosComponent implements OnInit {
+export class DetailCondominosComponent extends BaseComponent implements OnInit {
   condominos: CondominoParams[] = []
   condominosSelected: CondominoParams[] = [];
   @Input() readonly: boolean = false;
@@ -24,9 +25,10 @@ export class DetailCondominosComponent implements OnInit {
   constructor(
     private condominoService: CondominoService,
     private notificationService: NotificationService,
-    private confirmationDialogService: ConfirmationDialogService,
     private modalDialogService: ModalDialogService
-  ) { }
+  ) { 
+    super('CAD_CONDOMINO')
+  }
 
   ngOnInit() {
     if (this.condominioId) {
