@@ -33,13 +33,17 @@ export class FileUploadComponent {
       formData.append("leituraId", this.condomino.leituraagua.toString());
       formData.append("condominoId", this.condomino.condominoId.toString());
 
-      this.fileService.save(formData, this.condomino.leituraagua.toString()).pipe(first()).subscribe(
-        (response: any) => {
-          this.notificationService.showSuccess(response.message, "Sucesso");
-          this.condomino.fileName = file.name;
-          this.condomino.fileId = response.fileId;
-        }
-      );
+      this.fileService.save(formData, this.condomino.leituraagua.toString())
+        .pipe(first()).subscribe(
+          (response: any) => {
+            this.notificationService.showSuccess(response.message, "Sucesso");
+            this.condomino.fileName = file.name;
+            this.condomino.fileId = response.fileId;
+          },
+          (error) => {
+            this.notificationService.showError(error.error.message, "Erro");
+          }
+        )
     }
   }
 
