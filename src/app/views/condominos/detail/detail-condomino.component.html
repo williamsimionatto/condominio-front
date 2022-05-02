@@ -1,4 +1,4 @@
-<div class="mestreDetalhe">
+<div class="mestreDetalhe" *ngIf="hasPermission('consultar')">
     <div class="mestreDetalhe-content">
         <div class="mestreDetalhe-header">
             <div class="mestreDetalhe-title">
@@ -6,11 +6,11 @@
             </div>
 
             <div class="mestreDetalhe-info" *ngIf="!readonly">
-                <button type="button" *ngIf="enableAddButton() && !enableCountLabel()" (click)="openEmptyModal()">
+                <button type="button" *ngIf="enableAddButton() && !enableCountLabel() && hasPermission('inserir')" (click)="openEmptyModal()">
                     <i class="fa fa-plus-square"></i>
                 </button>
 
-                <button type="button" *ngIf="hasCondominoSelected() && !enableCountLabel()" (click)="openModalFor()">
+                <button type="button" *ngIf="hasCondominoSelected() && !enableCountLabel() && hasPermission('alterar')" (click)="openModalFor()">
                     <i class="fa fa-pencil-square"></i>
                 </button>
 
@@ -31,7 +31,6 @@
                         <th>Tipo</th>
                         <th>Número Quartos</th>
                         <th>Ativo</th>
-                        <!-- <th>Ordem</th> -->
                     </tr>
                 </thead>
 
@@ -45,7 +44,6 @@
                         <td>{{condomino.tipo == 'A' ? 'Apartamento' : 'Sala Comercial'}}</td>
                         <td>{{condomino.numeroquartos}}</td>
                         <td>{{condomino.ativo == 'S' ? 'Sim' : 'Não'}}</td>
-                        <!-- <td>{{condomino.position}}</td> -->
                     </tr>
                 </tbody>
             </table>

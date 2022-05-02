@@ -32,4 +32,8 @@ export class BaseComponent {
   canDelete(): boolean {
     return this.permissions.excluir === 'S';
   }
+
+  hasPermission(tipo: string): boolean {
+    return this.permissions[tipo] === 'S';
+  }
 }

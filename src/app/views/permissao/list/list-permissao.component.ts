@@ -1,36 +1,41 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { first } from "rxjs/operators";
 import { ConfirmationDialogService } from "../../../service/confirmation-dialog/confirmation-dialog";
 import { NotificationService } from "../../../service/notification/notification.service";
 import { PermissaoService } from "../../../service/permissao/permissao.service";
 import { PermissionsService } from "../../../service/permissions/permissions.service";
+import { BaseComponent } from "../../base.component";
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './list-permissao.component.html',
   styleUrls: ['../../../../assets/css/default.scss']
 })
-export class ListPermissaoComponent implements OnInit {
+export class ListPermissaoComponent extends BaseComponent implements OnInit {
   permissoes = null
-  permission = null
 
   constructor(
     private permissaoService: PermissaoService,
     private notificationService: NotificationService,
     private confirmationDialogService: ConfirmationDialogService,
-    private permissionService: PermissionsService
-  ) {}
+    private router: Router
+  ) {
+    super('CAD_PERMISSAO');
+  }
 
   ngOnInit() {
+    if (!this.canOverview()) {
+      this.router.navigate(['/not-found']);
+    }
+
     this.permissaoService.getAll().pipe(first()).subscribe(permissoes => {
       this.permissoes = permissoes
     })
-    
-    this.permission = this.permissionService.getPermissionsbySigla('CAD_PERMISSAO')
-  } 
+  }
  
   hasPermission(tipo: string): boolean {
-    return this.permission[tipo] === 'S'
+    return this.permissions[tipo] === 'S'
   }	
 
   delete(permissaoParams) {
@@ -42,7 +47,7 @@ export class ListPermissaoComponent implements OnInit {
 
         const permissao = this.permissoes.filter(permissao => permissao.id === permissaoParams.id)
         permissao.isDeleting = true
-    
+
         this.permissaoService.delete(permissaoParams.id).subscribe(
           results => {
             this.notificationService.showSuccess('Registro excluído com sucesso!', 'Sucesso')
@@ -53,9 +58,6 @@ export class ListPermissaoComponent implements OnInit {
             this.notificationService.showError('Não é possível excluir este registro', 'Erro')
           }
         )
-      })
-      .catch(() => {
-
       })
   }
 }

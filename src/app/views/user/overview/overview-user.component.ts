@@ -4,9 +4,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { UserService } from '../../../service';
 import { PerfilService } from '../../../service/perfil/perfil.service';
+import { BaseComponent } from '../../base.component';
 
 @Component({ templateUrl: '../add/add-edit.component.html' })
-export class OverUserViewComponent implements OnInit {
+export class OverUserViewComponent extends BaseComponent implements OnInit {
   userForm: FormGroup;
   id: string;
   isAddMode: boolean;
@@ -30,11 +31,18 @@ export class OverUserViewComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private perfilService: PerfilService,
-  ) {}
+    private router: Router
+  ) {
+    super('CAD_USUARIO')
+  }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
     this.isAddMode = !this.id;
+
+    if (!this.canOverview()) {
+      this.router.navigate(['/not-found']);
+    }
 
     this.userForm = this.formBuilder.group({
       id: this.formBuilder.control('', [Validators.nullValidator]),

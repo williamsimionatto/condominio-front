@@ -7,15 +7,15 @@ import { ConfirmationDialogService } from "../../../service/confirmation-dialog/
 import { PermissionsService } from "../../../service/permissions/permissions.service";
 import { UserParamsAuth } from "../../../model/user.model";
 import { LocalStorageService } from "../../../service";
+import { BaseComponent } from "../../base.component";
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './list-perfil.component.html',
   styleUrls: ['../../../../assets/css/default.scss']
 })
-export class ListPerfilComponent implements OnInit {
+export class ListPerfilComponent extends BaseComponent implements OnInit {
   perfis = null
-  permission = null
   user: UserParamsAuth
 
   constructor(
@@ -23,22 +23,24 @@ export class ListPerfilComponent implements OnInit {
     private router: Router,
     private notificationService: NotificationService,
     private confirmationDialogService: ConfirmationDialogService,
-    private localStorageService: LocalStorageService,
-    private permissionService: PermissionsService
-  ) {}
+  ) {
+    super('CAD_PERFIL');
+  }
 
   ngOnInit() {
+    if (!this.canOverview()) {
+      this.router.navigate(["/not-found"]);
+    }
+
     this.user = JSON.parse(this.localStorageService.getItem('user'));
     this.perfilService.getAll().pipe(first()).subscribe(perfis => {
       this.perfis = perfis
     })
-
-    this.permission = this.permissionService.getPermissionsbySigla('CAD_PERFIL')
   }
 
   hasPermission(tipo: string): boolean {
-    return this.permission[tipo] === 'S'
-  }	
+    return this.permissions[tipo] === 'S'
+  }
 
   delete(perfilParams) {
     this.confirmationDialogService.confirm('Excluir Perfil', 'Deseja realmente excluir este perfil? Esta ação não poderá ser desfeita.', 'Excluir', 'Cancelar', "lg")

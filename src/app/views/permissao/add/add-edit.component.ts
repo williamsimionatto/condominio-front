@@ -4,12 +4,13 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { first } from "rxjs/operators";
 import { NotificationService } from "../../../service/notification/notification.service";
 import { PermissaoService } from "../../../service/permissao/permissao.service";
+import { BaseComponent } from "../../base.component";
 
 @Component({
   templateUrl: "./add-edit.component.html",
   styleUrls: ['../../../../assets/css/default.scss']
 })
-export class AddEditPermissaoComponent implements OnInit {
+export class AddEditPermissaoComponent extends BaseComponent implements OnInit {
   permissaoForm: FormGroup
   id: string
   isAddMode: boolean
@@ -23,11 +24,18 @@ export class AddEditPermissaoComponent implements OnInit {
     private router: Router,
     private permissaoService: PermissaoService,
     private notificationService: NotificationService
-  ) {}
+  ) {
+    super('CAD_PERMISSAO');
+  }
 
   ngOnInit() {
     this.id = this.route.snapshot.params["id"]
     this.isAddMode = !this.id
+
+    if ((!this.isAddMode && !this.canEdit()) || (this.isAddMode && !this.canAdd())) {
+      this.router.navigate(["/not-found"]);
+    }
+
     this.permissaoForm = this.formBuilder.group({
       id: this.formBuilder.control(""),
       name: this.formBuilder.control("", [Validators.required, Validators.minLength(5)]),

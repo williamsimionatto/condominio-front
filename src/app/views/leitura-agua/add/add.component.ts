@@ -6,13 +6,14 @@ import { LeituraAguaParams } from "../../../model/leitura-agua.model";
 import { CondominioService } from "../../../service/condominio/condominio.service";
 import { LeituraAguaService } from "../../../service/leitura-agua/leitura-agua.service";
 import { NotificationService } from "../../../service/notification/notification.service";
+import { BaseComponent } from "../../base.component";
 import { ListLeituraAguaValoresComponent } from "../../leitura-agua-valores/list/list.component";
 
 @Component({
   templateUrl: "./add.component.html",
   styleUrls: ['../../../../assets/css/default.scss']
 })
-export class AddEditLeituraAguaComponent implements OnInit {
+export class AddEditLeituraAguaComponent extends BaseComponent implements OnInit {
   leituraAguaForm: FormGroup
   id: string
   isAddMode: boolean
@@ -35,11 +36,17 @@ export class AddEditLeituraAguaComponent implements OnInit {
     private leituraAguaService: LeituraAguaService,
     private notificationService: NotificationService,
     private condiminioService: CondominioService
-  ) {}
+  ) {
+    super('TAR_LEITURAAGUA')
+  }
 
   ngOnInit() {
     this.id = this.route.snapshot.params["id"]
     this.isAddMode = !this.id
+
+    if ((!this.isAddMode && !this.canEdit()) || (this.isAddMode && !this.canAdd())) {
+      this.router.navigate(["/not-found"]);
+    }
 
     this.leituraAguaForm = this.formBuilder.group({
       id: this.formBuilder.control(this.id),

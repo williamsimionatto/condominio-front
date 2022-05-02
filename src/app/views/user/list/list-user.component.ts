@@ -5,34 +5,37 @@ import { UserService } from '../../../service';
 import { ConfirmationDialogService } from '../../../service/confirmation-dialog/confirmation-dialog';
 import { NotificationService } from '../../../service/notification/notification.service';
 import { PermissionsService } from '../../../service/permissions/permissions.service';
+import { BaseComponent } from '../../base.component';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './list-user.component.html',
   styleUrls: ['../../../../assets/css/default.scss']
 })
-export class ListUserComponent implements OnInit {
+export class ListUserComponent extends BaseComponent implements OnInit {
   users = null
-  permission = null
 
   constructor(
     private userService: UserService,
     private notificationService: NotificationService,
     private router: Router,
     private confirmationDialogService: ConfirmationDialogService,
-    private permissionService: PermissionsService
-  ) {}
+  ) {
+    super('CAD_USUARIO');
+  }
 
   ngOnInit(): void {
+    if (!this.canOverview()) {
+      this.router.navigate(['/not-found']);
+    }
+
     this.userService.getAll().pipe(first()).subscribe(users => {
       this.users = users
     })
-
-    this.permission = this.permissionService.getPermissionsbySigla('CAD_USUARIO')
   }
 
   hasPermission(tipo: string): boolean {
-    return this.permission[tipo] === 'S'
+    return this.permissions[tipo] === 'S'
   }
 
   delete(userParams) {
@@ -51,9 +54,6 @@ export class ListUserComponent implements OnInit {
     
         this.notificationService.showSuccess('Registro excluído com sucesso!', 'Sucesso')
         this.users.splice(this.users.indexOf(userParams), 1);
-      })
-      .catch(() => {
-
       })
   }
 }

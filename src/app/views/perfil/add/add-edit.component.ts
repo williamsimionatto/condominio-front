@@ -29,12 +29,13 @@ export class AddEditPerfilComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (!this.canAdd()) {
+    this.id = this.route.snapshot.params["id"]
+    this.isAddMode = !this.id
+
+    if ((!this.isAddMode && !this.canEdit()) || (this.isAddMode && !this.canAdd())) {
       this.router.navigate(["/not-found"]);
     }
 
-    this.id = this.route.snapshot.params["id"]
-    this.isAddMode = !this.id
     this.perfilForm = this.formBuilder.group({
       id: this.formBuilder.control(""),
       name: this.formBuilder.control("", [Validators.required, Validators.minLength(5)]),
