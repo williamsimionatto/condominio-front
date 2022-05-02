@@ -1,31 +1,38 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { first } from "rxjs/operators";
 import { LeituraAguaParams } from "../../../model/leitura-agua.model";
 import { ConfirmationDialogService } from "../../../service/confirmation-dialog/confirmation-dialog";
 import { LeituraAguaService } from "../../../service/leitura-agua/leitura-agua.service";
 import { NotificationService } from "../../../service/notification/notification.service";
 import { PermissionsService } from "../../../service/permissions/permissions.service";
+import { BaseComponent } from "../../base.component";
 
 @Component({
   selector: 'app-list-leitura-agua',
   templateUrl: './list.component.html',
   styleUrls: ['../../../../assets/css/default.scss']
 })
-export class ListLeituraAguaComponent implements OnInit {
+export class ListLeituraAguaComponent extends BaseComponent implements OnInit {
   leituraAgua = null
-  permissions = null
 
   constructor(
     private leituraAguaService: LeituraAguaService,
     private notificationService: NotificationService,
     private confirmationDialogService: ConfirmationDialogService,
-    private permissionService: PermissionsService
-  ) {}
+    private router: Router
+  ) {
+    super('TAR_LEITURAAGUA');
+  }
 
   ngOnInit() {
+    if (!this.canOverview()) {
+      this.router.navigate(["/not-found"]);
+    }
+
     this.leituraAguaService.getAll().pipe(first()).subscribe(leituraAgua => {
       this.leituraAgua = leituraAgua
-    })
+    });
 
     this.permissions = this.permissionService.getPermissionsbySigla('TAR_LEITURAAGUA')
   }

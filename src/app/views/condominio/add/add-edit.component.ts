@@ -32,7 +32,7 @@ export class AddEditCondominioComponent extends BaseComponent implements OnInit 
   }
 
   ngOnInit() {
-    if (!this.canAdd()) {
+    if ((!this.isAddMode && !this.canEdit()) || (this.isAddMode && !this.canAdd())) {
       this.router.navigate(["/not-found"]);
     }
 
