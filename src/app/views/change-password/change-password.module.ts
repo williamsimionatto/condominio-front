@@ -1,28 +1,26 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ListUserComponent } from './list/list-user.component';
-import { UserRoutingModule } from './user-routing.module';
-import { AddEditUserComponent } from './add/add-edit.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { OverUserViewComponent } from './overview/overview-user.component';
+import { PasswordComponent } from '../change-password/password.component';
+import { AppModule } from '../../app.module';
 import { SharedModule } from '../../containers/shared.module';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ChangePasswordRoutingModule } from './change-password-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    UserRoutingModule,
+    ChangePasswordRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
     NgSelectModule
   ],
   declarations: [
-    ListUserComponent,
-    AddEditUserComponent,
-    OverUserViewComponent,
+    PasswordComponent,
   ],
   providers: [
   ],
 })
-export class UserModule { }
+export class ChangePasswordModule { }

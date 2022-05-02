@@ -41,6 +41,10 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
+        path: 'alterarsenha',
+        loadChildren: () => import('./views/change-password/change-password.module').then(m => m.ChangePasswordModule),
+      },
+      {
         path: 'condominio',
         loadChildren: () => import('./views/condominio/condominio.module').then(m => m.CondominioModule),
         canActivate: [AuthGuard],

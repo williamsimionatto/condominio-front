@@ -3,15 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { AddEditUserComponent } from './add/add-edit.component';
 import { ListUserComponent } from './list/list-user.component';
 import { OverUserViewComponent } from './overview/overview-user.component';
-import { PasswordComponent } from './password/password.component';
-
 
 const routes: Routes = [
   { path: '', component: ListUserComponent },
   { path: 'add', component: AddEditUserComponent },
   { path: 'edit/:id', component: AddEditUserComponent },
   { path: 'overview/:id', component: OverUserViewComponent },
-  { path: 'password/:id', component: PasswordComponent },
 ];
 
 @NgModule({

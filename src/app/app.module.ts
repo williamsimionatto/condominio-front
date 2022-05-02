@@ -64,6 +64,7 @@ import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 import { LeituraAguaReportModule } from './views/report/leituraagua/leitura-agua-report.module';
 import { ChartModule } from 'angular-highcharts';
 import { BarChartModule } from './views/report/leituraagua/charts/bar-chart.module';
+import { ChangePasswordModule } from './views/change-password/change-password.module';
 
 @NgModule({
   imports: [
@@ -89,6 +90,7 @@ import { BarChartModule } from './views/report/leituraagua/charts/bar-chart.modu
     LeituraAguaModule,
     LeituraAguaValoresModule,
     UserModule,
+    ChangePasswordModule,
     PerfilModule,
     PermissaoModule,
     LeituraAguaReportModule,
