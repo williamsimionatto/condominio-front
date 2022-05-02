@@ -5,12 +5,13 @@ import { first } from 'rxjs/operators';
 import { UserService } from '../../../service';
 import { NotificationService } from '../../../service/notification/notification.service';
 import { PerfilService } from '../../../service/perfil/perfil.service';
+import { BaseComponent } from '../../base.component';
 
 @Component({
    templateUrl: 'add-edit.component.html',
    styleUrls: ['../../../../assets/css/default.scss']
 })
-export class AddEditUserComponent implements OnInit {
+export class AddEditUserComponent extends BaseComponent implements OnInit {
   userForm: FormGroup;
   id: string;
   isAddMode: boolean;
@@ -38,11 +39,18 @@ export class AddEditUserComponent implements OnInit {
     private userService: UserService,
     private notificationService: NotificationService,
     private perfilService: PerfilService
-  ) {}
+  ) {
+    super('CAD_USUARIO')
+  }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
     this.isAddMode = !this.id;
+
+    if ((!this.isAddMode && !this.canEdit()) || (this.isAddMode && !this.canAdd())) {
+      this.router.navigate(["/not-found"]);
+    }
+
     this.userForm = this.formBuilder.group({
       id: this.formBuilder.control('', [Validators.nullValidator]),
       name: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
