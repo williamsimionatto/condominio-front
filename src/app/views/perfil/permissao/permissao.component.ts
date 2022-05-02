@@ -32,11 +32,11 @@ export class PermissaoComponent extends BaseComponent implements OnInit {
     private router: Router,
     private perfilService: PerfilService,
   ) {
-    super('CAD_PERFIL');
+    super('CAD_PERFILPERMISSAO');
   }
 
   ngOnInit(): void {
-    if (!this.canOverview()) {
+    if (!this.canOverview() || !this.canEdit()) {
       this.router.navigate(['/not-found']);
     }
 
@@ -126,6 +126,7 @@ export class PermissaoComponent extends BaseComponent implements OnInit {
   }
 
   hasPermission(tipo: string): boolean {
+    console.log(this.permission[tipo])
     return this.permission[tipo] === 'S'
   }
 }
