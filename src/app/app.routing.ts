@@ -43,6 +43,7 @@ export const routes: Routes = [
       {
         path: 'alterarsenha',
         loadChildren: () => import('./views/change-password/change-password.module').then(m => m.ChangePasswordModule),
+        canActivate: [AuthGuard],
       },
       {
         path: 'condominio',
