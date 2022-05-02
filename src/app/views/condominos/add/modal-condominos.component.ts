@@ -45,7 +45,6 @@ export class ModalCondominosComponent {
   ]
 
   constructor(
-    private condominoService: CondominoService,
     private activeModal: NgbActiveModal,
     private formBuilder: FormBuilder,
   ) { }
