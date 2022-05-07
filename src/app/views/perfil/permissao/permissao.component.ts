@@ -21,8 +21,6 @@ export class PermissaoComponent extends BaseComponent implements OnInit {
   permissaoName: string;
   loading = false;
   submitted = false;
-  user: UserParamsAuth
-  permission = null
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,12 +34,9 @@ export class PermissaoComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.canOverview() || !this.canEdit()) {
+    if (!(this.canOverview() || this.canEdit())) {
       this.router.navigate(['/not-found']);
     }
-
-    this.user = JSON.parse(this.localStorageService.getItem('user'));
-    this.permission = this.permissionService.getPermissionsbySigla('CAD_PERFIL')
 
     let id = this.route.snapshot.params['id'];
     this.perfil.id = id;
@@ -123,10 +118,5 @@ export class PermissaoComponent extends BaseComponent implements OnInit {
         this.perfil.name = data.name;
       }
     );
-  }
-
-  hasPermission(tipo: string): boolean {
-    console.log(this.permission[tipo])
-    return this.permission[tipo] === 'S'
   }
 }

@@ -8,6 +8,7 @@ import { LocalStorageService } from "../../../service";
 import { CondominoService } from "../../../service/condomino/condomino.service";
 import { FileDownloadService } from "../../../service/file-download/file-download.service";
 import { LeituraAguaService } from "../../../service/leitura-agua/leitura-agua.service";
+import { NotificationService } from "../../../service/notification/notification.service";
 
 @Component({
   selector: 'leitura-agua-report',
@@ -27,7 +28,8 @@ export class LeituraAguaReportComponent implements OnInit {
     private fileService: FileDownloadService,
     private condominoService: CondominoService,
     private localStorageService: LocalStorageService,
-    private changeDetector: ChangeDetectorRef
+    private changeDetector: ChangeDetectorRef,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit() {
@@ -75,7 +77,6 @@ export class LeituraAguaReportComponent implements OnInit {
   downloadFile(id: number, name: string) {
     this.fileService.getById(id.toString()).pipe(first()).subscribe(
       (response: any) =>{
-        console.log(response)
         let dataType = response.type;
         let binaryData = [];
         binaryData.push(response);
@@ -84,8 +85,10 @@ export class LeituraAguaReportComponent implements OnInit {
         downloadLink.setAttribute('download', name);
         document.body.appendChild(downloadLink);
         downloadLink.click();
-    }
-  );
+    },
+    (error) => {
+      this.notificationService.showError('Erro', 'Erro ao baixar arquivo')
+    });
   }
 
   public formatDateBr(date: string): string {
