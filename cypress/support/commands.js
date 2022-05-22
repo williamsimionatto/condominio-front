@@ -9,7 +9,7 @@ Cypress.Commands.add('login', () => {
     Cypress.env('user', Cypress.env('localUser'))
   }
   
-  cy.visit('/login', {timeout: 60000})
+  cy.visit('/login', {timeout: 80000})
 
   cy.get('#email')
     .should('be.visible')
@@ -23,5 +23,5 @@ Cypress.Commands.add('login', () => {
     .should('be.visible')
     .click({ force: true })
 
-  cy.get('.img-avatar').should('be.visible')
+  cy.get('.img-avatar').should('be.visible', { timeout: 60000 })
 })

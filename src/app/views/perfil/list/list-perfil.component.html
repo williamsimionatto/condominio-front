@@ -8,7 +8,7 @@
             <div class="card-label"> Perfil </div>
 
             <div class="card-header-actions">
-              <a class="btn btn-primary rounded-pill" routerLink="add" *ngIf="hasPermission('inserir')">
+              <a class="btn btn-primary rounded-pill" routerLink="add" *ngIf="hasPermission('inserir')" id="btnNovoRegistro">
                 <i class="fa fa-plus"></i> Novo Registro
               </a>
           </div>
@@ -44,7 +44,7 @@
                     <i class="fa fa-pencil"></i>
                   </a>
 
-                  <a class="btn btn-danger btn-sm rounded-pill" (click)="delete(perfil)" style="cursor: pointer;"  *ngIf="hasPermission('excluir')">
+                  <a id="btnDelete" class="btn btn-danger btn-sm rounded-pill" (click)="delete(perfil)" style="cursor: pointer;"  *ngIf="hasPermission('excluir')">
                     <i class="fa fa-trash"></i>
                   </a>
                 </td>
