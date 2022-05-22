@@ -68,7 +68,7 @@ export class AddEditPerfilComponent extends BaseComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
-          this.notificationService.showSuccess('Aconteceu um erro ao salvar o registro!', "Sucesso");
+          this.notificationService.showSuccess('Perfil cadastrado com sucesso!', "Sucesso");
           this.router.navigate(["/perfil"]);
         },
         error: error => {
