@@ -22,25 +22,25 @@ export const navItems: INavData[] = [
         name: 'Condomínio',
         url: '/condominio',
         icon: 'fa fa-building',
-        attributes: { disabled: isDisabled('CAD_CONDOMINIO') },
+        attributes: { disabled: isDisabled('CAD_CONDOMINIO'), id: 'nav-cad-condominio'  },
       }, 
       {
         name: 'Perfil',
         url: '/perfil',
         icon: 'fa fa-user',
-        attributes: { disabled: isDisabled('CAD_PERFIL') },
+        attributes: { disabled: isDisabled('CAD_PERFIL'), id: 'nav-cad-perfil' },
       },
       {
         name: 'Permissão',
         url: '/permissao',
         icon: 'fa fa-lock',
-        attributes: { disabled: isDisabled('CAD_PERMISSAO') },
+        attributes: { disabled: isDisabled('CAD_PERMISSAO'), id: 'nav-cad-permissao'  },
       },
       {
         name: 'Usuários',
         url: '/usuario',
         icon: 'fa fa-users',
-        attributes: { disabled: isDisabled('CAD_USUARIO') },
+        attributes: { disabled: isDisabled('CAD_USUARIO'), id: 'nav-cad-usuario'  },
       }
     ]
   },
@@ -53,7 +53,7 @@ export const navItems: INavData[] = [
         name: 'Leitura d`água',
         url: '/leituraagua',
         icon: 'fa fa-tint',
-        attributes: { disabled: isDisabled('TAR_LEITURAAGUA') },
+        attributes: { disabled: isDisabled('TAR_LEITURAAGUA'), id: 'nav-tar-leitura'  },
       }
     ]
   },
@@ -66,7 +66,7 @@ export const navItems: INavData[] = [
         name: 'Leitura d`água',
         url: '/report/leituraagua',
         icon: 'fa fa-tint',
-        attributes: { disabled: isDisabled('REL_LEITURAAGUA') },
+        attributes: { disabled: isDisabled('REL_LEITURAAGUA'), id: 'nav-rel-leitura'  },
       }
     ]
   }
