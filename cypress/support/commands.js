@@ -1,25 +1,25 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('login', () => {
+  cy.log(`Logging into ${Cypress.env('environment') ? Cypress.env('environment') : 'local'} environment`)
+  
+  if (Cypress.env('environment') === 'homolog') {
+    Cypress.env('user', Cypress.env('homologUser'))
+  } else if (Cypress.env('environment') === 'prod') {
+    Cypress.env('user', Cypress.env('prodUser'))
+  } else {
+    Cypress.env('user', Cypress.env('localUser'))
+  }
+  
+  cy.visit('/login')
+
+  cy.get('#email')
+    .should('be.visible')
+    .type(Cypress.env('user').email, { log: false, force: true })
+
+  cy.get('#password')
+    .should('be.visible')
+    .type(Cypress.env('user').password, { log: false, force: true })
+
+  cy.contains('button', 'Acessar')
+    .should('be.visible')
+    .click({ force: true })
+})
