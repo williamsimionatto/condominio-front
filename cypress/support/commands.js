@@ -23,5 +23,5 @@ Cypress.Commands.add('login', () => {
     .should('be.visible')
     .click({ force: true })
 
-  cy.get('.img-avatar').should('be.visible', { timeout: 60000 })
+  cy.get('.img-avatar', {timeout: 60000}).should('be.visible', { timeout: 60000 })
 })
