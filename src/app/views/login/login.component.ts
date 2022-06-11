@@ -38,7 +38,6 @@ export class LoginComponent {
     this.loading = true;
     this.loginService.login(this.loginForm.value).pipe(first()).subscribe({
       next: (data: any) => {
-        data = data[0]
         this.localStorageService.setItem('token', data.access_token);
         this.localStorageService.setItem('user', JSON.stringify(data.user));
         this.localStorageService.setItem('permissions', JSON.stringify(data.permissions));
