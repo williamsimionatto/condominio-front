@@ -47,9 +47,9 @@
                                     <tr>
                                         <th style="text-align: center;">Leitura</th>
                                         <th style="text-align: center;">Condômino</th>
-                                        <th style="text-align: center;">Consumo m³</th>
-                                        <th style="text-align: center;">Dias</th>
-                                        <th style="text-align: center;">Valor</th>
+                                        <th style="text-align: center; width: 15%;">Consumo m³</th>
+                                        <th style="text-align: center; width: 15%;">Dias</th>
+                                        <th style="text-align: center; width: 15%;">Valor</th>
                                         <th style="text-align: center;">Boleto</th>
                                     </tr>
                                 </thead>
@@ -59,7 +59,7 @@
                                         <td class="nowrap">{{ item.condominoName }}</td>
                                         <td style="text-align: right;">{{ item.consumo }} m³</td>
                                         <td style="text-align: right;">{{ item.diasConsumo }}</td>
-                                        <td class="nowrap" style="text-align: right;">{{ item.valorTotal | currency: 'BRL' }}</td>
+                                        <td style="text-align: right;">{{ item.valorTotal | currency: 'BRL' }}</td>
 
                                         <td style="text-align: center">
                                             <a class="btn btn-primary btn-sm rounded-pill" (click)="downloadFile(item.fileId, item.fileName)" *ngIf="item.fileId">
