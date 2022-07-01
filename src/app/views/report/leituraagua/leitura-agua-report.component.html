@@ -39,48 +39,42 @@
                         </div>
                     </form>
 
-                    <div>
-                        <hr *ngIf="data">
+                    <div class="row" *ngIf="data">
+                        <hr>
+                        <div class="col-md-auto table-responsive overflow-table">
+                            <table class="table table-striped border datatable table-body">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center;">Leitura</th>
+                                        <th style="text-align: center;">Condômino</th>
+                                        <th style="text-align: center;">Consumo m³</th>
+                                        <th style="text-align: center;">Dias</th>
+                                        <th style="text-align: center;">Valor</th>
+                                        <th style="text-align: center;">Boleto</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of data">
+                                        <td>{{ dateFull(item.mesreferencia) }}</td>
+                                        <td class="nowrap">{{ item.condominoName }}</td>
+                                        <td style="text-align: right;">{{ item.consumo }} m³</td>
+                                        <td style="text-align: right;">{{ item.diasConsumo }}</td>
+                                        <td class="nowrap" style="text-align: right;">{{ item.valorTotal | currency: 'BRL' }}</td>
 
-                        <div class="row">
-                            <div class="col col-lg-6 table-responsive overflow-table" *ngIf="data">
-                                <table class="table table-striped border datatable table-body">
-                                    <thead>
-                                        <tr>
-                                            <th colspan="2"></th>
-                                            <th colspan="2" style="text-align: center">Consumo</th>
-                                            <th colspan="2"></th>
-                                        </tr>
-                                        <tr>
-                                            <th width="6%" style="text-align: center">Leitura</th>
-                                            <th width="20%" style="text-align: center">Condômino</th>
-                                            <th style="text-align: center">m³</th>
-                                            <th width="5%" style="text-align: center">Dias</th>
-                                            <th width="7%" style="text-align: center">Valor Total</th>
-                                            <th width="5%" style="text-align: center">Boleto</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let item of data">
-                                            <td width="6%">{{ dateFull(item.mesreferencia) }}</td>
-                                            <td width="20%" class="nowrap">{{ item.condominoName }}</td>
-                                            <td style="text-align: right">{{ item.consumo }} m³</td>
-                                            <td width="5%" style="text-align: right">{{ item.diasConsumo }}</td>
-                                            <td width="7%" style="text-align: right">{{ item.valorTotal | currency: 'BRL' }}</td>
+                                        <td style="text-align: center">
+                                            <a class="btn btn-primary btn-sm rounded-pill" (click)="downloadFile(item.fileId, item.fileName)" *ngIf="item.fileId">
+                                                <i class="fa fa-download"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-                                            <td width="5%" style="text-align: center">
-                                                <a class="btn btn-primary btn-sm rounded-pill" (click)="downloadFile(item.fileId, item.fileName)" *ngIf="item.fileId">
-                                                    <i class="fa fa-download"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                        <hr>
 
-                            <div class="col col-lg-6" *ngIf="data">
-                                <app-bar-chart [chartData]="data"></app-bar-chart>
-                            </div>
+                        <div class="col">
+                            <app-bar-chart [chartData]="data"></app-bar-chart>
                         </div>
                     </div>
                 </div>
