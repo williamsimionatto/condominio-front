@@ -67,73 +67,72 @@ import { BarChartModule } from './views/report/leituraagua/charts/bar-chart.modu
 import { ChangePasswordModule } from './views/change-password/change-password.module';
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    AppAsideModule,
-    AppBreadcrumbModule.forRoot(),
-    AppFooterModule,
-    AppHeaderModule,
-    AppSidebarModule,
-    PerfectScrollbarModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    AppRoutingModule,
-    BsDropdownModule.forRoot(),
-    TabsModule.forRoot(),
-    ChartsModule,
-    IconModule,
-    IconSetModule.forRoot(),
-    CondominioModule,
-    CondominiosModule,
-    LeituraAguaModule,
-    LeituraAguaValoresModule,
-    UserModule,
-    ChangePasswordModule,
-    PerfilModule,
-    PermissaoModule,
-    LeituraAguaReportModule,
-    FormsModule,
-    NgProgressModule.withConfig({
-      color: "red",
-      spinner: false
-    }),
-    NgProgressHttpModule,
-    ToastrModule.forRoot(),
-    SharedModule.forRoot(),
-    NgSelectModule,
-    NgbProgressbarModule,
-    ChartModule,
-    BarChartModule,
-  ],
-  declarations: [
-    AppComponent,
-    ...APP_CONTAINERS,
-    P404Component,
-    P500Component,
-    LoginComponent,
-    ConfirmationDialogComponent,
-  ],
-  providers: [
-    AuthGuardService,
-    CanLoadService,
-    Storage,
-    { 
-      provide: JWT_OPTIONS, 
-      useValue: JWT_OPTIONS 
-    },
-    JwtHelperService,
-    {
-      provide: LocationStrategy,
-      useClass: HashLocationStrategy
-    },
-    IconSetService,
-    ConfirmationDialogService,
-    ModalDialogService,
-    { provide: LOCALE_ID, useValue: 'pt-BR' }
-  ],
-  bootstrap: [ AppComponent ],
-  entryComponents: [ ConfirmationDialogComponent ]
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        AppAsideModule,
+        AppBreadcrumbModule.forRoot(),
+        AppFooterModule,
+        AppHeaderModule,
+        AppSidebarModule,
+        PerfectScrollbarModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        AppRoutingModule,
+        BsDropdownModule.forRoot(),
+        TabsModule.forRoot(),
+        ChartsModule,
+        IconModule,
+        IconSetModule.forRoot(),
+        CondominioModule,
+        CondominiosModule,
+        LeituraAguaModule,
+        LeituraAguaValoresModule,
+        UserModule,
+        ChangePasswordModule,
+        PerfilModule,
+        PermissaoModule,
+        LeituraAguaReportModule,
+        FormsModule,
+        NgProgressModule.withConfig({
+            color: "red",
+            spinner: false
+        }),
+        NgProgressHttpModule,
+        ToastrModule.forRoot(),
+        SharedModule.forRoot(),
+        NgSelectModule,
+        NgbProgressbarModule,
+        ChartModule,
+        BarChartModule,
+    ],
+    declarations: [
+        AppComponent,
+        ...APP_CONTAINERS,
+        P404Component,
+        P500Component,
+        LoginComponent,
+        ConfirmationDialogComponent,
+    ],
+    providers: [
+        AuthGuardService,
+        CanLoadService,
+        Storage,
+        {
+            provide: JWT_OPTIONS,
+            useValue: JWT_OPTIONS
+        },
+        JwtHelperService,
+        {
+            provide: LocationStrategy,
+            useClass: HashLocationStrategy
+        },
+        IconSetService,
+        ConfirmationDialogService,
+        ModalDialogService,
+        { provide: LOCALE_ID, useValue: 'pt-BR' }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
