@@ -21,15 +21,19 @@
                                 <th>Condomínio</th>
                                 <th width="10%">Data Leitura</th>
                                 <th width="10%">Data Vencimento</th>
+                                <th width="10%">Status</th>
                                 <th width="11%" style="text-align: center">Ações</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             <tr *ngFor="let leitura of leituraAgua">
-                                <td>{{leitura.condominio}}</td>
+                                <td>{{leitura.condominio.name}}</td>
                                 <td>{{formatDateBr(leitura.dataleitura)}}</td>
                                 <td>{{formatDateBr(leitura.datavencimento)}}</td>
+                                <td>
+                                    {{leitura.periodo.status == 'A' ? 'Aberto' : 'Fechado'}}
+                                </td>
 
                                 <td style="cursor: pointer;text-align: center">	
 									<a class="btn btn-primary btn-sm rounded-pill" routerLink="edit/{{leitura.id}}" *ngIf="isEnabledToEdit(leitura) && hasPermission('alterar')">
