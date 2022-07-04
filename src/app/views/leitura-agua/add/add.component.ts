@@ -6,6 +6,7 @@ import { LeituraAguaParams } from "../../../model/leitura-agua.model";
 import { CondominioService } from "../../../service/condominio/condominio.service";
 import { LeituraAguaService } from "../../../service/leitura-agua/leitura-agua.service";
 import { NotificationService } from "../../../service/notification/notification.service";
+import { PeriodService } from "../../../service/period/period.service";
 import { BaseComponent } from "../../base.component";
 import { ListLeituraAguaValoresComponent } from "../../leitura-agua-valores/list/list.component";
 
@@ -27,6 +28,10 @@ export class AddEditLeituraAguaComponent extends BaseComponent implements OnInit
     { value: "", label: "Selecione:" },
   ]
 
+  periodOptions = [
+    { value: "", label: "Selecione:" },
+  ]
+
   @ViewChild(ListLeituraAguaValoresComponent) condominos
 
   constructor(
@@ -35,7 +40,8 @@ export class AddEditLeituraAguaComponent extends BaseComponent implements OnInit
     private router: Router,
     private leituraAguaService: LeituraAguaService,
     private notificationService: NotificationService,
-    private condiminioService: CondominioService
+    private condiminioService: CondominioService,
+    private periodService: PeriodService
   ) {
     super('TAR_LEITURAAGUA')
   }
@@ -53,15 +59,17 @@ export class AddEditLeituraAguaComponent extends BaseComponent implements OnInit
       condominio: this.formBuilder.control("", Validators.required),
       dataleitura: this.formBuilder.control("", [Validators.required]),
       datavencimento: this.formBuilder.control("", [Validators.required]),
+      period_id: this.formBuilder.control("", [Validators.required]),
     })
 
     this.getCondominios()
+    this.getPeriods()
 
     if (!this.isAddMode) {
       this.leituraAguaService
         .getById(this.id)
         .pipe(first())
-        .subscribe(x => {
+        .subscribe((x: any) => {
           this.leituraAguaForm.patchValue(x)
           this.showCondominos = true
         })
@@ -133,6 +141,18 @@ export class AddEditLeituraAguaComponent extends BaseComponent implements OnInit
         })
 
         this.condominioOptions = this.condominioOptions.concat(options)
+      }
+    )
+  }
+
+  private getPeriods() {
+    this.periodService.getAll().pipe(first()).subscribe(
+      data => {
+        let options = data.map(x => {
+          return { value: x.id, label: x.name }
+        })
+
+        this.periodOptions = this.periodOptions.concat(options)
       }
     )
   }
