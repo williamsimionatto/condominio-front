@@ -11,13 +11,13 @@
                 <div class="card-body">
                     <form [formGroup]="leituraAguaForm" (ngSubmit)="onSubmit()">
                         <div class="row">
-                            <div class="col-sm-2 col-xs-12">
+                            <div class="col-lg-2 col-md-2">
                                 <input-container errorMessage="i" label="Cód">
                                     <input id="id" class="form-control" formControlName="id" autocomplete="off" [readonly]="true">
                                 </input-container>
                             </div>
 
-                            <div class="col-lg-4 col-md-4">
+                            <div class="col-lg-2 col-md-2">
                                 <div class="form-group">
                                     <label class="form-label" for="inputSuccess">Condomínio</label>
                                     <ng-select [items]="condominioOptions" bindLabel="label" bindValue="value" id="condominio" formControlName="condominio" ngDefaultControl>
@@ -25,13 +25,21 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-2 col-xs-2">
+                            <div class="col-lg-2 col-md-2">
+                                <div class="form-group">
+                                    <label class="form-label" for="inputSuccess">Período</label>
+                                    <ng-select [items]="periodOptions" bindLabel="label" bindValue="value" id="period_id" formControlName="period_id" [readonly]="readonly || !this.isAddMode" ngDefaultControl>
+                                    </ng-select>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-2">
                                 <input-container errorMessage="Data Leitura é obrigatório" label="Data Leitura">
                                     <input type="date" id="dataleitura" class="form-control" formControlName="dataleitura" autocomplete="off" [readonly]="readonly || !this.isAddMode" (change)="setShowCondominos(false)">
                                 </input-container>
                             </div>
 
-                            <div class="col-sm-2 col-xs-2">
+                            <div class="col-lg-2 col-md-2">
                                 <input-container errorMessage="Data Vencimento é obrigatório" label="Data Vencimento">
                                     <input type="date" id="datavencimento" class="form-control" formControlName="datavencimento" autocomplete="off" [readonly]="readonly || !this.isAddMode" (change)="setShowCondominos(false)">
                                 </input-container>
@@ -47,9 +55,9 @@
 
                         <app-list-leitura-agua-valores *ngIf="showCondominos"
                                                        [condominioId]="this.getCondominio()"
-                                                       [idLeitura]="this.id" 
-                                                       [dataLeitura]="this.getDataLeitura()" 
-                                                       [dataVencimento]="this.getDataVencimento()" 
+                                                       [idLeitura]="this.id"
+                                                       [dataLeitura]="this.getDataLeitura()"
+                                                       [dataVencimento]="this.getDataVencimento()"
                                                        [isAddMode]="isAddMode">
 
                         </app-list-leitura-agua-valores>
