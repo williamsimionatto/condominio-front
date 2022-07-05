@@ -1,7 +1,9 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { NgSelectModule } from "@ng-select/ng-select";
 import { SharedModule } from "../../containers/shared.module";
+import { AddEditPeriodoComponent } from "./add/add-edit.component";
 import { ListPeriodoComponent } from "./list/list-periodo.component";
 import { PeriodoRoutingModule } from "./periodo-routing.module";
 
@@ -11,10 +13,12 @@ import { PeriodoRoutingModule } from "./periodo-routing.module";
     PeriodoRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    NgSelectModule
   ],
   declarations: [
-    ListPeriodoComponent
+    ListPeriodoComponent,
+    AddEditPeriodoComponent
   ],
   providers: [
     
