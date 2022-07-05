@@ -13,8 +13,10 @@ export class PermissionsService {
     if (!permissions) {
       return false;
     }
+    const permission = permissions.filter(x => {
+      return x.sigla === sigla;
+    })[0];
 
-    const permission = permissions.filter(x => x.sigla === sigla)[0];
     return permission[tipo] === 'S';
   }
 

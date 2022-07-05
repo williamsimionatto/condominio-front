@@ -15,6 +15,10 @@ export class CanLoadService implements CanLoad {
       route: 'perfil',
       sigla: 'CAD_PERFIL'
     }, {
+      route: 'periodo',
+      sigla: 'CAD_PERIODO'
+    },
+    {
       route: 'permissao',
       sigla: 'CAD_PERMISSAO'
     }, {

@@ -7,7 +7,7 @@ import { LocalStorageService, UserService } from '../../service';
 import { NotificationService } from '../../service/notification/notification.service';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-password',
   templateUrl: './password.component.html',
   styleUrls: ['../../../assets/css/default.scss']
 })

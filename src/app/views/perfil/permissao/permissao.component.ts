@@ -10,7 +10,7 @@ import { PerfilPermissaoService } from '../../../service/perfilpermissao/perfilp
 import { BaseComponent } from '../../base.component';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-list-permissao',
   templateUrl: './permissao.component.html',
   styleUrls: ['../../../../assets/css/default.scss']
 })

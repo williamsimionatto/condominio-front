@@ -7,7 +7,7 @@ import { LoginService } from '../../service/login/login.service';
 import { NotificationService } from '../../service/notification/notification.service';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-login',
   templateUrl: 'login.component.html',
   styleUrls: ['../../../assets/css/default.scss']
 })

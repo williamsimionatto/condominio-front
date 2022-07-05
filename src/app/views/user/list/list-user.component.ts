@@ -8,7 +8,7 @@ import { PermissionsService } from '../../../service/permissions/permissions.ser
 import { BaseComponent } from '../../base.component';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-list-user',
   templateUrl: './list-user.component.html',
   styleUrls: ['../../../../assets/css/default.scss']
 })

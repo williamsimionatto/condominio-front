@@ -64,6 +64,12 @@ export const routes: Routes = [
         canLoad: [CanLoadService]
       },
       {
+        path: 'periodo',
+        loadChildren: () => import('./views/periodo/periodo.module').then(m => m.PeriodoModule),
+        canActivate: [AuthGuard],
+        canLoad: [CanLoadService]  
+      },
+      {
         path: 'permissao',
         loadChildren: () => import('./views/permissao/permissao.module').then(m => m.PermissaoModule),
         canActivate: [AuthGuard],

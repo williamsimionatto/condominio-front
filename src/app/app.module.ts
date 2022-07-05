@@ -65,6 +65,7 @@ import { LeituraAguaReportModule } from './views/report/leituraagua/leitura-agua
 import { ChartModule } from 'angular-highcharts';
 import { BarChartModule } from './views/report/leituraagua/charts/bar-chart.module';
 import { ChangePasswordModule } from './views/change-password/change-password.module';
+import { PeriodoModule } from './views/periodo/periodo.module';
 
 @NgModule({
     imports: [
@@ -90,6 +91,7 @@ import { ChangePasswordModule } from './views/change-password/change-password.mo
         LeituraAguaModule,
         LeituraAguaValoresModule,
         UserModule,
+        PeriodoModule,
         ChangePasswordModule,
         PerfilModule,
         PermissaoModule,
