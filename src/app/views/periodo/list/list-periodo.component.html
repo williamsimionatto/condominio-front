@@ -18,22 +18,26 @@
         <table class="table table-striped border datatable">
           <thead>
             <tr>
-              <th>Código</th>
+              <th width="5%">Código</th>
               <th>Nome</th>
-              <th>Ínicio</th>
-              <th>Fim</th>
-              <th>Status</th>
+              <th style="text-align: center;">Ínicio</th>
+              <th style="text-align: center;">Fim</th>
+              <th style="text-align: center;">Status</th>
               <th width="18%" style="text-align: center">Ações</th>
             </tr>
           </thead>
 
           <tbody>
             <tr *ngFor="let periodo of periodos">
-              <td>{{ periodo.id }}</td>
+              <td style="text-align: right;">{{ periodo.id }}</td>
               <td>{{periodo.name}}</td>
-              <td>{{periodo.start_date | date: 'dd/MM/Y'}}</td>
-              <td>{{periodo.end_date | date: 'dd/MM/Y'}}</td>
-              <td>{{periodo.status === 'A' ? 'Aberto' : 'Fechado'}}</td>
+              <td style="text-align: center;">{{periodo.start_date | date: 'dd/MM/Y'}}</td>
+              <td style="text-align: center;">{{periodo.end_date | date: 'dd/MM/Y'}}</td>
+              <td style="text-align: center;">
+                <span class="badge badge-{{periodo.status == 'A' ? 'success' : 'warning'}}">
+                  {{periodo.status === 'A' ? 'Aberto' : 'Fechado'}}
+                </span>
+              </td>
 
               <td style="text-align: center">
                 <a class="btn btn-success btn-sm rounded-pill" routerLink="overview/{{periodo.id}}" 
