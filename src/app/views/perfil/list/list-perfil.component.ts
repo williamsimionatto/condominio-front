@@ -10,7 +10,7 @@ import { LocalStorageService } from "../../../service";
 import { BaseComponent } from "../../base.component";
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-list-perfil',
   templateUrl: './list-perfil.component.html',
   styleUrls: ['../../../../assets/css/default.scss']
 })

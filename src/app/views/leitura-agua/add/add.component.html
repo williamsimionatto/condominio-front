@@ -20,7 +20,7 @@
                             <div class="col-lg-2 col-md-2">
                                 <div class="form-group">
                                     <label class="form-label" for="inputSuccess">Condomínio</label>
-                                    <ng-select [items]="condominioOptions" bindLabel="label" bindValue="value" id="condominio" formControlName="condominio" ngDefaultControl>
+                                    <ng-select [items]="condominioOptions" bindLabel="label" bindValue="value" id="condominio" formControlName="condominio" [readonly]="readonly || !this.isAddMode" ngDefaultControl>
                                     </ng-select>
                                 </div>
                             </div>

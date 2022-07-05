@@ -31,6 +31,12 @@ export const navItems: INavData[] = [
         attributes: { disabled: isDisabled('CAD_PERFIL'), id: 'nav-cad-perfil' },
       },
       {
+        name: 'Período',
+        url: '/periodo',
+        icon: 'fa fa-calendar',
+        attributes: { disabled: isDisabled('CAD_PERIODO'), id: 'nav-cad-periodo' },
+      },
+      {
         name: 'Permissão',
         url: '/permissao',
         icon: 'fa fa-lock',

@@ -1,0 +1,69 @@
+<div class="animated fadeIn">
+  <header class="header header-sticky mb-4"></header>
+
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-label"> Período </div>
+
+          <div class="card-header-actions">
+            <a class="btn btn-primary rounded-pill" routerLink="add" *ngIf="hasPermission('inserir')" id="btnNovoRegistro">
+              <i class="fa fa-plus"></i> Novo Registro
+            </a>
+        </div>
+      </div>
+
+      <div class="card-body table-responsive">
+        <table class="table table-striped border datatable">
+          <thead>
+            <tr>
+              <th width="5%">Código</th>
+              <th>Nome</th>
+              <th style="text-align: center;">Ínicio</th>
+              <th style="text-align: center;">Fim</th>
+              <th style="text-align: center;">Status</th>
+              <th width="18%" style="text-align: center">Ações</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let periodo of periodos">
+              <td style="text-align: right;">{{ periodo.id }}</td>
+              <td>{{periodo.name}}</td>
+              <td style="text-align: center;">{{periodo.start_date | date: 'dd/MM/Y'}}</td>
+              <td style="text-align: center;">{{periodo.end_date | date: 'dd/MM/Y'}}</td>
+              <td style="text-align: center;">
+                <span class="badge badge-{{periodo.status == 'A' ? 'success' : 'warning'}}">
+                  {{periodo.status === 'A' ? 'Aberto' : 'Fechado'}}
+                </span>
+              </td>
+
+              <td style="text-align: center">
+                <a class="btn btn-success btn-sm rounded-pill" routerLink="overview/{{periodo.id}}" 
+                   style="cursor: pointer;"
+                   *ngIf="hasPermission('consultar')">
+                  <i class="fa fa-search"></i>
+                </a>
+
+                <a class="btn btn-primary btn-sm rounded-pill" 
+                   routerLink="edit/{{periodo.id}}" 
+                   style="cursor: pointer;" 
+                   *ngIf="hasPermission('alterar')">
+                  <i class="fa fa-pencil"></i>
+                </a>
+
+                <a id="btnDelete" class="btn btn-danger btn-sm rounded-pill" 
+                   (click)="delete(periodo)" 
+                   style="cursor: pointer;" 
+                   *ngIf="hasPermission('excluir')">
+                  <i class="fa fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
