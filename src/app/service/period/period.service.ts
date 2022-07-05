@@ -27,4 +27,8 @@ export class PeriodService extends Service {
   public update(period: PeriodParams) {
     return this.http.put<PeriodParams>(`${environment.apiUrl}/period/${period.id}`, period, this.requestOptions);
   }
+
+  public delete(id: string) {
+    return this.http.delete(`${environment.apiUrl}/period/${id}`, this.requestOptions);
+  }
 }
