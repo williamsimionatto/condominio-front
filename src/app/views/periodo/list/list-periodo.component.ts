@@ -27,7 +27,6 @@ export class ListPeriodoComponent extends BaseComponent implements OnInit {
     }
 
     this.periodoService.getAll().pipe(first()).subscribe(periodos => {
-      console.log(periodos)
       this.periodos = periodos
     })
   }

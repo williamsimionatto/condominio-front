@@ -13,6 +13,53 @@
             </a>
         </div>
       </div>
+
+      <div class="card-body table-responsive">
+        <table class="table table-striped border datatable">
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Nome</th>
+              <th>Ínicio</th>
+              <th>Fim</th>
+              <th>Status</th>
+              <th width="18%" style="text-align: center">Ações</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let periodo of periodos">
+              <td>{{ periodo.id }}</td>
+              <td>{{periodo.name}}</td>
+              <td>{{periodo.start_date | date: 'MMM/Y'}}</td>
+              <td>{{periodo.end_date | date: 'MMM/Y'}}</td>
+              <td>{{periodo.status === 'A' ? 'Aberto' : 'Fechado'}}</td>
+
+              <td style="text-align: center">
+                <a class="btn btn-success btn-sm rounded-pill" routerLink="overview/{{periodo.id}}" 
+                   style="cursor: pointer;" 
+                   *ngIf="hasPermission('consultar')">
+                  <i class="fa fa-search"></i>
+                </a>
+
+                <a class="btn btn-primary btn-sm rounded-pill" 
+                   routerLink="edit/{{periodo.id}}" 
+                   style="cursor: pointer;" 
+                   *ngIf="hasPermission('alterar')">
+                  <i class="fa fa-pencil"></i>
+                </a>
+
+                <a id="btnDelete" class="btn btn-danger btn-sm rounded-pill" 
+                   (click)="delete(periodo)" 
+                   style="cursor: pointer;" 
+                   *ngIf="hasPermission('excluir')">
+                  <i class="fa fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
