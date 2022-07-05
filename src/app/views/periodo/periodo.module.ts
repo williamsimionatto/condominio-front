@@ -5,6 +5,7 @@ import { NgSelectModule } from "@ng-select/ng-select";
 import { SharedModule } from "../../containers/shared.module";
 import { AddEditPeriodoComponent } from "./add/add-edit.component";
 import { ListPeriodoComponent } from "./list/list-periodo.component";
+import { OverviewPeriodoComponent } from "./overview/overview-periodo.component";
 import { PeriodoRoutingModule } from "./periodo-routing.module";
 
 @NgModule({
@@ -18,7 +19,8 @@ import { PeriodoRoutingModule } from "./periodo-routing.module";
   ],
   declarations: [
     ListPeriodoComponent,
-    AddEditPeriodoComponent
+    AddEditPeriodoComponent,
+    OverviewPeriodoComponent
   ],
   providers: [
     

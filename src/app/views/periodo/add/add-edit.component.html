@@ -38,7 +38,7 @@
                         <div class="col-lg-2 col-md-2">
                           <div class="form-group">
                               <label class="form-label" for="inputSuccess">Status</label>
-                              <ng-select [items]="statusOptions" bindLabel="label" bindValue="value" id="status" formControlName="status" ngDefaultControl>
+                              <ng-select [items]="statusOptions" bindLabel="label" bindValue="value" id="status" formControlName="status" [readonly]="readonly || !this.isAddMode" ngDefaultControl>
                               </ng-select>
                           </div>
                         </div>
