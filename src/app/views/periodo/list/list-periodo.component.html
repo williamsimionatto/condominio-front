@@ -31,13 +31,13 @@
             <tr *ngFor="let periodo of periodos">
               <td>{{ periodo.id }}</td>
               <td>{{periodo.name}}</td>
-              <td>{{periodo.start_date | date: 'MMM/Y'}}</td>
-              <td>{{periodo.end_date | date: 'MMM/Y'}}</td>
+              <td>{{periodo.start_date | date: 'dd/MM/Y'}}</td>
+              <td>{{periodo.end_date | date: 'dd/MM/Y'}}</td>
               <td>{{periodo.status === 'A' ? 'Aberto' : 'Fechado'}}</td>
 
               <td style="text-align: center">
                 <a class="btn btn-success btn-sm rounded-pill" routerLink="overview/{{periodo.id}}" 
-                   style="cursor: pointer;" 
+                   style="cursor: pointer;"
                    *ngIf="hasPermission('consultar')">
                   <i class="fa fa-search"></i>
                 </a>
