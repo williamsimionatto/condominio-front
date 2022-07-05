@@ -19,9 +19,9 @@
                         <thead>
                             <tr>
                                 <th>Condomínio</th>
-                                <th width="10%">Data Leitura</th>
-                                <th width="15%">Data Vencimento</th>
-                                <th width="10%">Status</th>
+                                <th width="10%" style="text-align: center;">Data Leitura</th>
+                                <th width="15%" style="text-align: center;">Data Vencimento</th>
+                                <th width="10%" style="text-align: center;">Status</th>
                                 <th width="11%" style="text-align: center">Ações</th>
                             </tr>
                         </thead>
@@ -29,10 +29,12 @@
                         <tbody>
                             <tr *ngFor="let leitura of leituraAgua">
                                 <td>{{leitura.condominio.name}}</td>
-                                <td>{{formatDateBr(leitura.dataleitura)}}</td>
-                                <td>{{formatDateBr(leitura.datavencimento)}}</td>
-                                <td>
-                                    {{leitura.periodo.status == 'A' ? 'Aberto' : 'Fechado'}}
+                                <td style="text-align: center;">{{leitura.dataleitura | date: 'dd/MM/Y'}}</td>
+                                <td style="text-align: center;">{{leitura.datavencimento | date: 'dd/MM/Y' }}</td>
+                                <td style="text-align: center;">
+                                    <span class="badge badge-{{leitura.periodo.status == 'A' ? 'success' : 'warning'}}">
+                                        {{leitura.periodo.status == 'A' ? 'Aberto' : 'Fechado'}}
+                                    </span>
                                 </td>
 
                                 <td style="cursor: pointer;text-align: center">	
