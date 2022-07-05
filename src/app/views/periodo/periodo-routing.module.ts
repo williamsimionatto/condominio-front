@@ -6,6 +6,7 @@ import { ListPeriodoComponent } from "./list/list-periodo.component";
 const routes: Routes = [
   { path: "", component: ListPeriodoComponent },
   { path: "add", component: AddEditPeriodoComponent },
+  { path: "edit/:id", component: AddEditPeriodoComponent }
 ]
 
 @NgModule({

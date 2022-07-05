@@ -19,7 +19,7 @@ export class AddEditPeriodoComponent extends BaseComponent implements OnInit {
   loading = false
   submitted = false
 
-   statusOptions: SelectOption[] = [
+  statusOptions: SelectOption[] = [
     { value: '', label: 'Selecione' },
     { value: 'A', label: 'Aberto' },
     { value: 'F', label: 'Fechado' }
