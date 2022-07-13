@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { PerfilPermissaoParams } from '../../../model/perfilpermissao.model';
@@ -16,14 +16,14 @@ import { BaseComponent } from '../../base.component';
 })
 export class PermissaoComponent extends BaseComponent implements OnInit {
   permissoesPerfil: PerfilPermissaoParams[]
-  perfilPermissaoForm: FormGroup;
+  perfilPermissaoForm: UntypedFormGroup;
   perfil: any = {};
   permissaoName: string;
   loading = false;
   submitted = false;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private perfilPermissaoService: PerfilPermissaoService,
     private notificationService: NotificationService,
     private route: ActivatedRoute,

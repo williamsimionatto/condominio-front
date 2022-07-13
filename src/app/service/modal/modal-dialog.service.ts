@@ -12,7 +12,7 @@ export class ModalDialogService {
   condomino: CondominoParams = null;
 
   public open(title: string, condominio?: CondominoParams): NgbModalRef {
-    const modalRef = this.modalService.open(ModalCondominosComponent, { size: 'lg' });
+    const modalRef = this.modalService.open(ModalCondominosComponent, { size: 'lg', backdrop: 'static' });
 
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.message = '';

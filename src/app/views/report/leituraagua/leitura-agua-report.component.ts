@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { Chart } from "angular-highcharts";
 import { first } from "rxjs/operators";
 import { CondominoParams } from "../../../model/condomino.model";
@@ -16,14 +16,14 @@ import { NotificationService } from "../../../service/notification/notification.
   styleUrls: ['../../../../assets/css/default.scss']
 })
 export class LeituraAguaReportComponent implements OnInit {
-  filterForm: FormGroup
+  filterForm: UntypedFormGroup
   loading = false
   data = null
   condominos: CondominoParams[]
   public user: UserParamsAuth;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private leituraService: LeituraAguaService,
     private fileService: FileDownloadService,
     private condominoService: CondominoService,

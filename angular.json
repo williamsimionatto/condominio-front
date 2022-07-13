@@ -26,7 +26,8 @@
               "node_modules/simple-line-icons/dist/styles/simple-line-icons.css",
               "src/scss/style.scss",
               "node_modules/ngx-toastr/toastr.css",
-              "node_modules/@ng-select/ng-select/themes/default.theme.css"
+              "node_modules/@ng-select/ng-select/themes/default.theme.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -132,7 +133,6 @@
       }
     }
   },
-  "defaultProject": "ng",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

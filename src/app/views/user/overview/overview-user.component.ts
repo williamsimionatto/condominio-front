@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { UserService } from '../../../service';
 import { PerfilService } from '../../../service/perfil/perfil.service';
@@ -8,7 +8,7 @@ import { BaseComponent } from '../../base.component';
 
 @Component({ templateUrl: '../add/add-edit.component.html' })
 export class OverUserViewComponent extends BaseComponent implements OnInit {
-  userForm: FormGroup;
+  userForm: UntypedFormGroup;
   id: string;
   isAddMode: boolean;
   loading = false;
@@ -27,7 +27,7 @@ export class OverUserViewComponent extends BaseComponent implements OnInit {
   ]
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private route: ActivatedRoute,
     private userService: UserService,
     private perfilService: PerfilService,
