@@ -38,7 +38,7 @@
     "@coreui/icons": "^2.0.0-rc.0",
     "@coreui/icons-angular": "1.0.0-alpha.3",
     "@ng-bootstrap/ng-bootstrap": "^12.1.2",
-    "@ng-select/ng-select": "^6.0",
+    "@ng-select/ng-select": "^9.0.2",
     "@types/highcharts": "^7.0.0",
     "angular-highcharts": "^12.0.0",
     "angular-progress-bar": "^1.0.11",
