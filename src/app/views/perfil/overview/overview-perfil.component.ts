@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { first } from "rxjs/operators";
 import { PerfilService } from "../../../service/perfil/perfil.service";
@@ -7,7 +7,7 @@ import { BaseComponent } from "../../base.component";
 
 @Component({ templateUrl: '../add/add-edit.component.html' })
 export class OverviewPerfilComponent extends BaseComponent implements OnInit {
-  perfilForm: FormGroup
+  perfilForm: UntypedFormGroup
   id: string
   isAddMode: boolean
   readonly = true
@@ -15,7 +15,7 @@ export class OverviewPerfilComponent extends BaseComponent implements OnInit {
   submitted = false
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private perfilService: PerfilService,

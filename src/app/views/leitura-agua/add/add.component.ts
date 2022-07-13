@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormBuilder, FormControl, UntypedFormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { first } from "rxjs/operators";
 import { LeituraAguaParams } from "../../../model/leitura-agua.model";
@@ -15,7 +15,7 @@ import { ListLeituraAguaValoresComponent } from "../../leitura-agua-valores/list
   styleUrls: ['../../../../assets/css/default.scss']
 })
 export class AddEditLeituraAguaComponent extends BaseComponent implements OnInit {
-  leituraAguaForm: FormGroup
+  leituraAguaForm: UntypedFormGroup
   id: string
   isAddMode: boolean
   readonly = false;
@@ -35,7 +35,7 @@ export class AddEditLeituraAguaComponent extends BaseComponent implements OnInit
   @ViewChild(ListLeituraAguaValoresComponent) condominos
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private leituraAguaService: LeituraAguaService,

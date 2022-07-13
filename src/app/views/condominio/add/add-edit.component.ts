@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { first } from "rxjs/operators";
 import { CondominioService } from "../../../service/condominio/condominio.service";
@@ -12,7 +12,7 @@ import { DetailCondominosComponent } from "../../condominos/detail/detail-condom
   styleUrls: ['../../../../assets/css/default.scss']
 })
 export class AddEditCondominioComponent extends BaseComponent implements OnInit {
-  condominioForm: FormGroup
+  condominioForm: UntypedFormGroup
   id: string
   isAddMode: boolean
   readonly = false
@@ -22,7 +22,7 @@ export class AddEditCondominioComponent extends BaseComponent implements OnInit 
   @ViewChild(DetailCondominosComponent) detail;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private condominioService: CondominioService,

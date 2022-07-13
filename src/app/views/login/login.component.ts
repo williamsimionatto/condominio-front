@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { LocalStorageService } from '../../service';
@@ -12,12 +12,12 @@ import { NotificationService } from '../../service/notification/notification.ser
   styleUrls: ['../../../assets/css/default.scss']
 })
 export class LoginComponent {
-  loginForm: FormGroup
+  loginForm: UntypedFormGroup
   loading = false;
 
   constructor (
     private notifyService : NotificationService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private router: Router,
     private loginService: LoginService,
     private localStorageService: LocalStorageService
