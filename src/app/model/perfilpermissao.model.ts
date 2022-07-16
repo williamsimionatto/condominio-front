@@ -1,6 +1,3 @@
-import { PerfilParams } from "./perfil.model";
-import { PermissaoParams } from "./permissao.mode";
-
 export type PerfilPermissaoParams = {
   id: number;
   name: string;

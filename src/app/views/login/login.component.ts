@@ -32,7 +32,7 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.invalid) {
-      return this.notifyService.showError('Usuário e/ou senha Incorretos', 'Anteção');
+      return this.notifyService.showError('Usuário e/ou senha Incorretos', 'Atenção');
     }
 
     this.loading = true;
