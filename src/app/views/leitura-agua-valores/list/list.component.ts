@@ -225,6 +225,24 @@ export class ListLeituraAguaValoresComponent implements OnInit {
     return true
   }
 
+  calculaTotalAgua() {
+    let params = this.historicoValores ? this.historicoValores : this.condominio
+    let total = 0
+
+    total += this.totalTalizadores.consumo * params.valoragua
+    total += Number(params.taxabasicaagua) * this.condominos.length
+    return total
+  }
+
+  calculaTotalTaxaBoleto() {
+    let params = this.historicoValores ? this.historicoValores : this.condominio
+    return params.taxaboleto * this.condominos.length
+  }
+
+  calculaTotalTaxaCondominio() {
+    return this.totalTalizadores.usoSalaoFesta + this.totalTalizadores.limpezaSalaoFesta + this.totalTalizadores.taxaMudanca
+  }
+
   isEnabledEdit() {
     return new Date(this.dataVencimento) < new Date()
   }

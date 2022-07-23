@@ -97,6 +97,19 @@
                         <td style="text-align: right">{{totalTalizadores.total | currency: 'BRL'}}</td>
                         <td *ngIf="!isAddMode"></td>
                     </tr>
+
+                    <tr>
+                        <td colspan="8" style="text-align: left">
+                            <ul>
+                                <li>Consumo: {{totalTalizadores.consumo}} m³</li>
+                                <li>Condomínio: {{totalTalizadores.condominio | currency: 'BRL'}}</li>
+                                <li>Taxas Condomínio: {{calculaTotalTaxaCondominio() | currency: 'BRL'}}</li>
+                                <li>Água + Taxa Básica: {{calculaTotalAgua() | currency: 'BRL'}}</li>
+                                <li>Taxa Boleto: {{calculaTotalTaxaBoleto() | currency: 'BRL'}}</li>
+                            </ul>
+                        </td>
+                        <td *ngIf="!isAddMode"></td>
+                    </tr>
             </table>
         </div>
     </div>
