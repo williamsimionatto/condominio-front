@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { CondominioParams } from "../../../model/condominio.model";
+import { HistoricoValoresParams } from "../../../model/historicovalores.model";
 
 @Component({
   selector: "app-legenda-valores",
@@ -11,7 +12,16 @@ import { CondominioParams } from "../../../model/condominio.model";
 })
 export class LegendaValoresComponent implements OnInit {
   @Input() condominio: CondominioParams
+  @Input() historicoValores: HistoricoValoresParams
+
+  valores: any
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.setValores()
+  }
+
+  private setValores() {
+    this.valores = this.historicoValores ? this.historicoValores : this.condominio
+  }
 }
