@@ -164,6 +164,10 @@ export class AddEditLeituraAguaComponent extends BaseComponent implements OnInit
   }
 
   getHistoricoValores() {
+    if (!this.id) {
+     return
+    }
+
     this.historicoValoresService.getByLeitura(Number(this.id)).pipe(first()).subscribe(
       data => {
         this.historicoValores = data

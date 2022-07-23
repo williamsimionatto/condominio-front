@@ -155,11 +155,13 @@ export class ListLeituraAguaValoresComponent implements OnInit {
   }
 
   atualizaTotalizadores(condomino: LeituraAguaValoresParams) {
+    let params = this.historicoValores ? this.historicoValores : this.condominio
+
     this.totalTalizadores.consumo += condomino.consumo
     this.totalTalizadores.condominio += condomino.valorcondominio
-    this.totalTalizadores.usoSalaoFesta += this.historicoValores.valorsalaofestas * condomino.qtdusosalao
-    this.totalTalizadores.limpezaSalaoFesta += this.historicoValores.valorlimpezasalaofestas * condomino.qtdlimpezasalao
-    this.totalTalizadores.taxaMudanca += this.historicoValores.valormudanca * condomino.qtdmudanca
+    this.totalTalizadores.usoSalaoFesta += params.valorsalaofestas * condomino.qtdusosalao
+    this.totalTalizadores.limpezaSalaoFesta += params.valorlimpezasalaofestas * condomino.qtdlimpezasalao
+    this.totalTalizadores.taxaMudanca += params.valormudanca * condomino.qtdmudanca
     this.totalTalizadores.total += condomino.total
   }
 
@@ -199,14 +201,15 @@ export class ListLeituraAguaValoresComponent implements OnInit {
   atualizaTotal(condominoParams: LeituraAguaValoresParams) {
     let index = this.condominos.indexOf(condominoParams)
     let condomino = this.condominos[index]
+    let params = this.historicoValores ? this.historicoValores : this.condominio
 
-    let total = (condomino.consumo * this.historicoValores.valoragua) +
-                Number(this.historicoValores.taxabasicaagua )+ 
-                Number(this.historicoValores.taxaboleto) +
+    let total = (condomino.consumo * params.valoragua) +
+                Number(params.taxabasicaagua )+ 
+                Number(params.taxaboleto) +
                 condomino.valorcondominio + 
-                (this.historicoValores.valorsalaofestas * condomino.qtdusosalao) +
-                (this.historicoValores.valorlimpezasalaofestas * condomino.qtdlimpezasalao) +
-                (this.historicoValores.valormudanca * condomino.qtdmudanca)
+                (params.valorsalaofestas * condomino.qtdusosalao) +
+                (params.valorlimpezasalaofestas * condomino.qtdlimpezasalao) +
+                (params.valormudanca * condomino.qtdmudanca)
 
     condomino.total = parseFloat((Math.round(total * 100) / 100).toFixed(2));
   }
