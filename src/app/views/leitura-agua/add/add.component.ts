@@ -2,8 +2,10 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { UntypedFormBuilder, FormControl, UntypedFormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { first } from "rxjs/operators";
+import { HistoricoValoresParams } from "../../../model/historicovalores.model";
 import { LeituraAguaParams } from "../../../model/leitura-agua.model";
 import { CondominioService } from "../../../service/condominio/condominio.service";
+import { HistoricoValoresService } from "../../../service/historicovalores/historicovalores.service";
 import { LeituraAguaService } from "../../../service/leitura-agua/leitura-agua.service";
 import { NotificationService } from "../../../service/notification/notification.service";
 import { PeriodService } from "../../../service/period/period.service";
@@ -32,6 +34,8 @@ export class AddEditLeituraAguaComponent extends BaseComponent implements OnInit
     { value: "", label: "Selecione:" },
   ]
 
+  historicoValores: HistoricoValoresParams
+
   @ViewChild(ListLeituraAguaValoresComponent) condominos
 
   constructor(
@@ -41,7 +45,8 @@ export class AddEditLeituraAguaComponent extends BaseComponent implements OnInit
     private leituraAguaService: LeituraAguaService,
     private notificationService: NotificationService,
     private condiminioService: CondominioService,
-    private periodService: PeriodService
+    private periodService: PeriodService,
+    private historicoValoresService: HistoricoValoresService
   ) {
     super('TAR_LEITURAAGUA')
   }
@@ -64,6 +69,7 @@ export class AddEditLeituraAguaComponent extends BaseComponent implements OnInit
 
     this.getCondominios()
     this.getPeriods()
+    this.getHistoricoValores()
 
     if (!this.isAddMode) {
       this.leituraAguaService
@@ -157,6 +163,14 @@ export class AddEditLeituraAguaComponent extends BaseComponent implements OnInit
     )
   }
 
+  getHistoricoValores() {
+    this.historicoValoresService.getByLeitura(Number(this.id)).pipe(first()).subscribe(
+      data => {
+        this.historicoValores = data
+      }
+    )
+  }
+
   getCondominio() {
     return this.leituraAguaForm.value.condominio
   }
@@ -171,6 +185,10 @@ export class AddEditLeituraAguaComponent extends BaseComponent implements OnInit
 
   getDataVencimento() {
     return this.leituraAguaForm.value.datavencimento
+  }
+
+  getHistoricoValoresCondominio() {
+    return this.historicoValores
   }
 
   isEnabledEdit() {
