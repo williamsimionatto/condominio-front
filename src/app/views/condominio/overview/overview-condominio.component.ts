@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { first } from "rxjs/operators";
 import { CondominioService } from "../../../service/condominio/condominio.service";
@@ -13,7 +13,7 @@ import { BaseComponent } from "../../base.component";
   ]
 })
 export class OverviewCondominioComponent extends BaseComponent implements OnInit {
-  condominioForm: FormGroup
+  condominioForm: UntypedFormGroup
   id: string
   isAddMode: boolean
   readonly = true
@@ -21,7 +21,7 @@ export class OverviewCondominioComponent extends BaseComponent implements OnInit
   submitted = false
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private route: ActivatedRoute,
     private condominioService: CondominioService,
     private router: Router

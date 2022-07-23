@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { first } from "rxjs/operators";
 import { SelectOption } from "../../../model/selectOption.model";
@@ -12,7 +12,7 @@ import { BaseComponent } from "../../base.component";
   styleUrls: ['../../../../assets/css/default.scss']
 })
 export class AddEditPeriodoComponent extends BaseComponent implements OnInit {
-  periodForm: FormGroup
+  periodForm: UntypedFormGroup
   id: string
   isAddMode: boolean
   readonly = false
@@ -26,7 +26,7 @@ export class AddEditPeriodoComponent extends BaseComponent implements OnInit {
   ]
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private periodService: PeriodService,

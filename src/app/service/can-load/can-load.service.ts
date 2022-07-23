@@ -3,39 +3,44 @@ import { CanLoad, Route, UrlSegment } from "@angular/router";
 import { Observable } from "rxjs";
 import { PermissionsService } from "../permissions/permissions.service";
 
+type PermissionsEnum = {
+  route: string;
+  slug: string;
+}
+
 @Injectable()
 export class CanLoadService implements CanLoad {
   constructor(private readonly permissionsService: PermissionsService) {}
 
-  permissionsEnum = [
+  permissionsEnum: PermissionsEnum[] = [
     {
       route: 'condominio',
-      sigla: 'CAD_CONDOMINIO'
+      slug: 'CAD_CONDOMINIO'
     }, {
       route: 'perfil',
-      sigla: 'CAD_PERFIL'
+      slug: 'CAD_PERFIL'
     }, {
       route: 'periodo',
-      sigla: 'CAD_PERIODO'
+      slug: 'CAD_PERIODO'
     },
     {
       route: 'permissao',
-      sigla: 'CAD_PERMISSAO'
+      slug: 'CAD_PERMISSAO'
     }, {
       route: 'usuario',
-      sigla: 'CAD_USUARIO'
+      slug: 'CAD_USUARIO'
     }, {
       route: 'leituraagua',
-      sigla: 'TAR_LEITURAAGUA'
+      slug: 'TAR_LEITURAAGUA'
     },
     {
       route: 'report/leituraagua',
-      sigla: 'REL_LEITURAAGUA'
+      slug: 'REL_LEITURAAGUA'
     }
   ]
 
   canLoad(route: Route, segments: UrlSegment[]): Observable<boolean>|Promise<boolean>|boolean {
     const permission = this.permissionsEnum.find(x => x.route === route.path);
-    return this.permissionsService.hasPermission(permission.sigla, 'consultar');
+    return this.permissionsService.hasPermission(permission.slug, 'consultar');
   }
 }

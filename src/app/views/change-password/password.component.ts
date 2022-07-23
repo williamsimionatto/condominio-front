@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { UserParams, UserParamsAuth } from '../../model/user.model';
@@ -13,7 +13,7 @@ import { NotificationService } from '../../service/notification/notification.ser
 })
 export class PasswordComponent implements OnInit {
   user: UserParams
-  passwordUserForm: FormGroup;
+  passwordUserForm: UntypedFormGroup;
   id: string;
   isAddMode: boolean;
   loading = false;
@@ -23,7 +23,7 @@ export class PasswordComponent implements OnInit {
   userAuth: UserParamsAuth
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private userService: UserService,
     private notificationService: NotificationService,
     private route: ActivatedRoute,

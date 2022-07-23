@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { UserService } from '../../../service';
 import { NotificationService } from '../../../service/notification/notification.service';
@@ -12,7 +12,7 @@ import { BaseComponent } from '../../base.component';
    styleUrls: ['../../../../assets/css/default.scss']
 })
 export class AddEditUserComponent extends BaseComponent implements OnInit {
-  userForm: FormGroup;
+  userForm: UntypedFormGroup;
   id: string;
   isAddMode: boolean;
   loading = false;
@@ -33,7 +33,7 @@ export class AddEditUserComponent extends BaseComponent implements OnInit {
   ]
 
   constructor (
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,

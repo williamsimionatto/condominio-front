@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { first } from "rxjs/operators";
 import { NotificationService } from "../../../service/notification/notification.service";
@@ -11,7 +11,7 @@ import { BaseComponent } from "../../base.component";
   styleUrls: ['../../../../assets/css/default.scss']
 })
 export class AddEditPermissaoComponent extends BaseComponent implements OnInit {
-  permissaoForm: FormGroup
+  permissaoForm: UntypedFormGroup
   id: string
   isAddMode: boolean
   readonly = false
@@ -19,7 +19,7 @@ export class AddEditPermissaoComponent extends BaseComponent implements OnInit {
   submitted = false
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private permissaoService: PermissaoService,

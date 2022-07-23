@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { FormBuilder, FormGroup, NgForm, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, NgForm, Validators } from "@angular/forms";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { first } from "rxjs/operators";
 import { CondominoParams } from "../../../model/condomino.model";
@@ -18,7 +18,7 @@ export class ModalCondominosComponent {
 
   @Output() condominoEmmiter = new EventEmitter<CondominoParams>();
 
-  condominoForm: FormGroup
+  condominoForm: UntypedFormGroup
   id: string
   isAddMode: boolean
   loading = false
@@ -46,7 +46,7 @@ export class ModalCondominosComponent {
 
   constructor(
     private activeModal: NgbActiveModal,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
   ) { }
 
   ngOnInit() {

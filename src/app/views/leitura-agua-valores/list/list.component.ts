@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { first, take } from "rxjs/operators";
 import { CondominioParams } from "../../../model/condominio.model";
+import { HistoricoValoresParams } from "../../../model/historicovalores.model";
 import { LeituraAguaValoresParams } from "../../../model/leitura-agua-valores.model";
 import { CondominioService } from "../../../service/condominio/condominio.service";
 import { LeituraAguaService } from "../../../service/leitura-agua/leitura-agua.service";
@@ -30,6 +31,7 @@ export class ListLeituraAguaValoresComponent implements OnInit {
   @Input() dataVencimento: string
   @Input() idLeitura: string
   @Input() isAddMode: boolean = false
+  @Input() historicoValores: HistoricoValoresParams
 
   condominos: LeituraAguaValoresParams[] = []
   condominio: CondominioParams = null
@@ -153,11 +155,13 @@ export class ListLeituraAguaValoresComponent implements OnInit {
   }
 
   atualizaTotalizadores(condomino: LeituraAguaValoresParams) {
+    let params = this.historicoValores ? this.historicoValores : this.condominio
+
     this.totalTalizadores.consumo += condomino.consumo
     this.totalTalizadores.condominio += condomino.valorcondominio
-    this.totalTalizadores.usoSalaoFesta += this.condominio.valorsalaofestas * condomino.qtdusosalao
-    this.totalTalizadores.limpezaSalaoFesta += this.condominio.valorlimpezasalaofestas * condomino.qtdlimpezasalao
-    this.totalTalizadores.taxaMudanca += this.condominio.valormudanca * condomino.qtdmudanca
+    this.totalTalizadores.usoSalaoFesta += params.valorsalaofestas * condomino.qtdusosalao
+    this.totalTalizadores.limpezaSalaoFesta += params.valorlimpezasalaofestas * condomino.qtdlimpezasalao
+    this.totalTalizadores.taxaMudanca += params.valormudanca * condomino.qtdmudanca
     this.totalTalizadores.total += condomino.total
   }
 
@@ -194,19 +198,20 @@ export class ListLeituraAguaValoresComponent implements OnInit {
     this.totalTalizadores.total += this.condominio.valormudanca * condomino.qtdmudanca
   }
 
-  atualizaTotal(condomino: LeituraAguaValoresParams) {
-    let index = this.condominos.indexOf(condomino)
-    let condominio = this.condominos[index]
+  atualizaTotal(condominoParams: LeituraAguaValoresParams) {
+    let index = this.condominos.indexOf(condominoParams)
+    let condomino = this.condominos[index]
+    let params = this.historicoValores ? this.historicoValores : this.condominio
 
-    let total = (parseFloat(condomino.consumo.toString()) * this.condominio.valoragua) +
-                parseFloat(this.condominio.taxabasicaagua.toString()) + 
-                parseFloat(this.condominio.taxaboleto.toString()) +
+    let total = (condomino.consumo * params.valoragua) +
+                Number(params.taxabasicaagua )+ 
+                Number(params.taxaboleto) +
                 condomino.valorcondominio + 
-                (this.condominio.valorsalaofestas * condomino.qtdusosalao) +
-                (this.condominio.valorlimpezasalaofestas * condomino.qtdlimpezasalao) +
-                (this.condominio.valormudanca * condomino.qtdmudanca)
+                (params.valorsalaofestas * condomino.qtdusosalao) +
+                (params.valorlimpezasalaofestas * condomino.qtdlimpezasalao) +
+                (params.valormudanca * condomino.qtdmudanca)
 
-    condominio.total = parseFloat((Math.round(total * 100) / 100).toFixed(2));
+    condomino.total = parseFloat((Math.round(total * 100) / 100).toFixed(2));
   }
 
   validaValor(params: LeituraAguaValoresParams) {
