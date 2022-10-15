@@ -66,6 +66,7 @@ import { ChartModule } from 'angular-highcharts';
 import { BarChartModule } from './views/report/leituraagua/charts/bar-chart.module';
 import { ChangePasswordModule } from './views/change-password/change-password.module';
 import { PeriodoModule } from './views/periodo/periodo.module';
+import { PrivacyPoliceComponent } from './views/privacy-police/privacy-police.component';
 
 @NgModule({
     imports: [
@@ -114,6 +115,7 @@ import { PeriodoModule } from './views/periodo/periodo.module';
         ...APP_CONTAINERS,
         P404Component,
         P500Component,
+        PrivacyPoliceComponent,
         LoginComponent,
         ConfirmationDialogComponent,
     ],
