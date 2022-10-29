@@ -69,6 +69,12 @@ export const navItems: INavData[] = [
     icon: 'fa fa-search',
     children: [
       {
+        name: 'Caixa',
+        url: '/report/cashflow',
+        icon: 'fa fa-money',
+        attributes: { disabled: isDisabled('REL_LEITURAAGUA'), id: 'nav-rel-cashflow'  },
+      },
+      {
         name: 'Leitura d`água',
         url: '/report/leituraagua',
         icon: 'fa fa-tint',
