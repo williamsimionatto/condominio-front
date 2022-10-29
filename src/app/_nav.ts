@@ -73,6 +73,12 @@ export const navItems: INavData[] = [
         url: '/report/leituraagua',
         icon: 'fa fa-tint',
         attributes: { disabled: isDisabled('REL_LEITURAAGUA'), id: 'nav-rel-leitura'  },
+      },
+      {
+        name: 'Caixa',
+        url: '/report/cashflow',
+        icon: 'fa fa-money',
+        attributes: { disabled: isDisabled('REL_LEITURAAGUA'), id: 'nav-rel-cashflow'  },
       }
     ]
   }
