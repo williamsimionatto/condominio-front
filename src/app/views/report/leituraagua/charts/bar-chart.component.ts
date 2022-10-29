@@ -50,7 +50,6 @@ export class BarChartCompoent implements OnInit, OnChanges {
 
     keys.forEach(key => {
       const serieData = groupedData[key]
-      console.log(serieData)
       const name: string = this.dateFull(serieData[0].mesreferencia)
       categories.push(name)
 
