@@ -36,6 +36,10 @@ export class CanLoadService implements CanLoad {
     {
       route: 'report/leituraagua',
       slug: 'REL_LEITURAAGUA'
+    },
+    {
+      route: 'report/cashflow',
+      slug: 'REL_LEITURAAGUA'
     }
   ]
 

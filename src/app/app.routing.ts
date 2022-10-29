@@ -90,6 +90,12 @@ export const routes: Routes = [
         canLoad: [CanLoadService]
       },
       {
+        path: 'report/cashflow',
+        loadChildren: () => import('./views/report/cashflow/cash-flow-report.module').then(m => m.CashFlowReportModule),
+        canActivate: [AuthGuard],
+        canLoad: [CanLoadService]
+      },
+      {
         path: 'usuario',
         loadChildren: () => import('./views/user/user.module').then(m => m.UserModule),
         canActivate: [AuthGuard],
