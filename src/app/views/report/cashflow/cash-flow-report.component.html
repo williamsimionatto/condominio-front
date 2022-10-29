@@ -7,6 +7,25 @@
         <div class="card-header">
           <div class="card-label"> Relatório Receitas/Despesas </div>
         </div>
+
+        <div class="card-body">
+          <form [formGroup]="filterForm">
+            <div class="row">
+              <div class="col-sm-2 col-xs-12">
+                <input-container errorMessage="Ano é obrigatório" label="Ano">
+                  <input type="number" formControlName="year" id="year" class="form-control" autocomplete="off">
+                </input-container>
+              </div>
+
+              <div class="ibox-buttons">
+                <button [disabled]="filterForm.invalid" type="button" class="btn btn-primary rounded-pill" (click)="filter()">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Filtrar
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
