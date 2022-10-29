@@ -67,6 +67,7 @@ import { BarChartModule } from './views/report/leituraagua/charts/bar-chart.modu
 import { ChangePasswordModule } from './views/change-password/change-password.module';
 import { PeriodoModule } from './views/periodo/periodo.module';
 import { CashFlowReportModule } from './views/report/cashflow/cash-flow-report.module';
+import { PrivacyPoliceComponent } from './views/privacy-police/privacy-police.component';
 
 @NgModule({
     imports: [
@@ -116,6 +117,7 @@ import { CashFlowReportModule } from './views/report/cashflow/cash-flow-report.m
         ...APP_CONTAINERS,
         P404Component,
         P500Component,
+        PrivacyPoliceComponent,
         LoginComponent,
         ConfirmationDialogComponent,
     ],
