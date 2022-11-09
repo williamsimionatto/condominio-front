@@ -52,11 +52,7 @@ export class BarChartCompoent implements OnInit, OnChanges {
 
       seriesNames.forEach(serieName => {
         let serie = series.find(s => s.name === serieName.name)
-        if (serieName.field === 'total_expense') {
-          serie.data.push(-item[serieName.field])
-        } else {
-          serie.data.push(item[serieName.field])
-        }
+        serie.data.push(item[serieName.field])
       })
     }
 
