@@ -1,10 +1,6 @@
-import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
 import * as HighCharts from 'highcharts';
-import { Observable } from "rxjs";
 import { CashFlowParams } from "../../../../model/cash-flow.model";
-import { LeituraAguaReportParams } from "../../../../model/leitura-agua.model";
-import { UserParamsAuth } from "../../../../model/user.model";
-import { LocalStorageService } from "../../../../service";
 
 @Component({
   selector: 'app-bar-chart',
@@ -33,8 +29,7 @@ export class BarChartCompoent implements OnInit, OnChanges {
       {
         name: 'Despesas',
         field: 'total_expense'
-      },
-      {
+      }, {
         name: 'Saldo',
         field: 'balance'
       }
@@ -43,9 +38,16 @@ export class BarChartCompoent implements OnInit, OnChanges {
     let series: SerieParams[] = seriesNames.map(serie => {
       return {
         name: serie.name,
+        type: serie.field === 'balance' ? 'spline' : 'column',
         data: []
       }
     })
+
+    series[2].marker = {
+      lineWidth: 2,
+      lineColor: HighCharts.getOptions().colors[2],
+      fillColor: 'white'
+    }
 
     for (let i = data.length -1; i >= 0; i--) {
       let item = data[i]
@@ -84,6 +86,8 @@ export class BarChartCompoent implements OnInit, OnChanges {
 }
 
 export type SerieParams = {
+  type: string,
   name?: string,
-  data: number[]
+  data: number[],
+  marker?: any
 }
