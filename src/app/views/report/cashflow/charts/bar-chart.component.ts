@@ -20,7 +20,11 @@ export class BarChartCompoent implements OnInit, OnChanges {
   }
 
   prepareChartData(data: CashFlowParams[]) {
-    let categories: string[] = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+    data.sort((a: CashFlowParams, b: CashFlowParams) => {
+      return parseInt(a.id) - parseInt(b.id)
+    })
+
+    let categories: string[] = data.map(d => d.name)
     let seriesNames: any[] = [
       {
         name: 'Receitas',
@@ -49,12 +53,12 @@ export class BarChartCompoent implements OnInit, OnChanges {
       fillColor: 'white'
     }
 
-    for (let i = data.length -1; i >= 0; i--) {
+    for (let i = 0; i < data.length; i++) {
       let item = data[i]
 
       seriesNames.forEach(serieName => {
         let serie = series.find(s => s.name === serieName.name)
-        serie.data.push(item[serieName.field])
+        serie.data.push(Math.round(item[serieName.field] * 100) / 100)
       })
     }
 

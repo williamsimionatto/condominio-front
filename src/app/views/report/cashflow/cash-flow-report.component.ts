@@ -20,7 +20,8 @@ export class CashFlowReportComponent implements OnInit {
 
   ngOnInit() {
     this.filterForm = this.formBuilder.group({
-      year: this.formBuilder.control(new Date().getFullYear(), [Validators.required]),
+      startDate: this.formBuilder.control(this.getStartDate(new Date()), [Validators.required]),
+      endDate: this.formBuilder.control(this.getEndDate(new Date()), [Validators.required])
     })
   }
 
@@ -40,5 +41,13 @@ export class CashFlowReportComponent implements OnInit {
     })
 
     this.loading = false
+  }
+
+  private getStartDate(currentDate: Date) {
+    return new Date(currentDate.getFullYear(), currentDate.getMonth() - 3, 1)
+  }
+
+  private getEndDate(currentDate: Date) {
+    return new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0)
   }
 }
