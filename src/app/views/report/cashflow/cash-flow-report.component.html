@@ -12,8 +12,14 @@
           <form [formGroup]="filterForm">
             <div class="row">
               <div class="col-sm-2 col-xs-12">
-                <input-container errorMessage="Ano é obrigatório" label="Ano">
-                  <input type="number" formControlName="year" id="year" class="form-control" autocomplete="off" min="2022">
+                <input-container errorMessage="Data Inicial é obrigatória" label="Data Inicial">
+                  <input type="date" formControlName="startDate" id="startDate" class="form-control" autocomplete="off">
+                </input-container>
+              </div>
+
+              <div class="col-sm-2 col-xs-12">
+                <input-container errorMessage="Data Final é obrigatória" label="Data Final">
+                  <input type="date" formControlName="endDate" id="endDate" class="form-control" autocomplete="off">
                 </input-container>
               </div>
 
